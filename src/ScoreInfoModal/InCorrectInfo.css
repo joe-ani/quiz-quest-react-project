@@ -1,0 +1,7 @@
+
+.incorrect-info-cont  .arrow-down{
+    transform: rotateZ(180deg);
+    stroke: red;
+    color: red;
+  }
+  

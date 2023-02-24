@@ -1,0 +1,53 @@
+.paginationButton {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin-left: -50px;
+  gap: 13px;
+  align-items: center;
+}
+
+.paginationButton li {
+  padding: 7px;
+
+  display: none;
+   /* position: absolute; */
+
+  top: 100px;
+  font-weight: bold;
+
+}
+.paginationActive a {
+  background: red;
+}
+
+.paginationButton .prevClass {
+  display: flex;
+}
+.paginationButton .nextClass {
+  display: flex;
+}
+
+.prevClass {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    font-weight: 900;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 50px;
+}
+.nextClass {
+  display: flex;
+  left: 170px;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  font-weight: 900;
+  cursor: pointer;
+  border-radius: 50px;
+}
+

@@ -1,0 +1,45 @@
+.score-modal {
+  position: absolute;
+  background-color: rgba(44, 44, 44, 0.166);
+  backdrop-filter: blur(0.4em);
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+  height: 100%;
+}
+
+.score-modal > .modal-container {
+  background: #15243a;
+  width: 35%;
+  position: relative;
+  color: #fff;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.205);
+  padding: 30px;
+  border: 5px solid #5e008a;
+  border-radius: 20px;
+}
+
+/* .score-modal .heading {
+} */
+
+.score-modal .close-info-icon {
+  position: absolute;
+  left: 85%;
+  top: 10px;
+  padding: 10px;
+  border-radius: 50px;
+  background: #ffffff00;
+  transition: 200ms ease-in-out;
+}
+
+.score-modal .close-info-icon:hover {
+  background: #ffffff0e;
+  transform: scale(1.1);
+}
+.score-modal .close-info-icon:active {
+  transform: scale(.9);
+}
+
