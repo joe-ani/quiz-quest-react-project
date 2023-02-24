@@ -110,21 +110,13 @@ function Question({ time, timeDuration, setTime, setTimeDuration }) {
   useEffect(() => {
     const timeData = window.localStorage.getItem("TIME_DATA");
     const durationData = window.localStorage.getItem("DURATION_DATA");
-    // setTimeDuration(JSON.parse(durationData));
-    // setTime(JSON.parse(timeData));
-    // console.log(durationData, timeData);
-    // console.log(time, timeDuration);
-    // console.log(timeData, timeDuration);
-  }, []);
+    setTimeDuration(JSON.parse(durationData));
+    setTime(JSON.parse(timeData));
+    console.log(durationData, timeData, "1");
+    console.log(time, timeDuration, "2");
+    console.log(timeData, timeDuration, "3");
 
-  useEffect(() => {
     if (timeDuration) {
-      window.localStorage.setItem("TIME_DATA", JSON.stringify(time));
-      window.localStorage.setItem(
-        "DURATION_DATA",
-        JSON.stringify(timeDuration)
-      );
-      // console.log(timeData, durationData);
       setTimingDuration(
         timeDuration
           .split("")
@@ -135,7 +127,10 @@ function Question({ time, timeDuration, setTime, setTimeDuration }) {
           .toLowerCase()
       );
     }
+  }, [timeDuration]);
 
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(

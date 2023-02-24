@@ -13,7 +13,7 @@
 
 .score-modal > .modal-container {
   background: #15243a;
-  width: 35%;
+  width: 25%;
   position: relative;
   color: #fff;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.205);
@@ -27,7 +27,7 @@
 
 .score-modal .close-info-icon {
   position: absolute;
-  left: 85%;
+  left: 87%;
   top: 10px;
   padding: 10px;
   border-radius: 50px;
@@ -43,3 +43,31 @@
   transform: scale(.9);
 }
 
+
+
+@media (max-width: 500px) {
+  .score-modal > .modal-container {
+
+    width: 70%;
+  }
+
+  .heading {
+    font-size: 17px;
+  }
+
+  .container .text {
+    font-size: 12px;
+  }
+}
+@media (max-width: 999px) {
+  .score-modal > .modal-container {
+
+    width: 40%;
+  }
+}
+@media (max-width: 800px) {
+  .score-modal > .modal-container {
+
+    width: 55%;
+  }
+}

@@ -1,8 +1,19 @@
 .home {
   height: 100vh;
   position: relative;
+  /* animation: zoom-in 500ms ease-out; */
 }
 
+/* @keyframes zoom-in {
+  1% {
+    transform: scale(0.9);
+    
+  }
+  100% {
+    transform: scale(1);
+
+  }
+} */
 h1 {
   font-weight: 900;
   color: white;

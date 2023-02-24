@@ -5,7 +5,7 @@ import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 
 import { useNavigate } from "react-router-dom";
 
-function Home({ setTime, setTimeDuration }) {
+function Home({ setTime, setTimeDuration, time, timeDuration }) {
   const navigate = useNavigate();
   const linkRef = useRef();
   const listRef = useRef();
@@ -20,17 +20,26 @@ function Home({ setTime, setTimeDuration }) {
   const timeDropIconRef = useRef();
   const questionDropIconRef = useRef();
   const durationDropIconRef = useRef();
+  const timeDataRef = useRef();
+  const durationDataRef = useRef();
   const [second, setSecond] = useState(true);
   const [selectedOption, setSelectedOption] = useState("10");
   const [selectedOptionTime, setSelectedOptionTime] = useState("5");
   const [selectedOptionDuration, setSelectedOptionDuration] =
     useState("Minutes");
 
-    useEffect(() => {
-    setTime(selectedOptionTime)
-    setTimeDuration(selectedOptionDuration)
-    },[selectedOptionTime, selectedOptionDuration])
+  useEffect(() => {
+    setTime(selectedOptionTime);
+    setTimeDuration(selectedOptionDuration);
+  }, [selectedOptionTime, selectedOptionDuration]);
 
+  useEffect(() => {
+      window.localStorage.setItem("TIME_DATA", JSON.stringify(selectedOptionTime));
+      window.localStorage.setItem(
+        "DURATION_DATA",
+        JSON.stringify(selectedOptionDuration)
+      );
+  }, [selectedOptionDuration, selectedOptionTime]);
   const handleChangeQuestion = (event) => {
     setSelectedOption(event.target.innerHTML);
     // setTime(event.target.innerHTML);
@@ -44,16 +53,15 @@ function Home({ setTime, setTimeDuration }) {
     showTime();
   };
   const handleChangeDuration = (event) => {
-    if (second) {
-      setSecond(false);
-      setSelectedOptionTime(30);
-      setTimeDuration(event.target.innerHTML);
-    } else {
+    if (event.target.innerHTML === "Minutes") {
       setSecond(true);
-      setTimeDuration(event.target.innerHTML);
-
       setSelectedOptionTime(5);
-    } //bug !!
+      setTimeDuration(event.target.innerHTML);
+    } else if (event.target.innerHTML === "Seconds") {
+      setSelectedOptionTime(30);
+      setSecond(false);
+      setTimeDuration(event.target.innerHTML);
+    }
     setSelectedOptionDuration(event.target.innerHTML);
     event.target.classList.add("active-list");
     showDuration();
@@ -163,7 +171,7 @@ function Home({ setTime, setTimeDuration }) {
         <div className="time-container">
           <h3>Time</h3>
           <div className="select-container time">
-            <div onClick={showTime} className="select">
+            <div onClick={showTime} ref={timeDataRef} className="select">
               {selectedOptionTime}
               <ArrowBackIosRoundedIcon
                 ref={timeDropIconRef}
@@ -192,7 +200,11 @@ function Home({ setTime, setTimeDuration }) {
             </div>
           </div>
           <div className="select-container duration">
-            <div onClick={showDuration} className="select">
+            <div
+              onClick={showDuration}
+              ref={durationDataRef}
+              className="select"
+            >
               {selectedOptionDuration}
               <ArrowBackIosRoundedIcon
                 ref={durationDropIconRef}
