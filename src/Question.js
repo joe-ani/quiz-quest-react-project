@@ -11,6 +11,7 @@ import TimesUpOverlay from "./TimesUpOverlay.js";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
 import { duration } from "@mui/material";
+import SkelentonLoader from "./SkeletonLoader.js";
 
 // "https://the-trivia-api.com/api/questions?limit=20"
 
@@ -24,6 +25,7 @@ function Question({ time, timeDuration, setTime, setTimeDuration }) {
   const [minute, setMinute] = useState(0);
   const [timesUp, setTimesUp] = useState(false);
   const [questions, setQuestions] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [incorrectAnswers, setIncorrectAnswers] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
   const [timingDuration, setTimingDuration] = useState();
@@ -45,29 +47,31 @@ function Question({ time, timeDuration, setTime, setTimeDuration }) {
 
   // timer
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (timesUp === false) {
-        if (second <= 59) {
-          setSeconds((second) => second + 1);
+    if (loading) {
+      const interval = setInterval(() => {
+        if (timesUp === false) {
+          if (second <= 59) {
+            setSeconds((second) => second + 1);
+          }
         }
-      }
-      if (timeDuration == "Minutes") {
-        if (minute == time) {
-          setTimesUp(true);
+        if (timeDuration == "Minutes") {
+          if (minute == time) {
+            setTimesUp(true);
+          }
+        } else if (timeDuration == "Seconds") {
+          if (second == time) {
+            setTimesUp(true);
+          }
         }
-      } else if (timeDuration == "Seconds") {
-        if (second == time) {
-          setTimesUp(true);
+        if (second == 60) {
+          if (minute <= time) {
+            setSeconds(1);
+            setMinute((minute) => minute + 1);
+          }
         }
-      }
-      if (second == 60) {
-        if (minute <= time) {
-          setSeconds(1);
-          setMinute((minute) => minute + 1);
-        }
-      }
-    }, 1000);
-    return () => clearInterval(interval);
+      }, 1000);
+      return () => clearInterval(interval);
+    }
   }, [second, minute]);
 
   // setInterval(timer, 1000)
@@ -129,13 +133,14 @@ function Question({ time, timeDuration, setTime, setTimeDuration }) {
     }
   }, [timeDuration]);
 
-
   useEffect(() => {
+    setLoading(true);
     const fetchData = async () => {
       try {
         const response = await axios.get(
           "https://the-trivia-api.com/api/questions?limit=20"
         );
+        setLoading(false);
         setQuestions(response.data);
         setIncorrectAnswers(response.data);
         questions.map((qus) => {
@@ -178,49 +183,55 @@ function Question({ time, timeDuration, setTime, setTimeDuration }) {
         <div className="pages">
           {pagesVisited + 1} / {pageCount}
         </div>
-        <div className="question-container2">
-          <div className={`question-cont ${!questions ? "show-skeleton" : ""}`}>
-            <h2>Qustion {pagesVisited + 1}:</h2>
+        {loading && <SkelentonLoader />}
+        {!loading && (
+          <div className="question-container2">
+            <div className={`question-cont ${loading ? "show-skeleton" : ""}`}>
+              <h2>Qustion {pagesVisited + 1}:</h2>
 
-            <p
-              style={{
-                margin: "20px",
-                marginTop: "50px",
-                textAlign: "center",
-              }}
-            >
-              {displayQuestion}
-              {/* Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam,
+              <p
+                style={{
+                  margin: "20px",
+                  marginTop: "50px",
+                  textAlign: "center",
+                }}
+              >
+                {displayQuestion}
+                {/* Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam,
               officiis? */}
-            </p>
-          </div>
-          <div className="option-cont">
-            <h2>Options</h2>
-            <div className="option-grid">
-              <div className="option">
-                {" "}
-                <div className="option-count">A</div> Lorem ipsum
+              </p>
+            </div>
+            <div className="option-cont">
+              <h2>Options</h2>
+              <div className="option-grid">
+                <div className="option">
+                  {" "}
+                  <div className="option-count">A</div> Lorem ipsum
+                </div>
+                <div className="option">
+                  {" "}
+                  <div className="option-count">B</div> Lorem ipsum
+                </div>
+                <div className="option">
+                  {" "}
+                  <div className="option-count">C</div> Lorem ipsum
+                </div>
+                <div className="option">
+                  {" "}
+                  <div className="option-count">D</div> Lorem ipsum
+                </div>
+                <div className="option">
+                  {" "}
+                  <div className="option-count">E</div> Lorem ipsum
+                </div>
               </div>
-              <div className="option">
-                {" "}
-                <div className="option-count">B</div> Lorem ipsum
-              </div>
-              <div className="option">
-                {" "}
-                <div className="option-count">C</div> Lorem ipsum
-              </div>
-              <div className="option">
-                {" "}
-                <div className="option-count">D</div> Lorem ipsum
-              </div>
-              <div className="option">
-                {" "}
-                <div className="option-count">E</div> Lorem ipsum
+              <div className="text">
+                ** You can only select an option once **
               </div>
             </div>
-            <div className="text">** You can only select an option once **</div>
           </div>
-        </div>
+        )}
+
         <div className="buttons">
           <div onClick={showPopUp} className="quit-button">
             {/* Quit icon */}
@@ -246,7 +257,10 @@ function Question({ time, timeDuration, setTime, setTimeDuration }) {
             disabledClassName={"paginationDisable"}
             activeClassName={"paginationActive"}
           />
-          <div onClick={(e) => navigate("/result")} className="submit-button">
+          <div
+            onClick={(e) => (!loading ? "" : navigate("/result"))}
+            className={`submit-button ${loading ? "submit-false" : ""}`}
+          >
             {/* submit icon */}
             <AssignmentTurnedInRoundedIcon className="submit-icon" />
             <h2>Submit</h2>
