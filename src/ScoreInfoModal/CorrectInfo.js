@@ -17,7 +17,7 @@ function CorrectInfo() {
           <div className="text">
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo
             necessitatibus ipsum, fugit culpa quis nostrum error voluptatum
-            dolorum et? Soluta.
+            dolorum et? Soluta. 
           </div>
         </div>
         <div className="line"></div>
@@ -56,6 +56,7 @@ function CorrectInfo() {
           <div className="text">Lorem ipsum dolor sit amet consectetur.</div>
         </div>
       </div>
+    
       <div  className="correct-main-container">
         <div className="ques">
           <div className="heading">Question 4</div>

@@ -30,6 +30,7 @@ function Result() {
     } else {
       setIsOn(true);
       optionRef.current.style.display = "flex";
+
     }
   };
 
@@ -110,7 +111,7 @@ function Result() {
           <div className="options-cont">
             <div className="message">You Can always try again! </div>
             <div className="option">
-              <div onClick={(e) => navigate("/home")} v className="home-button">
+              <div onClick={(e) => navigate("/home")} className="home-button">
                 <CottageRoundedIcon className="home-icon" />
                 Home
               </div>

@@ -19,6 +19,8 @@ function App() {
   const [showPage, setShowPage] = useState(false);
   const [time, setTime] = useState()
   const [timeDuration, setTimeDuration] = useState()
+  const [questionCount, setQuestionCount] = useState()
+  
   // const AppContext = createContext()
 
   // Timer
@@ -38,9 +40,9 @@ function App() {
       <div className="App">
         <Routes>
           {!showPage && <Route path="/" element={<Load />} />}
-          {showPage && <Route path="/" element={<Home setTime={setTime} setTimeDuration={setTimeDuration} />} />}
-          <Route path="question" element={<Question time={time} timeDuration={timeDuration} setTime={setTime} setTimeDuration={setTimeDuration} />} />
-          <Route path="/home" element={<Home setTime={setTime} setTimeDuration={setTimeDuration}/> }/>
+          {showPage && <Route path="/" element={<Home setQuestionCount={setQuestionCount} setTime={setTime} setTimeDuration={setTimeDuration} />} />}
+          <Route path="question" element={<Question time={time} timeDuration={timeDuration} setTime={setTime} setTimeDuration={setTimeDuration} setQuestionCount={setQuestionCount} questionCount={questionCount}/>  } />
+          <Route path="/home" element={<Home setQuestionCount={setQuestionCount} setTime={setTime} setTimeDuration={setTimeDuration}/> }/>
           <Route path="/result" element={<Result/> }/>
           <Route path="/test" element={<QuizQuestions/> }/>
         </Routes>

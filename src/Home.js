@@ -5,7 +5,11 @@ import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 
 import { useNavigate } from "react-router-dom";
 
-function Home({ setTime, setTimeDuration, time, timeDuration }) {
+function Home({
+  setTime,
+  setTimeDuration,
+  setQuestionCount,
+}) {
   const navigate = useNavigate();
   const linkRef = useRef();
   const listRef = useRef();
@@ -31,20 +35,28 @@ function Home({ setTime, setTimeDuration, time, timeDuration }) {
   useEffect(() => {
     setTime(selectedOptionTime);
     setTimeDuration(selectedOptionDuration);
-  }, [selectedOptionTime, selectedOptionDuration]);
+    setQuestionCount(selectedOption);
+  }, [selectedOption,selectedOptionTime, selectedOptionDuration]);
 
   useEffect(() => {
-      window.localStorage.setItem("TIME_DATA", JSON.stringify(selectedOptionTime));
-      window.localStorage.setItem(
-        "DURATION_DATA",
-        JSON.stringify(selectedOptionDuration)
-      );
-  }, [selectedOptionDuration, selectedOptionTime]);
+    window.localStorage.setItem(
+      "QUESTION_COUNT",
+      JSON.stringify(selectedOption)
+    );
+    window.localStorage.setItem(
+      "TIME_DATA",
+      JSON.stringify(selectedOptionTime)
+    );
+    window.localStorage.setItem(
+      "DURATION_DATA",
+      JSON.stringify(selectedOptionDuration)
+    );
+  }, [selectedOption, selectedOptionDuration, selectedOptionTime]);
   const handleChangeQuestion = (event) => {
     setSelectedOption(event.target.innerHTML);
-    // setTime(event.target.innerHTML);
     event.target.classList.add("active-list");
     showOptions();
+    setQuestionCount(event.target.innerHTML);
   };
   const handleChangeTime = (event) => {
     setSelectedOptionTime(event.target.innerHTML);
@@ -115,7 +127,6 @@ function Home({ setTime, setTimeDuration, time, timeDuration }) {
   const goTo = () => {
     window.location.href = "/";
   };
-
   const [hide, setHide] = useState(false);
   const hideLink = () => {
     if (hide) {

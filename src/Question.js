@@ -1,4 +1,4 @@
-import React, { useRef, useContext } from "react";
+import React, { useRef } from "react";
 import "./Question.css";
 import TimelapseRoundedIcon from "@mui/icons-material/TimelapseRounded";
 import AssignmentTurnedInRoundedIcon from "@mui/icons-material/AssignmentTurnedInRounded";
@@ -10,38 +10,138 @@ import { useState, useEffect } from "react";
 import TimesUpOverlay from "./TimesUpOverlay.js";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
-import { duration } from "@mui/material";
 import SkelentonLoader from "./SkeletonLoader.js";
+import PopUp from "./PopUp.js";
 
 // "https://the-trivia-api.com/api/questions?limit=20"
 
-function Question({ time, timeDuration, setTime, setTimeDuration }) {
+function Question({
+  time,
+  timeDuration,
+  setTime,
+  setTimeDuration,
+  questionCount,
+  setQuestionCount,
+}) {
   const navigate = useNavigate();
   const linkRef = useRef();
   const arrowRef = useRef();
-  const popUpRef = useRef();
   const [showPop, setShowPop] = useState(false);
   const [second, setSeconds] = useState(0);
   const [minute, setMinute] = useState(0);
   const [timesUp, setTimesUp] = useState(false);
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [incorrectAnswers, setIncorrectAnswers] = useState([]);
+  const [answers, setAnswers] = useState([]);
+  const [correctAnswer, setCorrectAnswer] = useState();
+  const [options, setOptions] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
   const [timingDuration, setTimingDuration] = useState();
+  // Test Data-----------------------------------****
+  const [mockQuestions, setMockQuestions] = useState([]);
+  const [mockOptions, setMockOptions] = useState([]);
+  const [mockAnswers, setMockAnswers] = useState([]);
+  const [mockCorrectAnswer, setMockCorrectAnswer] = useState();
+  // --------------------------------------------****
   const userPerPage = 1;
   const pagesVisited = pageNumber * userPerPage;
-  const displayQuestion = questions
+
+  const displayQuestion = mockQuestions
     .slice(pagesVisited, pagesVisited + userPerPage)
     .map((qes) => {
       return <div>{qes.question}</div>;
     });
 
-  const handlePageClick = ({ selected }) => {
-    setPageNumber(selected);
+  // *ORIGINAL
+  // const displayQuestion = questions
+  //   .slice(pagesVisited, pagesVisited + userPerPage)
+  //   .map((qes) => {
+  //     return <div>{qes.question}</div>;
+  //   });
+
+  useEffect(() => {
+    const questionsData = window.localStorage.getItem("QUESTIONS_DATA");
+    setMockQuestions(JSON.parse(questionsData));
+    JSON.parse(questionsData).forEach((data) => {
+      // console.log("running loop");
+      data.incorrectAnswers.push(data.correctAnswer);
+      setMockAnswers(data.incorrectAnswers);
+      const myObj = {
+        options: data.incorrectAnswers,
+      };
+      // if (mockOptions.length <= 19) {
+      mockOptions.push(myObj);
+      // }
+    });
+    // console.log(mockOptions);
+  }, []);
+
+  const getIndex = (i) => {
+    if (i === 0) {
+      return "A";
+    } else if (i === 1) {
+      return "B";
+    } else if (i === 2) {
+      return "C";
+    } else if (i === 3) {
+      return "D";
+    }
   };
 
-  const pageCount = Math.ceil(questions.length / userPerPage);
+  const [selectedOption, setSelectedOption] = useState();
+
+  useEffect(() => {
+    console.log(selectedOption);
+  }, [selectedOption]);
+
+  const checkOptions = (e) => {
+    // console.log("in page", pageNumber + 1, "option selected is⬇️");
+    setSelectedOption(e.target.innerText.split("").slice(2).join(""));
+
+    setTimeout(() => {
+      setPageNumber(pageNumber + 1); //->> BUGG⚠️
+    }, 300);
+
+    // console.log(e.target.innerText.split("").slice(2, -1).join(""));
+  };
+
+  const [optionsData, setOptionsData] = useState([]);
+
+  useEffect(() => {
+    mockOptions.slice(pagesVisited, pagesVisited + userPerPage).map((ans) => {
+      setOptionsData(ans.options); //->> shuffle array data
+    });
+  }, [pageNumber]);
+
+  const displayOptions = optionsData.map((data, index) => {
+    return (
+      <div key={index} onClick={checkOptions} className="option">
+        <div key={index} className="option-count">
+          {getIndex(index)}
+        </div>
+        {data}
+      </div>
+    );
+  });
+
+  // *ORIGINAL
+  // const displayOptions = answers.map((ans, index) => {
+  //   return (
+  //     <div key={index} className="option">
+  //       <div className="option-count">{getIndex(index)}</div> {ans}
+  //     </div>
+  //   );
+  // });
+
+  const handlePageClick = ({ selected }) => {
+    setPageNumber(selected);
+    console.log(pageNumber);
+  };
+
+  const pageCount = Math.ceil(questionCount / userPerPage);
+
+  // *ORIGINAL
+  // const pageCount = Math.ceil(questions.length / userPerPage);
 
   // ADD AUIDO
 
@@ -74,10 +174,6 @@ function Question({ time, timeDuration, setTime, setTimeDuration }) {
     }
   }, [second, minute]);
 
-  // setInterval(timer, 1000)
-
-  // * how to use setInterval in react 🔍
-
   const goTo = () => {
     window.location.href = "/";
   };
@@ -100,25 +196,26 @@ function Question({ time, timeDuration, setTime, setTimeDuration }) {
     }
   };
 
+  const [togglePopUp, setTogglePopUp] = useState(false);
   const showPopUp = () => {
-    if (showPop == false) {
-      popUpRef.current.style.display = "flex";
-      setShowPop(true);
-    } else if (showPop == true) {
-      popUpRef.current.style.display = "none";
-      setShowPop(false);
+    if (togglePopUp === false) {
+      setTogglePopUp(true);
+    } else {
+      setTogglePopUp(false);
     }
+    console.log(togglePopUp);
   };
 
-  // const [timeData, setTimeData] = useState()
   useEffect(() => {
     const timeData = window.localStorage.getItem("TIME_DATA");
     const durationData = window.localStorage.getItem("DURATION_DATA");
+    const questionCountData = window.localStorage.getItem("QUESTION_COUNT");
+    setQuestionCount(JSON.parse(questionCountData));
     setTimeDuration(JSON.parse(durationData));
     setTime(JSON.parse(timeData));
-    console.log(durationData, timeData, "1");
-    console.log(time, timeDuration, "2");
-    console.log(timeData, timeDuration, "3");
+    // console.log(durationData, timeData, "1");
+    // console.log(time, timeDuration, "2");
+    // console.log(timeData, timeDuration, "3");
 
     if (timeDuration) {
       setTimingDuration(
@@ -141,12 +238,21 @@ function Question({ time, timeDuration, setTime, setTimeDuration }) {
           "https://the-trivia-api.com/api/questions?limit=20"
         );
         setLoading(false);
+        // const optionsData = window.localStorage.getItem("OPTIONS_DATA");
+        window.localStorage.setItem(
+          "QUESTIONS_DATA",
+          JSON.stringify(response.data)
+        );
+        window.localStorage.setItem("OPTIONS_DATA", JSON.stringify());
         setQuestions(response.data);
-        setIncorrectAnswers(response.data);
-        questions.map((qus) => {
-          console.log(qus.incorrectAnswers);
-        });
-        // console.log(questions);
+        response.data
+          .slice(pagesVisited, pagesVisited + userPerPage)
+          .map((qus) => {
+            setAnswers(qus.incorrectAnswers);
+            setCorrectAnswer(qus.correctAnswer);
+          });
+        answers.push(correctAnswer);
+        setAnswers(answers);
       } catch (error) {
         console.log(error);
       }
@@ -183,8 +289,8 @@ function Question({ time, timeDuration, setTime, setTimeDuration }) {
         <div className="pages">
           {pagesVisited + 1} / {pageCount}
         </div>
-        {loading && <SkelentonLoader />}
-        {!loading && (
+        {!loading && <SkelentonLoader />}
+        {loading && (
           <div className="question-container2">
             <div className={`question-cont ${loading ? "show-skeleton" : ""}`}>
               <h2>Qustion {pagesVisited + 1}:</h2>
@@ -197,34 +303,11 @@ function Question({ time, timeDuration, setTime, setTimeDuration }) {
                 }}
               >
                 {displayQuestion}
-                {/* Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam,
-              officiis? */}
               </p>
             </div>
             <div className="option-cont">
               <h2>Options</h2>
-              <div className="option-grid">
-                <div className="option">
-                  {" "}
-                  <div className="option-count">A</div> Lorem ipsum
-                </div>
-                <div className="option">
-                  {" "}
-                  <div className="option-count">B</div> Lorem ipsum
-                </div>
-                <div className="option">
-                  {" "}
-                  <div className="option-count">C</div> Lorem ipsum
-                </div>
-                <div className="option">
-                  {" "}
-                  <div className="option-count">D</div> Lorem ipsum
-                </div>
-                <div className="option">
-                  {" "}
-                  <div className="option-count">E</div> Lorem ipsum
-                </div>
-              </div>
+              <div className="option-grid">{displayOptions}</div>
               <div className="text">
                 ** You can only select an option once **
               </div>
@@ -232,19 +315,12 @@ function Question({ time, timeDuration, setTime, setTimeDuration }) {
           </div>
         )}
 
+        {togglePopUp && <PopUp setTogglePopUp={setTogglePopUp} />}
         <div className="buttons">
           <div onClick={showPopUp} className="quit-button">
             {/* Quit icon */}
             <HighlightOffRoundedIcon className="quit-icon" />
             <h2 style={{ userSelect: "none" }}>Quit</h2>
-
-            <div ref={popUpRef} className="pop-up">
-              <div className="txt">Are You sure ?</div>
-              <div onClick={(e) => navigate("/home")} className="yes">
-                Quit
-              </div>
-              <div className="no">Cancel</div>
-            </div>
           </div>
           <ReactPaginate
             previousLabel={<ArrowLeftRoundedIcon className="left-icon" />}
