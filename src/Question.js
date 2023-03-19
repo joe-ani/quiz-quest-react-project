@@ -134,11 +134,6 @@ function Question({
   //   );
   // });
 
-  const handlePageClick = ({ selected }) => {
-    setPageNumber(selected);
-    console.log(selected + 1);
-  };
-
   const prevPage = () => {
     if (pageNumber < pageCount - 1) {
       setPageNumber(pageNumber - 1);
