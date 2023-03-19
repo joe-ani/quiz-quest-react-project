@@ -12,6 +12,8 @@ import axios from "axios";
 import ReactPaginate from "react-paginate";
 import SkelentonLoader from "./SkeletonLoader.js";
 import PopUp from "./PopUp.js";
+import _ from "lodash"
+
 
 // "https://the-trivia-api.com/api/questions?limit=20"
 
@@ -37,12 +39,12 @@ function Question({
   const [options, setOptions] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
   const [timingDuration, setTimingDuration] = useState();
-  // Test Data-----------------------------------****
+  // *Test Data-----------------------------------****
   const [mockQuestions, setMockQuestions] = useState([]);
   const [mockOptions, setMockOptions] = useState([]);
   const [mockAnswers, setMockAnswers] = useState([]);
   const [mockCorrectAnswer, setMockCorrectAnswer] = useState();
-  // --------------------------------------------****
+  // *--------------------------------------------****
   const userPerPage = 1;
   const pagesVisited = pageNumber * userPerPage;
 
@@ -63,7 +65,6 @@ function Question({
     const questionsData = window.localStorage.getItem("QUESTIONS_DATA");
     setMockQuestions(JSON.parse(questionsData));
     JSON.parse(questionsData).forEach((data) => {
-      // console.log("running loop");
       data.incorrectAnswers.push(data.correctAnswer);
       setMockAnswers(data.incorrectAnswers);
       const myObj = {
@@ -73,7 +74,7 @@ function Question({
       mockOptions.push(myObj);
       // }
     });
-    // console.log(mockOptions);
+    console.log(mockOptions);
   }, []);
 
   const getIndex = (i) => {
@@ -91,30 +92,26 @@ function Question({
   const [selectedOption, setSelectedOption] = useState();
 
   useEffect(() => {
-    console.log(selectedOption);
+    console.log(selectedOption, `>> index  in page ${pageNumber + 1}, in ${pageCount}`);
   }, [selectedOption]);
 
   const checkOptions = (e) => {
-    // console.log("in page", pageNumber + 1, "option selected is⬇️");
     setSelectedOption(e.target.innerText.split("").slice(2).join(""));
-
     setTimeout(() => {
       setPageNumber(pageNumber + 1); //->> BUGG⚠️
     }, 300);
-
-    // console.log(e.target.innerText.split("").slice(2, -1).join(""));
   };
 
   const [optionsData, setOptionsData] = useState([]);
 
   useEffect(() => {
     mockOptions.slice(pagesVisited, pagesVisited + userPerPage).map((ans) => {
-      setOptionsData(ans.options); //->> shuffle array data
+      setOptionsData(_.shuffle(ans.options)); //->> shuffle array data
     });
   }, [pageNumber]);
 
   const displayOptions = optionsData.map((data, index) => {
-    return (
+    return ( 
       <div key={index} onClick={checkOptions} className="option">
         <div key={index} className="option-count">
           {getIndex(index)}
@@ -135,7 +132,7 @@ function Question({
 
   const handlePageClick = ({ selected }) => {
     setPageNumber(selected);
-    console.log(pageNumber);
+    console.log(selected);
   };
 
   const pageCount = Math.ceil(questionCount / userPerPage);
@@ -289,8 +286,8 @@ function Question({
         <div className="pages">
           {pagesVisited + 1} / {pageCount}
         </div>
-        {!loading && <SkelentonLoader />}
-        {loading && (
+        {loading && <SkelentonLoader />}
+        {!loading && (
           <div className="question-container2">
             <div className={`question-cont ${loading ? "show-skeleton" : ""}`}>
               <h2>Qustion {pagesVisited + 1}:</h2>
