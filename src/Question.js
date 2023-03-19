@@ -342,7 +342,6 @@ function Question({
               <ArrowLeftRoundedIcon onClick={nextPage} className="right-icon" />
             }
             pageCount={pageCount}
-            // onPageChange={handlePageClick}
             previousClassName={"prevClass"}
             nextClassName={"nextClass"}
             containerClassName={"paginationButton"}
