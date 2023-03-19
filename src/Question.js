@@ -36,7 +36,6 @@ function Question({
   const [answers, setAnswers] = useState([]);
   const [correctAnswer, setCorrectAnswer] = useState();
   const [options, setOptions] = useState([]);
-  const [pageNumber, setPageNumber] = useState(0);
   const [timingDuration, setTimingDuration] = useState();
   // *Test Data-----------------------------------****
   const [mockQuestions, setMockQuestions] = useState([]);
@@ -44,6 +43,7 @@ function Question({
   const [mockAnswers, setMockAnswers] = useState([]);
   const [mockCorrectAnswer, setMockCorrectAnswer] = useState();
   // *--------------------------------------------****
+  const [pageNumber, setPageNumber] = useState(0);
   const userPerPage = 1;
   const pagesVisited = pageNumber * userPerPage;
 
@@ -93,15 +93,16 @@ function Question({
   useEffect(() => {
     console.log(
       selectedOption,
-      `>> index  in page ${pageNumber + 1}, in ${pageCount}`
+      `>> index ${pagesVisited}  in page ${pageNumber + 1}, in ${pageCount}`
     );
   }, [selectedOption]);
 
   const checkOptions = (e) => {
     setSelectedOption(e.target.innerText.split("").slice(2).join(""));
     setTimeout(() => {
-      if (pageNumber < pageCount - 1) {
-        setPageNumber(pageNumber + 1); //->> BUGG⚠️
+      const nextPage = pageNumber + 1;
+      if (nextPage < pageCount) {
+        setPageNumber(nextPage);
       }
     }, 300);
   };
