@@ -63,17 +63,18 @@ function Question({
   useEffect(() => {
     const questionsData = window.localStorage.getItem("QUESTIONS_DATA");
     setMockQuestions(JSON.parse(questionsData));
+    console.log(mockQuestions);
     JSON.parse(questionsData).forEach((data) => {
       data.incorrectAnswers.push(data.correctAnswer);
       setMockAnswers(data.incorrectAnswers);
       const myObj = {
-        options: data.incorrectAnswers,
-      };
+        options: _.shuffle(data.incorrectAnswers),
+      }; 
       // if (mockOptions.length <= 19) {
       mockOptions.push(myObj);
       // }
     });
-    console.log(mockOptions);
+    // console.log(mockOptions);
   }, []);
 
   const getIndex = (i) => {
@@ -91,7 +92,7 @@ function Question({
   const [selectedOption, setSelectedOption] = useState();
 
   useEffect(() => {
-    console.log(
+    console.log( 
       selectedOption,
       `>> index ${pagesVisited}  in page ${pageNumber + 1}, in ${pageCount}`
     );
@@ -99,6 +100,7 @@ function Question({
 
   const checkOptions = (e) => {
     setSelectedOption(e.target.innerText.split("").slice(2).join(""));
+    e.target.style.background = "red";
     setTimeout(() => {
       if (pageNumber < pageCount - 1) {
         setPageNumber(pageNumber + 1);
@@ -109,8 +111,9 @@ function Question({
   const [optionsData, setOptionsData] = useState([]);
 
   useEffect(() => {
+    console.log(mockOptions);
     mockOptions.slice(pagesVisited, pagesVisited + userPerPage).map((ans) => {
-      setOptionsData(_.shuffle(ans.options)); //->> shuffle array data
+      setOptionsData(ans.options); //->> shuffle array data
     });
   }, [pageNumber]);
 
@@ -135,9 +138,9 @@ function Question({
   // });
 
   const prevPage = () => {
-    if (pageNumber < pageCount - 1) {
-      setPageNumber(pageNumber - 1);
-    }
+    // if (pageNumber < pageCount - 1) {
+    setPageNumber(pageNumber - 1);
+    // }
   };
   const nextPage = () => {
     if (pageNumber < pageCount - 1) {
