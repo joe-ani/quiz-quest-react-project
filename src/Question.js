@@ -63,17 +63,17 @@ function Question({
   useEffect(() => {
     const questionsData = window.localStorage.getItem("QUESTIONS_DATA");
     setMockQuestions(JSON.parse(questionsData));
-    console.log(mockQuestions);
     JSON.parse(questionsData).forEach((data) => {
       data.incorrectAnswers.push(data.correctAnswer);
       setMockAnswers(data.incorrectAnswers);
       const myObj = {
         options: _.shuffle(data.incorrectAnswers),
-      }; 
-      // if (mockOptions.length <= 19) {
+      };
+      // if (mockOptions.length <= pageCount) {
       mockOptions.push(myObj);
       // }
     });
+    // console.log(mockQuestions);
     // console.log(mockOptions);
   }, []);
 
@@ -92,15 +92,20 @@ function Question({
   const [selectedOption, setSelectedOption] = useState();
 
   useEffect(() => {
-    console.log( 
-      selectedOption,
-      `>> index ${pagesVisited}  in page ${pageNumber + 1}, in ${pageCount}`
-    );
+    // optionsData.map((opt, index) => {
+    //   console.log(
+    //     selectedOption,
+    //     `>> index ${index}  in page ${pageNumber + 1}, in ${pageCount}`
+    //   );
+    // })
   }, [selectedOption]);
 
-  const checkOptions = (e) => {
-    setSelectedOption(e.target.innerText.split("").slice(2).join(""));
-    e.target.style.background = "red";
+  const checkOptions = (index, e) => {
+    if (e && e.target) {
+      setSelectedOption(e.target.innerText.split("").slice(2).join(""));
+    }
+    console.log(index + pageCount * pageNumber)
+    console.log(`at index ${index} in page ${pageNumber + 1}, in ${pageCount}`);
     setTimeout(() => {
       if (pageNumber < pageCount - 1) {
         setPageNumber(pageNumber + 1);
@@ -111,15 +116,17 @@ function Question({
   const [optionsData, setOptionsData] = useState([]);
 
   useEffect(() => {
-    console.log(mockOptions);
-    mockOptions.slice(pagesVisited, pagesVisited + userPerPage).map((ans) => {
-      setOptionsData(ans.options); //->> shuffle array data
-    });
+    // console.log(mockOptions);
+    mockOptions
+      .slice(pagesVisited, pagesVisited + userPerPage)
+      .map((ans, index) => {
+        setOptionsData(ans.options); //->> shuffle array data
+      });
   }, [pageNumber]);
 
   const displayOptions = optionsData.map((data, index) => {
     return (
-      <div key={index} onClick={checkOptions} className="option">
+      <div key={index} onClick={() => checkOptions(index)} className="option">
         <div key={index} className="option-count">
           {getIndex(index)}
         </div>
@@ -138,9 +145,9 @@ function Question({
   // });
 
   const prevPage = () => {
-    // if (pageNumber < pageCount - 1) {
+    if (pageNumber > 0) {
     setPageNumber(pageNumber - 1);
-    // }
+    }
   };
   const nextPage = () => {
     if (pageNumber < pageCount - 1) {
