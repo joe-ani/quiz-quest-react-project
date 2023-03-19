@@ -223,7 +223,20 @@
   padding: 10px;
 }
 
+.option-grid .option.selected {
+  background-color: #5e008a;
+  transition: 200ms ease-in-out;
 
+ }
+
+.option-grid .option.selected:hover {
+  background-color: #5e008a;
+}
+
+
+ .option-count.selected {
+  transform: scale(1.2);
+ }
 
 .option-count {
   display: flex;

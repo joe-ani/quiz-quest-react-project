@@ -46,6 +46,7 @@ function Question({
   const [pageNumber, setPageNumber] = useState(0);
   const userPerPage = 1;
   const pagesVisited = pageNumber * userPerPage;
+  const pageCount = Math.ceil(questionCount / userPerPage);
 
   const displayQuestion = mockQuestions
     .slice(pagesVisited, pagesVisited + userPerPage)
@@ -89,7 +90,9 @@ function Question({
     }
   };
 
+  const [selectedOptionIndex, setSelectedOptionIndex] = useState();
   const [selectedOption, setSelectedOption] = useState();
+  const [selectedOptions, setSelectedOptions] = useState([]);
 
   useEffect(() => {
     // optionsData.map((opt, index) => {
@@ -104,13 +107,17 @@ function Question({
     if (e && e.target) {
       setSelectedOption(e.target.innerText.split("").slice(2).join(""));
     }
-    console.log(index + pageCount * pageNumber)
+    setSelectedOptionIndex(index + pageCount * pageNumber);
+    selectedOptions.push(selectedOptionIndex);
+    console.log(index + pageCount * pageNumber);
+    console.log(selectedOptions);
+
     console.log(`at index ${index} in page ${pageNumber + 1}, in ${pageCount}`);
     setTimeout(() => {
       if (pageNumber < pageCount - 1) {
         setPageNumber(pageNumber + 1);
       }
-    }, 100);
+    }, 300);
   };
 
   const [optionsData, setOptionsData] = useState([]);
@@ -120,14 +127,36 @@ function Question({
     mockOptions
       .slice(pagesVisited, pagesVisited + userPerPage)
       .map((ans, index) => {
-        setOptionsData(ans.options); //->> shuffle array data
+        setOptionsData(ans.options);
       });
   }, [pageNumber]);
 
   const displayOptions = optionsData.map((data, index) => {
+    let isSelected;
+    selectedOptions.forEach((data) => {
+      if (data === index + pageCount * pageNumber) {
+        console.log("works!");
+        isSelected = true;
+      }
+    });
     return (
-      <div key={index} onClick={() => checkOptions(index)} className="option">
-        <div key={index} className="option-count">
+      <div
+        key={index}
+        onClick={() => checkOptions(index)}
+        className={`option ${
+          selectedOptionIndex === index + pageCount * pageNumber
+            ? "selected"
+            : ""
+        }`}
+      >
+        <div
+          key={index}
+          className={`option-count ${
+            selectedOptionIndex === index + pageCount * pageNumber
+              ? "selected"
+              : ""
+          }`}
+        >
           {getIndex(index)}
         </div>
         {data}
@@ -146,7 +175,7 @@ function Question({
 
   const prevPage = () => {
     if (pageNumber > 0) {
-    setPageNumber(pageNumber - 1);
+      setPageNumber(pageNumber - 1);
     }
   };
   const nextPage = () => {
@@ -154,8 +183,6 @@ function Question({
       setPageNumber(pageNumber + 1);
     }
   };
-
-  const pageCount = Math.ceil(questionCount / userPerPage);
 
   // *ORIGINAL
   // const pageCount = Math.ceil(questions.length / userPerPage);
