@@ -12,8 +12,7 @@ import axios from "axios";
 import ReactPaginate from "react-paginate";
 import SkelentonLoader from "./SkeletonLoader.js";
 import PopUp from "./PopUp.js";
-import _ from "lodash"
-
+import _ from "lodash";
 
 // "https://the-trivia-api.com/api/questions?limit=20"
 
@@ -92,13 +91,18 @@ function Question({
   const [selectedOption, setSelectedOption] = useState();
 
   useEffect(() => {
-    console.log(selectedOption, `>> index  in page ${pageNumber + 1}, in ${pageCount}`);
+    console.log(
+      selectedOption,
+      `>> index  in page ${pageNumber + 1}, in ${pageCount}`
+    );
   }, [selectedOption]);
 
   const checkOptions = (e) => {
     setSelectedOption(e.target.innerText.split("").slice(2).join(""));
     setTimeout(() => {
-      setPageNumber(pageNumber + 1); //->> BUGG⚠️
+      if (pageNumber < pageCount - 1) {
+        setPageNumber(pageNumber + 1); //->> BUGG⚠️
+      }
     }, 300);
   };
 
@@ -111,7 +115,7 @@ function Question({
   }, [pageNumber]);
 
   const displayOptions = optionsData.map((data, index) => {
-    return ( 
+    return (
       <div key={index} onClick={checkOptions} className="option">
         <div key={index} className="option-count">
           {getIndex(index)}
