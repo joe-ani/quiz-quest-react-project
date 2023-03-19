@@ -100,11 +100,10 @@ function Question({
   const checkOptions = (e) => {
     setSelectedOption(e.target.innerText.split("").slice(2).join(""));
     setTimeout(() => {
-      const nextPage = pageNumber + 1;
-      if (nextPage < pageCount) {
-        setPageNumber(nextPage);
+      if (pageNumber < pageCount - 1) {
+        setPageNumber(pageNumber + 1);
       }
-    }, 300);
+    }, 100);
   };
 
   const [optionsData, setOptionsData] = useState([]);
@@ -137,7 +136,18 @@ function Question({
 
   const handlePageClick = ({ selected }) => {
     setPageNumber(selected);
-    console.log(selected);
+    console.log(selected + 1);
+  };
+
+  const prevPage = () => {
+    if (pageNumber < pageCount - 1) {
+      setPageNumber(pageNumber - 1);
+    }
+  };
+  const nextPage = () => {
+    if (pageNumber < pageCount - 1) {
+      setPageNumber(pageNumber + 1);
+    }
   };
 
   const pageCount = Math.ceil(questionCount / userPerPage);
@@ -325,10 +335,14 @@ function Question({
             <h2 style={{ userSelect: "none" }}>Quit</h2>
           </div>
           <ReactPaginate
-            previousLabel={<ArrowLeftRoundedIcon className="left-icon" />}
-            nextLabel={<ArrowLeftRoundedIcon className="right-icon" />}
+            previousLabel={
+              <ArrowLeftRoundedIcon onClick={prevPage} className="left-icon" />
+            }
+            nextLabel={
+              <ArrowLeftRoundedIcon onClick={nextPage} className="right-icon" />
+            }
             pageCount={pageCount}
-            onPageChange={handlePageClick}
+            // onPageChange={handlePageClick}
             previousClassName={"prevClass"}
             nextClassName={"nextClass"}
             containerClassName={"paginationButton"}
