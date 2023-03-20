@@ -111,8 +111,6 @@ function Question({
     selectedOptions.push(selectedOptionIndex);
     console.log(index + pageCount * pageNumber);
     console.log(selectedOptions);
-
-    console.log(`at index ${index} in page ${pageNumber + 1}, in ${pageCount}`);
     setTimeout(() => {
       if (pageNumber < pageCount - 1) {
         setPageNumber(pageNumber + 1);
@@ -135,17 +133,15 @@ function Question({
     let isSelected;
     selectedOptions.forEach((data) => {
       if (data === index + pageCount * pageNumber) {
-        console.log("works!");
         isSelected = true;
       }
     });
     return (
       <div
         key={index}
-        onClick={() => checkOptions(index)}
+        onClick={() =>  checkOptions(index)}
         className={`option ${
-          selectedOptionIndex === index + pageCount * pageNumber
-            ? "selected"
+        isSelected ||  selectedOptionIndex === index + pageCount * pageNumber ? "selected"
             : ""
         }`}
       >
