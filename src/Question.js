@@ -93,15 +93,7 @@ function Question({
   const [selectedOptionIndex, setSelectedOptionIndex] = useState();
   const [selectedOption, setSelectedOption] = useState();
   const [selectedOptions, setSelectedOptions] = useState([]);
-
-  useEffect(() => {
-    // optionsData.map((opt, index) => {
-    //   console.log(
-    //     selectedOption,
-    //     `>> index ${index}  in page ${pageNumber + 1}, in ${pageCount}`
-    //   );
-    // })
-  }, [selectedOption]);
+  const [active, setActive] = useState(true);
 
   const checkOptions = (index, e) => {
     if (e && e.target) {
@@ -122,6 +114,7 @@ function Question({
 
   useEffect(() => {
     // console.log(mockOptions);
+    // if (pageNumber)
     mockOptions
       .slice(pagesVisited, pagesVisited + userPerPage)
       .map((ans, index) => {
@@ -131,6 +124,8 @@ function Question({
 
   const displayOptions = optionsData.map((data, index) => {
     let isSelected;
+    // if the page number has a selected value in it then
+    // reset a state to make the onclick not work...
     selectedOptions.forEach((data) => {
       if (data === index + pageCount * pageNumber) {
         isSelected = true;
@@ -139,9 +134,10 @@ function Question({
     return (
       <div
         key={index}
-        onClick={() =>  checkOptions(index)}
+        onClick={() => (active ? checkOptions(index) : "")}
         className={`option ${
-        isSelected ||  selectedOptionIndex === index + pageCount * pageNumber ? "selected"
+          isSelected || selectedOptionIndex === index + pageCount * pageNumber
+            ? "selected"
             : ""
         }`}
       >
