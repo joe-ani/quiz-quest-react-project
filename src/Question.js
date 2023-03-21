@@ -93,15 +93,15 @@ function Question({
   const [selectedOptionIndex, setSelectedOptionIndex] = useState();
   const [selectedOption, setSelectedOption] = useState();
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [active, setActive] = useState(true);
-
+  const [optionIndexs, setOptionIndexs] = useState();
   const checkOptions = (index, e) => {
     if (e && e.target) {
       setSelectedOption(e.target.innerText.split("").slice(2).join(""));
     }
+
     setSelectedOptionIndex(index + pageCount * pageNumber);
     selectedOptions.push(selectedOptionIndex);
-    console.log(index + pageCount * pageNumber);
+    // console.log(index + pageCount * pageNumber);
     console.log(selectedOptions);
     setTimeout(() => {
       if (pageNumber < pageCount - 1) {
@@ -122,19 +122,28 @@ function Question({
       });
   }, [pageNumber]);
 
-  const displayOptions = optionsData.map((data, index) => {
+  const indexArr = [];
+  const displayOptions = optionsData.map((data, index, arr) => {
+    let disableOptions = true;
     let isSelected;
-    // if the page number has a selected value in it then
-    // reset a state to make the onclick not work...
+    indexArr.push(index + pageCount * pageNumber);
+    console.log(indexArr);
     selectedOptions.forEach((data) => {
       if (data === index + pageCount * pageNumber) {
         isSelected = true;
+        console.log(data);
       }
+      indexArr.forEach((data) => {
+        if (data === selectedOptionIndex) {
+          // isSelected = true;
+          disableOptions = false;
+        } //->> BUG
+      });
     });
     return (
       <div
         key={index}
-        onClick={() => (active ? checkOptions(index) : "")}
+        onClick={() => (disableOptions ? checkOptions(index) : "")}
         className={`option ${
           isSelected || selectedOptionIndex === index + pageCount * pageNumber
             ? "selected"
@@ -144,7 +153,7 @@ function Question({
         <div
           key={index}
           className={`option-count ${
-            selectedOptionIndex === index + pageCount * pageNumber
+            isSelected || selectedOptionIndex === index + pageCount * pageNumber
               ? "selected"
               : ""
           }`}
@@ -183,7 +192,7 @@ function Question({
 
   // timer
   useEffect(() => {
-    if (loading) {
+    if (!loading) {
       const interval = setInterval(() => {
         if (timesUp === false) {
           if (second <= 59) {
@@ -325,12 +334,11 @@ function Question({
         <div className="pages">
           {pagesVisited + 1} / {pageCount}
         </div>
-        {loading && <SkelentonLoader />}
-        {!loading && (
+        {!loading && <SkelentonLoader />}
+        {loading && (
           <div className="question-container2">
             <div className={`question-cont ${loading ? "show-skeleton" : ""}`}>
               <h2>Qustion {pagesVisited + 1}:</h2>
-
               <p
                 style={{
                   margin: "20px",
