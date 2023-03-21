@@ -135,7 +135,7 @@ function Question({
       }
       indexArr.forEach((data) => {
         if (data === selectedOptionIndex) {
-          // isSelected = true;
+          isSelected = true;
           disableOptions = false;
         } //->> BUG
       });
@@ -334,8 +334,8 @@ function Question({
         <div className="pages">
           {pagesVisited + 1} / {pageCount}
         </div>
-        {!loading && <SkelentonLoader />}
-        {loading && (
+        {loading && <SkelentonLoader />}
+        {!loading && (
           <div className="question-container2">
             <div className={`question-cont ${loading ? "show-skeleton" : ""}`}>
               <h2>Qustion {pagesVisited + 1}:</h2>
