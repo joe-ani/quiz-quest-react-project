@@ -226,17 +226,15 @@
 .option-grid .option.selected {
   background-color: #5e008a;
   transition: 200ms ease-in-out;
-
- }
+}
 
 .option-grid .option.selected:hover {
   background-color: #5e008a;
 }
 
-
- .option-count.selected {
+.option-count.selected {
   transform: scale(1.2);
- }
+}
 
 .option-count {
   display: flex;
@@ -255,11 +253,31 @@
 .option-cont .text {
   font-size: 13px;
   font-weight: normal;
+  transition: 100ms ease-in-out;
   margin-top: 10px;
   color: rgb(193, 255, 78);
+  /* opacity: 0; */
 }
 
+.option-cont .animate-text {
+  animation: shake 400ms ease-in-out;
+  /* opacity: 1; */
+}
 
+@keyframes shake {
+  0% {
+    transform: translateX(0px);
+  }
+  30% {
+    transform: translateX(-15px);
+  }
+  60% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
 
 .option-grid .option:hover {
   background: #8484843b;
@@ -285,7 +303,6 @@
     margin-top: 50px;
   }
 } */
-
 
 @media screen and (max-width: 500px) {
   .top-container > .top-logo {
