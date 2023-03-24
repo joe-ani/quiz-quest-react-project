@@ -23,15 +23,10 @@ function Question({
   setTimeDuration,
   questionCount,
   setQuestionCount,
-  setCorrectData,
-  setInCorrectData,
-  setQuestionsData
-
 }) {
   const navigate = useNavigate();
   const linkRef = useRef();
   const arrowRef = useRef();
-  const textRef = useRef();
   const [showPop, setShowPop] = useState(false);
   const [second, setSeconds] = useState(0);
   const [minute, setMinute] = useState(0);
@@ -96,20 +91,18 @@ function Question({
   };
 
   const [selectedOptionIndex, setSelectedOptionIndex] = useState();
-  const [selectedOption, setSelectedOption] = useState([]);
+  const [selectedOption, setSelectedOption] = useState();
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [pagesSelected, setPagesSelected] = useState([]);
-  let disableOptions = true;
+  const [optionIndexs, setOptionIndexs] = useState();
+  const checkOptions = (index, e) => {
+    if (e && e.target) {
+      setSelectedOption(e.target.innerText.split("").slice(2).join(""));
+    }
 
-  const checkOptions = (index, option) => {
-    // keep track of page with selected option
-    pagesSelected.push(index + pageCount * pageNumber);
-    selectedOption.push(option);
-    console.log(selectedOption)
-    console.log(`clicked on ${option}! in page ${pageNumber + 1}`);
     setSelectedOptionIndex(index + pageCount * pageNumber);
     selectedOptions.push(selectedOptionIndex);
-    // moves pagination by one page
+    // console.log(index + pageCount * pageNumber);
+    console.log(selectedOptions);
     setTimeout(() => {
       if (pageNumber < pageCount - 1) {
         setPageNumber(pageNumber + 1);
@@ -130,39 +123,27 @@ function Question({
   }, [pageNumber]);
 
   const indexArr = [];
-
-  const runTextAmimate = () => {
-    textRef.current.classList.add("animate-text");
-    textRef.current.innerText = "** You can't change your answer **";
-  };
-
-  useEffect(() => {
-    // keep track of page with selected option
-    pagesSelected.forEach((val) => {
-      if (indexArr.includes(val)) {
-        console.log("works");
-        disableOptions = false;
-      }
-    });
-  }, [indexArr, pageNumber]);
-
   const displayOptions = optionsData.map((data, index, arr) => {
+    let disableOptions = true;
     let isSelected;
     indexArr.push(index + pageCount * pageNumber);
-    textRef.current.classList.remove("animate-text");
-    textRef.current.innerText = "** Carefully answer each question **";
+    console.log(indexArr);
     selectedOptions.forEach((data) => {
       if (data === index + pageCount * pageNumber) {
         isSelected = true;
-        // console.log(data);
+        console.log(data);
       }
+      indexArr.forEach((data) => {
+        if (data === selectedOptionIndex) {
+          isSelected = true;
+          disableOptions = false;
+        } //->> BUG
+      });
     });
     return (
       <div
         key={index}
-        onClick={() =>
-          disableOptions ? checkOptions(index, data) : runTextAmimate()
-        }
+        onClick={() => (disableOptions ? checkOptions(index) : "")}
         className={`option ${
           isSelected || selectedOptionIndex === index + pageCount * pageNumber
             ? "selected"
@@ -353,11 +334,11 @@ function Question({
         <div className="pages">
           {pagesVisited + 1} / {pageCount}
         </div>
-        {!loading && <SkelentonLoader />}
-        {loading && (
+        {loading && <SkelentonLoader />}
+        {!loading && (
           <div className="question-container2">
             <div className={`question-cont ${loading ? "show-skeleton" : ""}`}>
-              <h2>Question {pagesVisited + 1}:</h2>
+              <h2>Qustion {pagesVisited + 1}:</h2>
               <p
                 style={{
                   margin: "20px",
@@ -371,8 +352,8 @@ function Question({
             <div className="option-cont">
               <h2>Options</h2>
               <div className="option-grid">{displayOptions}</div>
-              <div ref={textRef} className="text">
-                ** Carefully answer each question **
+              <div className="text">
+                ** You can only select an option once **
               </div>
             </div>
           </div>
