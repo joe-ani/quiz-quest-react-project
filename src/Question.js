@@ -5,7 +5,7 @@ import AssignmentTurnedInRoundedIcon from "@mui/icons-material/AssignmentTurnedI
 import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
 import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import ArrowLeftRoundedIcon from "@mui/icons-material/ArrowLeftRounded";
-import { BrowserRouter as Router, useNavigate, Link } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import TimesUpOverlay from "./TimesUpOverlay.js";
 import axios from "axios";
@@ -14,7 +14,6 @@ import SkelentonLoader from "./SkeletonLoader.js";
 import PopUp from "./PopUp.js";
 import _ from "lodash";
 
-// "https://the-trivia-api.com/api/questions?limit=20"
 
 function Question({
   time,
@@ -23,25 +22,31 @@ function Question({
   setTimeDuration,
   questionCount,
   setQuestionCount,
+  setCorrectData,
+  setInCorrectData,
+  setQuestionsData,
 }) {
   const navigate = useNavigate();
   const linkRef = useRef();
   const arrowRef = useRef();
+  const textRef = useRef();
   const [showPop, setShowPop] = useState(false);
+  const [isPrevEnd, setIsPrevEnd] = useState(false);
+  const [isNextEnd, setIsNextEnd] = useState(false);
   const [second, setSeconds] = useState(0);
   const [minute, setMinute] = useState(0);
   const [timesUp, setTimesUp] = useState(false);
-  const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [answers, setAnswers] = useState([]);
   const [correctAnswer, setCorrectAnswer] = useState();
-  const [options, setOptions] = useState([]);
   const [timingDuration, setTimingDuration] = useState();
+  const [questions, setQuestions] = useState([]);
+  const [optionsData, setOptionsData] = useState([]);
+  const [optionsArr, setOptionsArr] = useState([]);
   // *Test Data-----------------------------------****
   const [mockQuestions, setMockQuestions] = useState([]);
-  const [mockOptions, setMockOptions] = useState([]);
-  const [mockAnswers, setMockAnswers] = useState([]);
-  const [mockCorrectAnswer, setMockCorrectAnswer] = useState();
+  // const [mockAnswers, setMockAnswers] = useState([]);
+  // const [mockCorrectAnswer, setMockCorrectAnswer] = useState();
   // *--------------------------------------------****
   const [pageNumber, setPageNumber] = useState(0);
   const userPerPage = 1;
@@ -54,28 +59,19 @@ function Question({
       return <div>{qes.question}</div>;
     });
 
-  // *ORIGINAL
-  // const displayQuestion = questions
-  //   .slice(pagesVisited, pagesVisited + userPerPage)
-  //   .map((qes) => {
-  //     return <div>{qes.question}</div>;
-  //   });
 
   useEffect(() => {
     const questionsData = window.localStorage.getItem("QUESTIONS_DATA");
     setMockQuestions(JSON.parse(questionsData));
     JSON.parse(questionsData).forEach((data) => {
       data.incorrectAnswers.push(data.correctAnswer);
-      setMockAnswers(data.incorrectAnswers);
       const myObj = {
         options: _.shuffle(data.incorrectAnswers),
       };
       // if (mockOptions.length <= pageCount) {
-      mockOptions.push(myObj);
+        optionsArr.push(myObj);
       // }
     });
-    // console.log(mockQuestions);
-    // console.log(mockOptions);
   }, []);
 
   const getIndex = (i) => {
@@ -91,18 +87,21 @@ function Question({
   };
 
   const [selectedOptionIndex, setSelectedOptionIndex] = useState();
-  const [selectedOption, setSelectedOption] = useState();
+  const [selectedOption, setSelectedOption] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [optionIndexs, setOptionIndexs] = useState();
-  const checkOptions = (index, e) => {
-    if (e && e.target) {
-      setSelectedOption(e.target.innerText.split("").slice(2).join(""));
-    }
+  const [pagesSelected, setPagesSelected] = useState([]);
+  let disableOptions = true;
 
+  const checkOptions = (index, option) => {
+    // keep track of page with selected option
+    textRef.current.classList.remove("animate-text");
+    textRef.current.innerText = "** Carefully answer each question **";
+    pagesSelected.push(index + pageCount * pageNumber);
+    selectedOption.push(option);
+    console.log(`clicked on option ${getIndex(index)} "${option}" in page ${pageNumber + 1}`);
     setSelectedOptionIndex(index + pageCount * pageNumber);
     selectedOptions.push(selectedOptionIndex);
-    // console.log(index + pageCount * pageNumber);
-    console.log(selectedOptions);
+    // moves pagination by one page
     setTimeout(() => {
       if (pageNumber < pageCount - 1) {
         setPageNumber(pageNumber + 1);
@@ -110,40 +109,45 @@ function Question({
     }, 300);
   };
 
-  const [optionsData, setOptionsData] = useState([]);
 
   useEffect(() => {
-    // console.log(mockOptions);
-    // if (pageNumber)
-    mockOptions
+    optionsArr
       .slice(pagesVisited, pagesVisited + userPerPage)
-      .map((ans, index) => {
+      .map((ans) => {
         setOptionsData(ans.options);
       });
   }, [pageNumber]);
 
   const indexArr = [];
+
+  const runTextAmimate = () => {
+    textRef.current.classList.add("animate-text");
+    textRef.current.innerText = "** You can't change your answer **";
+  };
+
+  useEffect(() => {
+    // keep track of page with selected option
+    pagesSelected.forEach((val) => {
+      if (indexArr.includes(val)) {
+        disableOptions = false;
+      }
+    });
+  }, [indexArr, pageNumber]);
+
   const displayOptions = optionsData.map((data, index, arr) => {
-    let disableOptions = true;
     let isSelected;
     indexArr.push(index + pageCount * pageNumber);
-    console.log(indexArr);
     selectedOptions.forEach((data) => {
       if (data === index + pageCount * pageNumber) {
         isSelected = true;
-        console.log(data);
       }
-      indexArr.forEach((data) => {
-        if (data === selectedOptionIndex) {
-          isSelected = true;
-          disableOptions = false;
-        } //->> BUG
-      });
     });
     return (
       <div
         key={index}
-        onClick={() => (disableOptions ? checkOptions(index) : "")}
+        onClick={() =>
+          disableOptions ? checkOptions(index, data) : runTextAmimate()
+        }
         className={`option ${
           isSelected || selectedOptionIndex === index + pageCount * pageNumber
             ? "selected"
@@ -165,28 +169,34 @@ function Question({
     );
   });
 
-  // *ORIGINAL
-  // const displayOptions = answers.map((ans, index) => {
-  //   return (
-  //     <div key={index} className="option">
-  //       <div className="option-count">{getIndex(index)}</div> {ans}
-  //     </div>
-  //   );
-  // });
+
+  useEffect(() => {
+    if (pageNumber + 1 == 1) {
+      setIsPrevEnd(true);
+    } else if (pageNumber + 1 > 1) {
+      setIsPrevEnd(false);
+    }
+    if (pageNumber + 1 == pageCount) {
+      setIsNextEnd(true);
+    } else if (pageNumber + 1 < pageCount) {
+      setIsNextEnd(false);
+    }
+  }, [pageNumber]);
 
   const prevPage = () => {
     if (pageNumber > 0) {
       setPageNumber(pageNumber - 1);
+      textRef.current.classList.remove("animate-text");
+      textRef.current.innerText = "** Carefully answer each question **";
     }
   };
   const nextPage = () => {
     if (pageNumber < pageCount - 1) {
       setPageNumber(pageNumber + 1);
+      textRef.current.classList.remove("animate-text");
+      textRef.current.innerText = "** Carefully answer each question **";
     }
   };
-
-  // *ORIGINAL
-  // const pageCount = Math.ceil(questions.length / userPerPage);
 
   // ADD AUIDO
 
@@ -258,10 +268,6 @@ function Question({
     setQuestionCount(JSON.parse(questionCountData));
     setTimeDuration(JSON.parse(durationData));
     setTime(JSON.parse(timeData));
-    // console.log(durationData, timeData, "1");
-    // console.log(time, timeDuration, "2");
-    // console.log(timeData, timeDuration, "3");
-
     if (timeDuration) {
       setTimingDuration(
         timeDuration
@@ -283,7 +289,6 @@ function Question({
           "https://the-trivia-api.com/api/questions?limit=20"
         );
         setLoading(false);
-        // const optionsData = window.localStorage.getItem("OPTIONS_DATA");
         window.localStorage.setItem(
           "QUESTIONS_DATA",
           JSON.stringify(response.data)
@@ -338,12 +343,14 @@ function Question({
         {!loading && (
           <div className="question-container2">
             <div className={`question-cont ${loading ? "show-skeleton" : ""}`}>
-              <h2>Qustion {pagesVisited + 1}:</h2>
+              <h2>Question {pagesVisited + 1}:</h2>
               <p
                 style={{
                   margin: "20px",
                   marginTop: "50px",
                   textAlign: "center",
+                  fontWeight: "10",
+                  lineHeight: "1.5"
                 }}
               >
                 {displayQuestion}
@@ -352,8 +359,8 @@ function Question({
             <div className="option-cont">
               <h2>Options</h2>
               <div className="option-grid">{displayOptions}</div>
-              <div className="text">
-                ** You can only select an option once **
+              <div ref={textRef} className="text">
+                ** Carefully answer each question **
               </div>
             </div>
           </div>
@@ -368,10 +375,16 @@ function Question({
           </div>
           <ReactPaginate
             previousLabel={
-              <ArrowLeftRoundedIcon onClick={prevPage} className="left-icon" />
+              <ArrowLeftRoundedIcon
+                onClick={prevPage}
+                className={`left-icon ${isPrevEnd ? "prev-end" : ""}`}
+              />
             }
             nextLabel={
-              <ArrowLeftRoundedIcon onClick={nextPage} className="right-icon" />
+              <ArrowLeftRoundedIcon
+                onClick={nextPage}
+                className={`right-icon ${isNextEnd ? "next-end" : ""}`}
+              />
             }
             pageCount={pageCount}
             previousClassName={"prevClass"}
