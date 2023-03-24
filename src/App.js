@@ -59,6 +59,9 @@ function App() {
                 setTimeDuration={setTimeDuration}
                 setQuestionCount={setQuestionCount}
                 questionCount={questionCount}
+                setInCorrectData={setInCorrectData}
+                setCorrectData={setCorrectData}
+                setQuestionsData={setQuestionsData}
               />
             }
           />
@@ -77,10 +80,10 @@ function App() {
             element={
               <Result
                 correctData={correctData}
-                setCorrectData={setCorrectData}
                 inCorrectData={inCorrectData}
-                setInCorrectData={setInCorrectData}
                 questionsData={questionsData}
+                setInCorrectData={setInCorrectData}
+                setCorrectData={setCorrectData}
                 setQuestionsData={setQuestionsData}
               />
             }
