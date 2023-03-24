@@ -40,7 +40,7 @@ function SkeletonLoader() {
             <div className="option"></div>
             <div className="option"></div>
           </div>
-          <div className="text">** You can only select an option once **</div>
+          <div className="text"> ** Carefully answer each question **</div>
         </div>
       </div>
     </div>

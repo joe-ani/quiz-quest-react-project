@@ -11,7 +11,7 @@ import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
 import ScoreInfoModal from "./ScoreInfoModal";
 import AnswerModal from "./AnswerModal.js";
 
-function Result() {
+function Result({ correctData, inCorrectData, questionsData }) {
   const navigate = useNavigate();
   const [isOn, setIsOn] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
@@ -30,7 +30,6 @@ function Result() {
     } else {
       setIsOn(true);
       optionRef.current.style.display = "flex";
-
     }
   };
 
@@ -115,7 +114,7 @@ function Result() {
                 <CottageRoundedIcon className="home-icon" />
                 Home
               </div>
-              <div className="retry-button">
+              <div onClick={(e) => navigate("/question")}  className="retry-button">
                 <ReplayRoundedIcon className="retry-icon" />
                 Retry
               </div>
