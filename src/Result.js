@@ -11,7 +11,7 @@ import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
 import ScoreInfoModal from "./ScoreInfoModal";
 import AnswerModal from "./AnswerModal.js";
 
-function Result({ correctData, inCorrectData, questionsData }) {
+function Result({ correctData, inCorrectData, questionsData, optionObjs }) {
   const navigate = useNavigate();
   const [isOn, setIsOn] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
@@ -63,8 +63,9 @@ function Result({ correctData, inCorrectData, questionsData }) {
   };
 
   useEffect(() => {
-    // innerLineRef.current.getProp(innerLineRef.current, "--width")
+    console.log(optionObjs);
   }, []);
+
   return (
     <div className="result">
       <h1>Result </h1>
@@ -114,7 +115,10 @@ function Result({ correctData, inCorrectData, questionsData }) {
                 <CottageRoundedIcon className="home-icon" />
                 Home
               </div>
-              <div onClick={(e) => navigate("/question")}  className="retry-button">
+              <div
+                onClick={(e) => navigate("/question")}
+                className="retry-button"
+              >
                 <ReplayRoundedIcon className="retry-icon" />
                 Retry
               </div>
@@ -127,6 +131,7 @@ function Result({ correctData, inCorrectData, questionsData }) {
             Correct Answers
             {isOn ? <VisibilityRoundedIcon /> : <VisibilityOffRoundedIcon />}
           </div>
+          {/* ____________________________ */}
           <div className="main-answer-container">
             <div ref={optionRef} className="option-cont">
               <div className="question-count">
@@ -165,6 +170,7 @@ function Result({ correctData, inCorrectData, questionsData }) {
               </div>
             </div>
           </div>
+          {/* ------------------------------ */}
           <div className="faders">
             <div className="fade1"></div>
             <div className="fade2"></div>
