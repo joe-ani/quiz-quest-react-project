@@ -17,7 +17,7 @@ function App() {
   const [correctData, setCorrectData] = useState();
   const [inCorrectData, setInCorrectData] = useState([]);
   const [questionsData, setQuestionsData] = useState([]);
-
+  const [optionObjs, setOptionObjs] = useState([]);
   // const AppContext = createContext()
 
   // Timer
@@ -62,6 +62,8 @@ function App() {
                 setInCorrectData={setInCorrectData}
                 setCorrectData={setCorrectData}
                 setQuestionsData={setQuestionsData}
+                setOptionObjs={setOptionObjs}
+                optionObjs={optionObjs}
               />
             }
           />
@@ -85,6 +87,7 @@ function App() {
                 setInCorrectData={setInCorrectData}
                 setCorrectData={setCorrectData}
                 setQuestionsData={setQuestionsData}
+                optionObjs={optionObjs}
               />
             }
           />
