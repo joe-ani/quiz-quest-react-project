@@ -59,7 +59,8 @@
 
 .buttons {
   display: flex;
-  position: sticky;
+  position: fixed;
+  top: 65%;
   bottom: 10px;
   align-items: center;
   gap: 30px;
