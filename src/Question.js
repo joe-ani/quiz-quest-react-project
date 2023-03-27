@@ -5,7 +5,7 @@ import AssignmentTurnedInRoundedIcon from "@mui/icons-material/AssignmentTurnedI
 import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
 import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import ArrowLeftRoundedIcon from "@mui/icons-material/ArrowLeftRounded";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import TimesUpOverlay from "./TimesUpOverlay.js";
 import axios from "axios";
@@ -13,7 +13,6 @@ import ReactPaginate from "react-paginate";
 import SkelentonLoader from "./SkeletonLoader.js";
 import PopUp from "./PopUp.js";
 import _ from "lodash";
-
 
 function Question({
   time,
@@ -25,6 +24,7 @@ function Question({
   setCorrectData,
   setInCorrectData,
   setQuestionsData,
+  setOptionObjs,
 }) {
   const navigate = useNavigate();
   const linkRef = useRef();
@@ -59,7 +59,6 @@ function Question({
       return <div>{qes.question}</div>;
     });
 
-
   useEffect(() => {
     const questionsData = window.localStorage.getItem("QUESTIONS_DATA");
     setMockQuestions(JSON.parse(questionsData));
@@ -69,9 +68,10 @@ function Question({
         options: _.shuffle(data.incorrectAnswers),
       };
       // if (mockOptions.length <= pageCount) {
-        optionsArr.push(myObj);
+      optionsArr.push(myObj);
       // }
     });
+    setOptionObjs(optionsArr);
   }, []);
 
   const getIndex = (i) => {
@@ -98,7 +98,11 @@ function Question({
     textRef.current.innerText = "** Carefully answer each question **";
     pagesSelected.push(index + pageCount * pageNumber);
     selectedOption.push(option);
-    console.log(`clicked on option ${getIndex(index)} "${option}" in page ${pageNumber + 1}`);
+    console.log(
+      `clicked on option ${getIndex(index)} "${option}" in page ${
+        pageNumber + 1
+      }`
+    );
     setSelectedOptionIndex(index + pageCount * pageNumber);
     selectedOptions.push(selectedOptionIndex);
     // moves pagination by one page
@@ -109,13 +113,10 @@ function Question({
     }, 300);
   };
 
-
   useEffect(() => {
-    optionsArr
-      .slice(pagesVisited, pagesVisited + userPerPage)
-      .map((ans) => {
-        setOptionsData(ans.options);
-      });
+    optionsArr.slice(pagesVisited, pagesVisited + userPerPage).map((ans) => {
+      setOptionsData(ans.options);
+    });
   }, [pageNumber]);
 
   const indexArr = [];
@@ -168,7 +169,6 @@ function Question({
       </div>
     );
   });
-
 
   useEffect(() => {
     if (pageNumber + 1 == 1) {
@@ -298,11 +298,11 @@ function Question({
         response.data
           .slice(pagesVisited, pagesVisited + userPerPage)
           .map((qus) => {
-            setAnswers(qus.incorrectAnswers);
-            setCorrectAnswer(qus.correctAnswer);
+            // setAnswers(qus.incorrectAnswers);
+            // setCorrectAnswer(qus.correctAnswer);
           });
-        answers.push(correctAnswer);
-        setAnswers(answers);
+        // answers.push(correctAnswer);
+        // setAnswers(answers);
       } catch (error) {
         console.log(error);
       }
@@ -350,7 +350,7 @@ function Question({
                   marginTop: "50px",
                   textAlign: "center",
                   fontWeight: "10",
-                  lineHeight: "1.5"
+                  lineHeight: "1.5",
                 }}
               >
                 {displayQuestion}
