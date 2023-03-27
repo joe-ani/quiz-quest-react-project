@@ -394,7 +394,7 @@ function Question({
             activeClassName={"paginationActive"}
           />
           <div
-            onClick={(e) => (!loading ? "" : navigate("/result"))}
+            onClick={(e) => (loading ? "" : navigate("/result"))}
             className={`submit-button ${loading ? "submit-false" : ""}`}
           >
             {/* submit icon */}
