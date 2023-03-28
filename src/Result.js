@@ -38,19 +38,6 @@ function Result({ questionCount }) {
       optionRef.current.style.display = "flex";
     }
   };
-
-  useEffect(() => {
-    const options = window.localStorage.getItem("OPTIONS_DATA");
-    const questions = window.localStorage.getItem("QUESTIONS_DATA");
-    setOptionsData(JSON.parse(options));
-    JSON.parse(questions).map((data, index) => {
-      if (index <= 20) {
-        correctData.push(data.correctAnswer);
-      }
-    });
-    console.log(correctData);
-  }, []);
-
   const getLetter = (i) => {
     if (i === 0) {
       return "A";
@@ -62,19 +49,39 @@ function Result({ questionCount }) {
       return "D";
     }
   };
+  const [optionLetter, setOptionLetter] = useState([]);
+  useEffect(() => {
+    const options = window.localStorage.getItem("OPTIONS_DATA");
+    JSON.parse(options).map((data, index) => {
+      optionLetter.push(getLetter(index));
+    });
+    const questions = window.localStorage.getItem("QUESTIONS_DATA");
+    setOptionsData(JSON.parse(options));
+    JSON.parse(questions).map((data, index) => {
+      if (index <= 19) {
+        correctData.push(data.correctAnswer);
+      }
+    });
+    console.log(correctData);
+    console.log(optionLetter);
+  }, []);
+
   const showModal = () => {
     if (!showAnswerModal) {
       setShowAnswerModal(true);
     }
   };
 
-  const diaplayAnswers = optionsData.map((ans, index) => {
-    <div className="question-count">
-      <div className="num">{index + 1}</div>
-      <div onClick={showModal} className="option1">
-        <div className="option-count">{getLetter(index)}</div>
+  const diaplayAnswers = correctData.map((ans, index) => {
+    return (
+      <div className="question-count">
+        <div className="num">{index + 1}</div>
+        <div onClick={showModal} className="option1">
+          <div className="option-count">{getLetter(index)}</div>
+          {ans}
+        </div>
       </div>
-    </div>;
+    );
   });
 
   const addInfoModalCorrect = () => {
@@ -167,9 +174,9 @@ function Result({ questionCount }) {
           </div>
           {/* ____________________________ */}
           <div className="main-answer-container">
-            {diaplayAnswers}
-            {/* <div ref={optionRef} className="option-cont">
-              <div className="question-count">
+            <div ref={optionRef} className="option-cont">
+              {diaplayAnswers}
+              {/* <div className="question-count">
                 <div className="num">1</div>
                 <div onClick={showModal} className="option1">
                   <div className="option-count">E</div> Lorem ipusm
@@ -202,8 +209,8 @@ function Result({ questionCount }) {
                 <div onClick={showModal} className="option1">
                   <div className="option-count">E</div> Lorem ipusm
                 </div>
-              </div>
-            </div> */}
+              </div> */}
+            </div>
           </div>
           {/* ------------------------------ */}
           <div className="faders">
