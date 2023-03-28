@@ -5,6 +5,8 @@ import AssignmentTurnedInRoundedIcon from "@mui/icons-material/AssignmentTurnedI
 import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
 import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import ArrowLeftRoundedIcon from "@mui/icons-material/ArrowLeftRounded";
+import VolumeOffRoundedIcon from "@mui/icons-material/VolumeOffRounded";
+import VolumeUpRoundedIcon from "@mui/icons-material/VolumeUpRounded";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import TimesUpOverlay from "./TimesUpOverlay.js";
@@ -45,7 +47,7 @@ function Question({
   const [questions, setQuestions] = useState([]);
   const [optionsData, setOptionsData] = useState([]);
   const [optionsArr, setOptionsArr] = useState([]);
-  const [isResult, setIsResult] = useState();
+  const [isResult, setIsResult] = useState(false);
   // *Test Data-----------------------------------****
   const [mockQuestions, setMockQuestions] = useState([]);
   // const [mockAnswers, setMockAnswers] = useState([]);
@@ -65,16 +67,19 @@ function Question({
   useEffect(() => {
     const questionsData = window.localStorage.getItem("QUESTIONS_DATA");
     setMockQuestions(JSON.parse(questionsData));
-    JSON.parse(questionsData).forEach((data) => {
-      data.incorrectAnswers.push(data.correctAnswer);
-      const myObj = {
-        options: _.shuffle(data.incorrectAnswers),
-      };
-      // if (mockOptions.length <= pageCount) {
-      optionsArr.push(myObj);
-      // }
-    });
-    // setOptionObjs(optionsArr);
+
+    if (questionsData) {
+      JSON.parse(questionsData).forEach((data) => {
+        data.incorrectAnswers.push(data.correctAnswer);
+        const myObj = {
+          options: _.shuffle(data.incorrectAnswers),
+        };
+        // if (mockOptions.length <= pageCount) {
+        optionsArr.push(myObj);
+        // }
+      });
+      // setOptionObjs(optionsArr);
+    }
     window.localStorage.setItem("OPTIONS_DATA", JSON.stringify(optionsArr));
   }, []);
 
@@ -203,6 +208,17 @@ function Question({
   };
 
   // ADD AUIDO
+  const [isPlaying, setIsPlaying] = useState(true);
+
+  const handlePlayPause = () => {
+    const audioElement = document.getElementById("audio");
+    if (isPlaying) {
+      audioElement.pause();
+    } else {
+      audioElement.play();
+    }
+    setIsPlaying(!isPlaying);
+  };
 
   // timer
   useEffect(() => {
@@ -293,15 +309,15 @@ function Question({
           "https://the-trivia-api.com/api/questions?limit=20"
         );
         setLoading(false);
-
         const data = window.localStorage.getItem("QUESTIONS_DATA");
-        if (data & isResult) {
-          
-        }
+        // if (data && isResult) {
+        //   return;
+        // } else {
         window.localStorage.setItem(
           "QUESTIONS_DATA",
           JSON.stringify(response.data)
         );
+        // }
         setQuestions(response.data);
         response.data
           .slice(pagesVisited, pagesVisited + userPerPage)
@@ -350,6 +366,14 @@ function Question({
         {loading && <SkelentonLoader />}
         {!loading && (
           <div className="question-container2">
+            <audio autoPlay id="audio" src="music/audio2.mp3" />
+            <button className="playBtn" onClick={handlePlayPause}>
+              {isPlaying ? (
+                <VolumeUpRoundedIcon className="wave-on" />
+              ) : (
+                <VolumeOffRoundedIcon className="wave-off" />
+              )}
+            </button>
             <div className={`question-cont ${loading ? "show-skeleton" : ""}`}>
               <h2>Question {pagesVisited + 1}:</h2>
               <p
