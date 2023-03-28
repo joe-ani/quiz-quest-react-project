@@ -43,6 +43,45 @@
   margin-top: -75px;
 }
 
+.playBtn {
+  background: none;
+  color: #fff;
+  border: none;
+  position: absolute;
+  z-index: 99;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(215, 215, 215, 0.096);
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  transition: 200ms ease-in-out;
+}
+
+.playBtn:hover {
+  background: rgba(215, 215, 215, 0.163);
+}
+
+.playBtn .wave-on {
+  padding: 4px;
+  border-radius: 50%;
+  animation: wave1 3s ease-in-out infinite;
+}
+
+@keyframes wave1 {
+  0% {
+    background: rgba(215, 215, 215, 0.096);
+  }
+  50% {
+    background: rgba(215, 215, 215, 0.382);
+  }
+  100% {
+    background: rgba(215, 215, 215, 0.096);
+  }
+}
+
 .pages {
   color: #fff;
   padding: 10px;
