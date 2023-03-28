@@ -88,6 +88,8 @@ function App() {
                 setCorrectData={setCorrectData}
                 setQuestionsData={setQuestionsData}
                 optionObjs={optionObjs}
+                questionCount={questionCount}
+
               />
             }
           />
