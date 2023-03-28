@@ -30,6 +30,8 @@ function Question({
   const linkRef = useRef();
   const arrowRef = useRef();
   const textRef = useRef();
+  const elem1Ref = useRef() //-->> Fix overlapping
+  const elem2Ref = useRef()
   const [showPop, setShowPop] = useState(false);
   const [isPrevEnd, setIsPrevEnd] = useState(false);
   const [isNextEnd, setIsNextEnd] = useState(false);
@@ -356,7 +358,7 @@ function Question({
                 {displayQuestion}
               </p>
             </div>
-            <div className="option-cont">
+            <div ref={elem1Ref} className="option-cont">
               <h2>Options</h2>
               <div className="option-grid">{displayOptions}</div>
               <div ref={textRef} className="text">
@@ -367,7 +369,7 @@ function Question({
         )}
 
         {togglePopUp && <PopUp setTogglePopUp={setTogglePopUp} />}
-        <div className="buttons">
+        <div ref={elem2Ref} className="buttons">
           <div onClick={showPopUp} className="quit-button">
             {/* Quit icon */}
             <HighlightOffRoundedIcon className="quit-icon" />
