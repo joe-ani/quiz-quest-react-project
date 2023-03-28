@@ -14,9 +14,9 @@ function App() {
   const [time, setTime] = useState();
   const [timeDuration, setTimeDuration] = useState();
   const [questionCount, setQuestionCount] = useState();
-  const [correctData, setCorrectData] = useState();
-  const [inCorrectData, setInCorrectData] = useState([]);
-  const [questionsData, setQuestionsData] = useState([]);
+  // const [correctData, setCorrectData] = useState([]);
+  // const [inCorrectData, setInCorrectData] = useState([]);
+  // const [questionsData, setQuestionsData] = useState([]);
   const [optionObjs, setOptionObjs] = useState([]);
   // const AppContext = createContext()
 
@@ -59,11 +59,11 @@ function App() {
                 setTimeDuration={setTimeDuration}
                 setQuestionCount={setQuestionCount}
                 questionCount={questionCount}
-                setInCorrectData={setInCorrectData}
-                setCorrectData={setCorrectData}
-                setQuestionsData={setQuestionsData}
-                setOptionObjs={setOptionObjs}
-                optionObjs={optionObjs}
+                // setInCorrectData={setInCorrectData}
+                // setCorrectData={setCorrectData}
+                // setQuestionsData={setQuestionsData}
+                // setOptionObjs={setOptionObjs}
+                // optionObjs={optionObjs}
               />
             }
           />
@@ -81,15 +81,15 @@ function App() {
             path="/result"
             element={
               <Result
-                correctData={correctData}
-                inCorrectData={inCorrectData}
-                questionsData={questionsData}
-                setInCorrectData={setInCorrectData}
-                setCorrectData={setCorrectData}
-                setQuestionsData={setQuestionsData}
-                optionObjs={optionObjs}
+                // correctData={correctData}
+                // inCorrectData={inCorrectData}
+                // questionsData={questionsData}
+                // setInCorrectData={setInCorrectData}
+                // setCorrectData={setCorrectData}
+                // setQuestionsData={setQuestionsData}
+                // optionObjs={optionObjs}
+                // setOptionObjs={setOptionObjs}
                 questionCount={questionCount}
-
               />
             }
           />
