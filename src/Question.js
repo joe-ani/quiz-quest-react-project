@@ -21,10 +21,10 @@ function Question({
   setTimeDuration,
   questionCount,
   setQuestionCount,
-  setCorrectData,
-  setInCorrectData,
-  setQuestionsData,
-  setOptionObjs,
+  // setCorrectData,
+  // setInCorrectData,
+  // setQuestionsData,
+  // setOptionObjs,
 }) {
   const navigate = useNavigate();
   const linkRef = useRef();
@@ -73,7 +73,8 @@ function Question({
       optionsArr.push(myObj);
       // }
     });
-    setOptionObjs(optionsArr);
+    // setOptionObjs(optionsArr);
+    window.localStorage.setItem("OPTIONS_DATA", JSON.stringify(optionsArr));
   }, []);
 
   const getIndex = (i) => {
@@ -295,7 +296,6 @@ function Question({
           "QUESTIONS_DATA",
           JSON.stringify(response.data)
         );
-        window.localStorage.setItem("OPTIONS_DATA", JSON.stringify());
         setQuestions(response.data);
         response.data
           .slice(pagesVisited, pagesVisited + userPerPage)

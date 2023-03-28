@@ -11,13 +11,7 @@ import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
 import ScoreInfoModal from "./ScoreInfoModal";
 import AnswerModal from "./AnswerModal.js";
 
-function Result({
-  correctData,
-  inCorrectData,
-  questionsData,
-  optionObjs,
-  questionCount,
-}) {
+function Result({ questionCount }) {
   const navigate = useNavigate();
   const [isOn, setIsOn] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
@@ -27,6 +21,12 @@ function Result({
   const innerLineRef = useRef();
   const [showAnswerModal, setShowAnswerModal] = useState(false);
   const [showScoreInfoModal, setShowScoreInfoModal] = useState(false);
+  const [correctData, setCorrectData] = useState([]);
+  const [inCorrectData, setInCorrectData] = useState([]);
+  const [questionsData, setQuestionsData] = useState([]);
+  const [optionsData, setOptionsData] = useState([]);
+  // a json data holding ->> Correct answers and OPtion letter
+  const [answerData, setAnswerData] = useState([]);
 
   // * how to addevent listeners to a node of elements in react 🔍
   const toggle = () => {
@@ -39,9 +39,16 @@ function Result({
     }
   };
 
-
   useEffect(() => {
-    console.log(optionObjs);
+    const options = window.localStorage.getItem("OPTIONS_DATA");
+    const questions = window.localStorage.getItem("QUESTIONS_DATA");
+    setOptionsData(JSON.parse(options));
+    JSON.parse(questions).map((data, index) => {
+      if (index <= 20) {
+        correctData.push(data.correctAnswer);
+      }
+    });
+    console.log(correctData);
   }, []);
 
   const getLetter = (i) => {
@@ -54,20 +61,21 @@ function Result({
     } else if (i === 3) {
       return "D";
     }
-  }
+  };
+  const showModal = () => {
+    if (!showAnswerModal) {
+      setShowAnswerModal(true);
+    }
+  };
 
-
-  const diaplayAnswers = optionObjs.map((ans, index) => {
+  const diaplayAnswers = optionsData.map((ans, index) => {
     <div className="question-count">
-    <div className="num">{index + 1}</div>
-    <div onClick={showModal} className="option1">
-      <div className="option-count">{getLetter(index)}</div> 
-    </div>
-  </div>
-  })
-
-
-  
+      <div className="num">{index + 1}</div>
+      <div onClick={showModal} className="option1">
+        <div className="option-count">{getLetter(index)}</div>
+      </div>
+    </div>;
+  });
 
   const addInfoModalCorrect = () => {
     setShowScoreInfoModal(true);
@@ -86,12 +94,6 @@ function Result({
     setIsCorrect(false);
     setIsInCorrect(false);
     setIsUnattempted(true);
-  };
-
-  const showModal = () => {
-    if (!showAnswerModal) {
-      setShowAnswerModal(true);
-    }
   };
 
   const removeModal = () => {
