@@ -11,7 +11,13 @@ import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
 import ScoreInfoModal from "./ScoreInfoModal";
 import AnswerModal from "./AnswerModal.js";
 
-function Result({ correctData, inCorrectData, questionsData, optionObjs }) {
+function Result({
+  correctData,
+  inCorrectData,
+  questionsData,
+  optionObjs,
+  questionCount,
+}) {
   const navigate = useNavigate();
   const [isOn, setIsOn] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
@@ -32,6 +38,36 @@ function Result({ correctData, inCorrectData, questionsData, optionObjs }) {
       optionRef.current.style.display = "flex";
     }
   };
+
+
+  useEffect(() => {
+    console.log(optionObjs);
+  }, []);
+
+  const getLetter = (i) => {
+    if (i === 0) {
+      return "A";
+    } else if (i === 1) {
+      return "B";
+    } else if (i === 2) {
+      return "C";
+    } else if (i === 3) {
+      return "D";
+    }
+  }
+
+
+  const diaplayAnswers = optionObjs.map((ans, index) => {
+    <div className="question-count">
+    <div className="num">{index + 1}</div>
+    <div onClick={showModal} className="option1">
+      <div className="option-count">{getLetter(index)}</div> 
+    </div>
+  </div>
+  })
+
+
+  
 
   const addInfoModalCorrect = () => {
     setShowScoreInfoModal(true);
@@ -61,10 +97,6 @@ function Result({ correctData, inCorrectData, questionsData, optionObjs }) {
   const removeModal = () => {
     // setShowAnswerModal(false)
   };
-
-  useEffect(() => {
-    console.log(optionObjs);
-  }, []);
 
   return (
     <div className="result">
@@ -133,7 +165,8 @@ function Result({ correctData, inCorrectData, questionsData, optionObjs }) {
           </div>
           {/* ____________________________ */}
           <div className="main-answer-container">
-            <div ref={optionRef} className="option-cont">
+            {diaplayAnswers}
+            {/* <div ref={optionRef} className="option-cont">
               <div className="question-count">
                 <div className="num">1</div>
                 <div onClick={showModal} className="option1">
@@ -168,7 +201,7 @@ function Result({ correctData, inCorrectData, questionsData, optionObjs }) {
                   <div className="option-count">E</div> Lorem ipusm
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
           {/* ------------------------------ */}
           <div className="faders">
