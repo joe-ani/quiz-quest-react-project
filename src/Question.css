@@ -180,7 +180,7 @@
   padding: 30px;
   border-radius: 30px;
   color: #fff;
-  margin: 30px;
+  margin: 45px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.134);
   max-width: 100%;
   position: relative;
@@ -202,7 +202,6 @@
 .question-cont {
   font-size: 13px;
 }
-
 
 .question-container2 .option-cont {
   width: 100%;
@@ -406,5 +405,11 @@
 @media screen and (min-width: 1100px) {
   .question-container2 {
     max-width: 42%;
+  }
+}
+
+@media only screen and (max-height: 670px) {
+  .question-container2 {
+    margin: 45px;
   }
 }
