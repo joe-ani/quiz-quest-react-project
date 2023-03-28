@@ -30,8 +30,8 @@ function Question({
   const linkRef = useRef();
   const arrowRef = useRef();
   const textRef = useRef();
-  const elem1Ref = useRef() //-->> Fix overlapping
-  const elem2Ref = useRef()
+  const elem1Ref = useRef(); //-->> Fix overlapping
+  const elem2Ref = useRef();
   const [showPop, setShowPop] = useState(false);
   const [isPrevEnd, setIsPrevEnd] = useState(false);
   const [isNextEnd, setIsNextEnd] = useState(false);
@@ -45,6 +45,7 @@ function Question({
   const [questions, setQuestions] = useState([]);
   const [optionsData, setOptionsData] = useState([]);
   const [optionsArr, setOptionsArr] = useState([]);
+  const [isResult, setIsResult] = useState();
   // *Test Data-----------------------------------****
   const [mockQuestions, setMockQuestions] = useState([]);
   // const [mockAnswers, setMockAnswers] = useState([]);
@@ -292,6 +293,11 @@ function Question({
           "https://the-trivia-api.com/api/questions?limit=20"
         );
         setLoading(false);
+
+        const data = window.localStorage.getItem("QUESTIONS_DATA");
+        if (data & isResult) {
+          
+        }
         window.localStorage.setItem(
           "QUESTIONS_DATA",
           JSON.stringify(response.data)
@@ -396,7 +402,12 @@ function Question({
             activeClassName={"paginationActive"}
           />
           <div
-            onClick={(e) => (loading ? "" : navigate("/result"))}
+            onClick={(e) => {
+              if (!loading) {
+                navigate("/result");
+                setIsResult(true);
+              }
+            }}
             className={`submit-button ${loading ? "submit-false" : ""}`}
           >
             {/* submit icon */}
