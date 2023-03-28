@@ -51,6 +51,7 @@ function Home({
       "DURATION_DATA",
       JSON.stringify(selectedOptionDuration)
     );
+    
   }, [selectedOption, selectedOptionDuration, selectedOptionTime]);
   const handleChangeQuestion = (event) => {
     setSelectedOption(event.target.innerHTML);
