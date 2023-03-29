@@ -50,21 +50,30 @@ function Result({ questionCount }) {
     }
   };
 
-  const checkLetter = (data, index) => {
-    console.log(data)
-    if (data.every(item => correctData.includes(item))) {
-      console.log(index)
-    }
-  };
+  // const checkLetter = (data, index) => {
+  //  data.forEach((opt, idx) => {
+  //   console.log(idx)
+  //  })
+  // };
 
-  const [optionLetter, setOptionLetter] = useState([]);
-  useEffect(() => {
+  const [jsonData, setJsonData] = useState([]);
+useEffect(() => {
+  jsonData.map((data, index) => {
+    data.array.forEach((value, idx) => {
+      if (correctData[index] === value) {
+        console.log("works")
+      }
+     })
+  });
+}, [jsonData])
+
+
+const [optionLetter, setOptionLetter] = useState([]);
+useEffect(() => {
     const options = window.localStorage.getItem("OPTIONS_DATA");
-    JSON.parse(options).map((data, index) => {
-      checkLetter(data, index);
-    });
-    const questions = window.localStorage.getItem("QUESTIONS_DATA");
     setOptionsData(JSON.parse(options));
+    setJsonData(JSON.parse(options))
+    const questions = window.localStorage.getItem("QUESTIONS_DATA");
     JSON.parse(questions).map((data, index) => {
       if (index <= 19) {
         correctData.push(data.correctAnswer);
