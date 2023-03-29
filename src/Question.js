@@ -220,8 +220,10 @@ function Question({
     setIsPlaying(!isPlaying);
   };
 
+  const [timer, setTimer] = useState()
   // timer
   useEffect(() => {
+    setTimer(`${minute.toString().padStart(2, '0')}:${second.toString().padStart(2, '0')}`)
     if (!loading) {
       const interval = setInterval(() => {
         if (timesUp === false) {
@@ -354,7 +356,7 @@ function Question({
                 gap: "5px",
               }}
             >
-              {minute}:{second} /
+              {timer} /
               <div className="time-set">
                 {time}
                 {timingDuration}
