@@ -50,29 +50,20 @@ function Result({ questionCount }) {
     }
   };
 
-  // const checkLetter = (data, index) => {
-  //  data.forEach((opt, idx) => {
-  //   console.log(idx)
-  //  })
-  // };
 
-  const [jsonData, setJsonData] = useState([]);
-useEffect(() => {
-  jsonData.map((data, index) => {
-    data.array.forEach((value, idx) => {
-      if (correctData[index] === value) {
-        console.log("works")
-      }
-     })
-  });
-}, [jsonData])
+  const [optionLetter, setOptionLetter] = useState([]);
 
-
-const [optionLetter, setOptionLetter] = useState([]);
-useEffect(() => {
+  useEffect(() => {
     const options = window.localStorage.getItem("OPTIONS_DATA");
     setOptionsData(JSON.parse(options));
-    setJsonData(JSON.parse(options))
+    JSON.parse(options).map((data, index) => {
+      data.options.map((value, idx) => {
+        if (correctData.includes(value)) {
+          console.log(getLetter(idx), idx);
+          optionLetter.push(getLetter(idx))
+        }
+      });
+    });
     const questions = window.localStorage.getItem("QUESTIONS_DATA");
     JSON.parse(questions).map((data, index) => {
       if (index <= 19) {
@@ -86,12 +77,12 @@ useEffect(() => {
   const showModal = () => {
     if (!showAnswerModal) {
       setShowAnswerModal(true);
-    }
-  };
+    }   
+  }; 
 
   const diaplayAnswers = correctData.map((ans, index) => {
     return (
-      <div className="question-count">
+      <div key={index} className="question-count">
         <div className="num">{index + 1}</div>
         <div onClick={showModal} className="option1">
           <div className="option-count">{getLetter(index)}</div>
