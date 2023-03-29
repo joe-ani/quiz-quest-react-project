@@ -66,9 +66,10 @@ function Question({
 
   useEffect(() => {
     const questionsData = window.localStorage.getItem("QUESTIONS_DATA");
-
     if (questionsData) {
       setMockQuestions(JSON.parse(questionsData));
+      setQuestionsData(JSON.parse(questionsData));
+      window.localStorage.setItem("RESULT_DATA", questionsData);
       JSON.parse(questionsData).forEach((data) => {
         data.incorrectAnswers.push(data.correctAnswer);
         const myObj = {
@@ -78,9 +79,9 @@ function Question({
         optionsArr.push(myObj);
         // }
       });
+      window.localStorage.setItem("OPTIONS_DATA", JSON.stringify(optionsArr));
       // setOptionObjs(optionsArr);
     }
-    window.localStorage.setItem("OPTIONS_DATA", JSON.stringify(optionsArr));
   }, []);
 
   const getIndex = (i) => {
@@ -322,7 +323,6 @@ function Question({
           "https://the-trivia-api.com/api/questions?limit=20"
         );
         setLoading(false);
-        setQuestionsData(response.data);
         window.localStorage.setItem(
           "QUESTIONS_DATA",
           JSON.stringify(response.data)
