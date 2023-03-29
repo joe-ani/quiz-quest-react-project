@@ -25,7 +25,7 @@ function Question({
   setQuestionCount,
   // setCorrectData,
   // setInCorrectData,
-  // setQuestionsData,
+  setQuestionsData,
   // setOptionObjs,
 }) {
   const navigate = useNavigate();
@@ -305,10 +305,12 @@ function Question({
     setLoading(true);
     const fetchData = async () => {
       try {
+        console.log("fetching....")
         const response = await axios.get(
           "https://the-trivia-api.com/api/questions?limit=20"
         );
         setLoading(false);
+        setQuestionsData(response.data);
         const data = window.localStorage.getItem("QUESTIONS_DATA");
         // if (data && isResult) {
         //   return;

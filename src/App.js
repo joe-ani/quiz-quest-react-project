@@ -16,7 +16,7 @@ function App() {
   const [questionCount, setQuestionCount] = useState();
   // const [correctData, setCorrectData] = useState([]);
   // const [inCorrectData, setInCorrectData] = useState([]);
-  // const [questionsData, setQuestionsData] = useState([]);
+  const [questionsData, setQuestionsData] = useState([]);
   const [optionObjs, setOptionObjs] = useState([]);
   // const AppContext = createContext()
 
@@ -61,7 +61,7 @@ function App() {
                 questionCount={questionCount}
                 // setInCorrectData={setInCorrectData}
                 // setCorrectData={setCorrectData}
-                // setQuestionsData={setQuestionsData}
+                setQuestionsData={setQuestionsData}
                 // setOptionObjs={setOptionObjs}
                 // optionObjs={optionObjs}
               />
@@ -83,10 +83,10 @@ function App() {
               <Result
                 // correctData={correctData}
                 // inCorrectData={inCorrectData}
-                // questionsData={questionsData}
+                questionsData={questionsData}
                 // setInCorrectData={setInCorrectData}
                 // setCorrectData={setCorrectData}
-                // setQuestionsData={setQuestionsData}
+                setQuestionsData={setQuestionsData}
                 // optionObjs={optionObjs}
                 // setOptionObjs={setOptionObjs}
                 questionCount={questionCount}
