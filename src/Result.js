@@ -26,7 +26,7 @@ function Result({ questionCount }) {
   const [questionsData, setQuestionsData] = useState([]);
   const [optionsData, setOptionsData] = useState([]);
 
-  
+
   // a json data holding ->> Correct answers and OPtion letter
   const [answerData, setAnswerData] = useState([]);
 
@@ -66,7 +66,7 @@ function Result({ questionCount }) {
         }
       });
     });
-    const questions = window.localStorage.getItem("QUESTIONS_DATA");
+    const questions = window.localStorage.getItem("RESULT_DATA");
     JSON.parse(questions).map((data, index) => {
       if (index <= 19) {
         correctData.push(data.correctAnswer);
