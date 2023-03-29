@@ -66,7 +66,7 @@ function Question({
 
   useEffect(() => {
     const questionsData = window.localStorage.getItem("QUESTIONS_DATA");
-    
+
     if (questionsData) {
       setMockQuestions(JSON.parse(questionsData));
       JSON.parse(questionsData).forEach((data) => {
@@ -79,7 +79,7 @@ function Question({
         // }
       });
       // setOptionObjs(optionsArr);
-    } 
+    }
     window.localStorage.setItem("OPTIONS_DATA", JSON.stringify(optionsArr));
   }, []);
 
@@ -220,10 +220,14 @@ function Question({
     setIsPlaying(!isPlaying);
   };
 
-  const [timer, setTimer] = useState()
+  const [timer, setTimer] = useState();
   // timer
   useEffect(() => {
-    setTimer(`${minute.toString().padStart(2, '0')}:${second.toString().padStart(2, '0')}`)
+    setTimer(
+      `${minute.toString().padStart(2, "0")}:${second
+        .toString()
+        .padStart(2, "0")}` //ERR
+    );
     if (!loading) {
       const interval = setInterval(() => {
         if (timesUp === false) {
@@ -337,7 +341,6 @@ function Question({
       }
     };
     fetchData();
-
   }, []);
 
   return (

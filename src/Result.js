@@ -25,6 +25,8 @@ function Result({ questionCount }) {
   const [inCorrectData, setInCorrectData] = useState([]);
   const [questionsData, setQuestionsData] = useState([]);
   const [optionsData, setOptionsData] = useState([]);
+
+  
   // a json data holding ->> Correct answers and OPtion letter
   const [answerData, setAnswerData] = useState([]);
 
