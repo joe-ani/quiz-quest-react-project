@@ -49,11 +49,19 @@ function Result({ questionCount }) {
       return "D";
     }
   };
+
+  const checkLetter = (data, index) => {
+    console.log(data)
+    if (data.every(item => correctData.includes(item))) {
+      console.log(index)
+    }
+  };
+
   const [optionLetter, setOptionLetter] = useState([]);
   useEffect(() => {
     const options = window.localStorage.getItem("OPTIONS_DATA");
     JSON.parse(options).map((data, index) => {
-      optionLetter.push(getLetter(index));
+      checkLetter(data, index);
     });
     const questions = window.localStorage.getItem("QUESTIONS_DATA");
     setOptionsData(JSON.parse(options));

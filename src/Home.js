@@ -5,11 +5,7 @@ import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 
 import { useNavigate } from "react-router-dom";
 
-function Home({
-  setTime,
-  setTimeDuration,
-  setQuestionCount,
-}) {
+function Home({ setTime, setTimeDuration, setQuestionCount }) {
   const navigate = useNavigate();
   const linkRef = useRef();
   const listRef = useRef();
@@ -36,7 +32,7 @@ function Home({
     setTime(selectedOptionTime);
     setTimeDuration(selectedOptionDuration);
     setQuestionCount(selectedOption);
-  }, [selectedOption,selectedOptionTime, selectedOptionDuration]);
+  }, [selectedOption, selectedOptionTime, selectedOptionDuration]);
 
   useEffect(() => {
     window.localStorage.setItem(
@@ -51,7 +47,8 @@ function Home({
       "DURATION_DATA",
       JSON.stringify(selectedOptionDuration)
     );
-    
+    window.localStorage.removeItem("QUESTIONS_DATA");
+    window.localStorage.removeItem("OPTIONS_DATA");
   }, [selectedOption, selectedOptionDuration, selectedOptionTime]);
   const handleChangeQuestion = (event) => {
     setSelectedOption(event.target.innerHTML);

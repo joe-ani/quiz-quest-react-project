@@ -66,9 +66,9 @@ function Question({
 
   useEffect(() => {
     const questionsData = window.localStorage.getItem("QUESTIONS_DATA");
-    setMockQuestions(JSON.parse(questionsData));
-
+    
     if (questionsData) {
+      setMockQuestions(JSON.parse(questionsData));
       JSON.parse(questionsData).forEach((data) => {
         data.incorrectAnswers.push(data.correctAnswer);
         const myObj = {
@@ -79,7 +79,7 @@ function Question({
         // }
       });
       // setOptionObjs(optionsArr);
-    }
+    } 
     window.localStorage.setItem("OPTIONS_DATA", JSON.stringify(optionsArr));
   }, []);
 
@@ -303,23 +303,24 @@ function Question({
 
   useEffect(() => {
     setLoading(true);
+    const data = window.localStorage.getItem("QUESTIONS_DATA");
+    if (data) {
+      console.log("fetch");
+    } else {
+      console.log("don't fetch");
+    }
     const fetchData = async () => {
       try {
-        console.log("fetching....")
+        console.log("fetching....");
         const response = await axios.get(
           "https://the-trivia-api.com/api/questions?limit=20"
         );
         setLoading(false);
         setQuestionsData(response.data);
-        const data = window.localStorage.getItem("QUESTIONS_DATA");
-        // if (data && isResult) {
-        //   return;
-        // } else {
         window.localStorage.setItem(
           "QUESTIONS_DATA",
           JSON.stringify(response.data)
         );
-        // }
         setQuestions(response.data);
         response.data
           .slice(pagesVisited, pagesVisited + userPerPage)
@@ -334,6 +335,7 @@ function Question({
       }
     };
     fetchData();
+
   }, []);
 
   return (
