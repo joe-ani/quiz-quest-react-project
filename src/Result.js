@@ -24,6 +24,7 @@ function Result({ selectedOption }) {
   const [correctData, setCorrectData] = useState([]);
   const [correctModalData, setCorrectModalData] = useState([]);
   const [inCorrectModalData, setInCorrectModalData] = useState([]);
+  const [unattemptedModalData, setUnattemptedModalData] = useState([]);
   const [questionsModalData, setQuestionsModalData] = useState([]);
   const [optionsData, setOptionsData] = useState([]);
 
@@ -60,18 +61,68 @@ function Result({ selectedOption }) {
   const [optionLetter, setOptionLetter] = useState([]);
   const questionCount = window.localStorage.getItem("QUESTION_COUNT");
 
-
   useEffect(() => {
     JSON.parse(resultData).map((data, index) => {
+      // Correct
       if (selectedOption.includes(data.correctAnswer)) {
         const obj = {
           question: data.question,
-          answer: data.correctAnswer
-        }
-        correctModalData.push(obj)
+          answer: data.correctAnswer,
+        };
+        correctModalData.push(obj);
       }
-    })
-    console.log(correctModalData)
+      // Incorrect
+      data.incorrectAnswers.map((val, i) => {
+        if (selectedOption.includes(val)) {
+          const obj = {
+            question: data.question,
+            answer: data.correctAnswer,
+          };
+          inCorrectModalData.push(obj);
+        }
+      });
+
+      // Unattempted Qustions
+      if (unattemptedModalData.length <= JSON.parse(questionCount) -1) {
+        if (
+          selectedOption.every(
+            (value) =>
+              !data.incorrectAnswers.includes(value) &&
+              value !== data.correctAnswer
+          )
+        ) {
+          const obj = {
+            question: data.question,
+            answer: data.correctAnswer,
+          };
+          unattemptedModalData.push(obj);
+        }
+      }
+    });
+    const uniqueCorrectModalData = correctModalData.filter(
+      (obj, index, self) =>
+        index ===
+        self.findIndex(
+          (o) => o.question === obj.question && o.answer === obj.answer
+        )
+    );
+    const uniqueInCorrectModalData = inCorrectModalData.filter(
+      (obj, index, self) =>
+        index ===
+        self.findIndex(
+          (o) => o.question === obj.question && o.answer === obj.answer
+        )
+    );
+    const uniqueUnattemptedModalData = unattemptedModalData.filter(
+      (obj, index, self) =>
+        index ===
+        self.findIndex(
+          (o) => o.question === obj.question && o.answer === obj.answer
+        )
+    );
+    console.log("correct", uniqueCorrectModalData);
+    console.log("incorrect", uniqueInCorrectModalData);
+    console.log("unattempted", uniqueUnattemptedModalData);
     console.log(selectedOption);
   }, []);
 
@@ -105,7 +156,6 @@ function Result({ selectedOption }) {
     });
     console.log(answerData);
     console.log(Number(JSON.parse(questionCount)));
-
   }, []);
 
   const showModal = (data) => {
