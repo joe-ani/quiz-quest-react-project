@@ -314,14 +314,8 @@ function Question({
   useEffect(() => {
     setLoading(true);
     const data = window.localStorage.getItem("QUESTIONS_DATA");
-    if (data) {
-      console.log("fetch");
-    } else {
-      console.log("don't fetch");
-    }
     const fetchData = async () => {
       try {
-        console.log("fetching....");
         const response = await axios.get(
           "https://the-trivia-api.com/api/questions?limit=20"
         );
