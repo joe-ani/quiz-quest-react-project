@@ -26,7 +26,6 @@ function Result({ questionCount }) {
   const [questionsData, setQuestionsData] = useState([]);
   const [optionsData, setOptionsData] = useState([]);
 
-
   // a json data holding ->> Correct answers and OPtion letter
   const [answerData, setAnswerData] = useState([]);
 
@@ -52,7 +51,6 @@ function Result({ questionCount }) {
     }
   };
 
-
   const [optionLetter, setOptionLetter] = useState([]);
 
   useEffect(() => {
@@ -61,17 +59,30 @@ function Result({ questionCount }) {
     JSON.parse(options).map((data, index) => {
       data.options.map((value, idx) => {
         if (correctData.includes(value)) {
-          console.log(getLetter(idx), idx);
-          optionLetter.push(getLetter(idx))
+          // console.log(getLetter(idx), idx);
+          if (optionLetter.length <= 19) {
+            optionLetter.push(getLetter(idx));
+          }
         }
       });
     });
     const questions = window.localStorage.getItem("RESULT_DATA");
     JSON.parse(questions).map((data, index) => {
-      if (index <= 19) {
+      if (correctData.length <= 19) {
         correctData.push(data.correctAnswer);
       }
     });
+
+    if (answerData.length <= 19) {
+        correctData.forEach((data, i) => {
+          const obj = {
+            answer: correctData[i],
+            option: optionLetter[i],
+          };
+          answerData.push(obj);
+        });
+    }
+    console.log(answerData);
     console.log(correctData);
     console.log(optionLetter);
   }, []);
@@ -79,8 +90,8 @@ function Result({ questionCount }) {
   const showModal = () => {
     if (!showAnswerModal) {
       setShowAnswerModal(true);
-    }   
-  }; 
+    }
+  };
 
   const diaplayAnswers = correctData.map((ans, index) => {
     return (
