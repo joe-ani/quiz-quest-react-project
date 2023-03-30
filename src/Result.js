@@ -28,6 +28,10 @@ function Result({ selectedOption }) {
   const [questionsModalData, setQuestionsModalData] = useState([]);
   const [optionsData, setOptionsData] = useState([]);
 
+  const [correctInfo, setCorrectInfo] = useState([]);
+  const [inCorrectInfo, setInCorrectInfo] = useState([]);
+  const [unattemptedInfo, setUnattemptedInfo] = useState([]);
+
   // a json data holding ->> Correct answers and OPtion letter
   const [answerData, setAnswerData] = useState([]);
 
@@ -82,21 +86,22 @@ function Result({ selectedOption }) {
         }
       });
 
-      // Unattempted Qustions
-      if (unattemptedModalData.length <= JSON.parse(questionCount) -1) {
-        if (
-          selectedOption.every(
-            (value) =>
-              !data.incorrectAnswers.includes(value) &&
-              value !== data.correctAnswer
-          )
-        ) {
-          const obj = {
-            question: data.question,
-            answer: data.correctAnswer,
-          };
-          unattemptedModalData.push(obj);
-        }
+      // Unattempted
+      if (unattemptedModalData.length <= JSON.parse(questionCount) - 1) {
+        data.incorrectAnswers.map((value) => {
+          if (
+            !selectedOption.includes(value) ||
+            !selectedOption.includes(data.correctAnswer)
+          ) {
+            const obj = {
+              question: data.question,
+              answer: data.correctAnswer,
+            };
+            unattemptedModalData.push(obj);
+          } else {
+            console.log("unattempted");
+          }
+        });
       }
     });
     const uniqueCorrectModalData = correctModalData.filter(
@@ -120,6 +125,10 @@ function Result({ selectedOption }) {
           (o) => o.question === obj.question && o.answer === obj.answer
         )
     );
+
+    setCorrectInfo(uniqueCorrectModalData);
+    setInCorrectInfo(uniqueInCorrectModalData);
+    setUnattemptedInfo(uniqueUnattemptedModalData);
     console.log("correct", uniqueCorrectModalData);
     console.log("incorrect", uniqueInCorrectModalData);
     console.log("unattempted", uniqueUnattemptedModalData);
@@ -295,6 +304,9 @@ function Result({ selectedOption }) {
         )}
         {showScoreInfoModal && (
           <ScoreInfoModal
+            unattemptedInfo={unattemptedInfo}
+            correctInfo={correctInfo}
+            inCorrectInfo={inCorrectInfo}
             setShowScoreInfoModal={setShowScoreInfoModal}
             isCorrect={isCorrect}
             isInCorrect={isInCorrect}

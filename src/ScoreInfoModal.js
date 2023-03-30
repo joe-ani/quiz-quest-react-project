@@ -10,16 +10,19 @@ function ScoreInfoModal({
   isCorrect,
   isInCorrect,
   isUnattempted,
+  correctInfo,
+  inCorrectInfo,
+  unattemptedInfo,
 }) {
   const removeModal = () => {
     setShowScoreInfoModal(false);
   };
   return (
     <div className="score-modal">
-      <div  className="modal-container">
-        {isCorrect && <CorrectInfo/>}
-        {isInCorrect && <InCorrectInfo />}
-        {isUnattempted && <Unattempted />}
+      <div className="modal-container">
+        {isCorrect && <CorrectInfo correctInfo={correctInfo} />}
+        {isInCorrect && <InCorrectInfo inCorrectInfo={inCorrectInfo} />}
+        {isUnattempted && <Unattempted unattemptedInfo={unattemptedInfo} />}
         <HighlightOffRoundedIcon
           onClick={removeModal}
           className="close-info-icon"
