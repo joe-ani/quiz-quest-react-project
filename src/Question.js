@@ -23,6 +23,8 @@ function Question({
   setTimeDuration,
   questionCount,
   setQuestionCount,
+  selectedOption,
+  setSelectedOption,
   // setCorrectData,
   // setInCorrectData,
   setQuestionsData,
@@ -67,6 +69,7 @@ function Question({
   useEffect(() => {
     const questionsData = window.localStorage.getItem("QUESTIONS_DATA");
     if (questionsData) {
+      setSelectedOption([])
       setMockQuestions(JSON.parse(questionsData));
       setQuestionsData(JSON.parse(questionsData));
       window.localStorage.setItem("RESULT_DATA", questionsData);
@@ -97,7 +100,7 @@ function Question({
   };
 
   const [selectedOptionIndex, setSelectedOptionIndex] = useState();
-  const [selectedOption, setSelectedOption] = useState([]);
+  // const [selectedOption, setSelectedOption] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [pagesSelected, setPagesSelected] = useState([]);
   let disableOptions = true;

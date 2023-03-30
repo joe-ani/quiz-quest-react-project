@@ -11,7 +11,7 @@ import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
 import ScoreInfoModal from "./ScoreInfoModal";
 import AnswerModal from "./AnswerModal.js";
 
-function Result() {
+function Result({ selectedOption }) {
   const navigate = useNavigate();
   const [isOn, setIsOn] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
@@ -59,6 +59,7 @@ function Result() {
 
   const resultData = window.localStorage.getItem("RESULT_DATA");
   useEffect(() => {
+    console.log(selectedOption);
     const questionCount = window.localStorage.getItem("QUESTION_COUNT");
     JSON.parse(resultData).map((data, index) => {
       if (correctData.length <= 19) {
