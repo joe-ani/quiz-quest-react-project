@@ -29,6 +29,9 @@ function Result() {
   // a json data holding ->> Correct answers and OPtion letter
   const [answerData, setAnswerData] = useState([]);
 
+  //Answers Modal states
+  const [answerModalQuestion, setAnswerModalQuestion] = useState() 
+
   // * how to addevent listeners to a node of elements in react 🔍
   const toggle = () => {
     if (isOn) {
@@ -54,9 +57,9 @@ function Result() {
   const [optionLetter, setOptionLetter] = useState([]);
 
   useEffect(() => {
-    const questions = window.localStorage.getItem("RESULT_DATA");
+    const resultData = window.localStorage.getItem("RESULT_DATA");
     const questionCount = window.localStorage.getItem("QUESTION_COUNT");
-    JSON.parse(questions).map((data, index) => {
+    JSON.parse(resultData).map((data, index) => {
       if (correctData.length <= 19) {
         correctData.push(data.correctAnswer);
       }
@@ -89,7 +92,7 @@ function Result() {
     // console.log(optionLetter);
   }, []);
 
-  const showModal = () => {
+  const showModal = (data) => {
     if (!showAnswerModal) {
       setShowAnswerModal(true);
     }
@@ -99,7 +102,7 @@ function Result() {
     return (
       <div key={index} className="question-count">
         <div className="num">{index + 1}</div>
-        <div onClick={showModal} className="option1">
+        <div onClick={(e) => showModal(ans.answer)} className="option1">
           <div className="option-count">{ans.option}</div>
           {ans.answer}
         </div>
@@ -199,40 +202,6 @@ function Result() {
           <div className="main-answer-container">
             <div ref={optionRef} className="option-cont">
               {diaplayAnswers}
-              {/* <div className="question-count">
-                <div className="num">1</div>
-                <div onClick={showModal} className="option1">
-                  <div className="option-count">E</div> Lorem ipusm
-                </div>
-              </div>
-              <div className="question-count">
-                <div className="num">2</div>
-                <div onClick={showModal} className="option1">
-                  <div className="option-count">D</div> Lorem ipusm
-                </div>
-              </div>
-
-              <div className="question-count">
-                <div className="num">3</div>
-
-                <div onClick={showModal} className="option1">
-                  <div className="option-count">C</div> Lorem ipusm
-                </div>
-              </div>
-
-              <div className="question-count">
-                <div className="num">4</div>
-                <div onClick={showModal} className="option1">
-                  <div className="option-count">B</div> Lorem ipusm
-                </div>
-              </div>
-
-              <div className="question-count">
-                <div className="num">5</div>
-                <div onClick={showModal} className="option1">
-                  <div className="option-count">E</div> Lorem ipusm
-                </div>
-              </div> */}
             </div>
           </div>
           {/* ------------------------------ */}
