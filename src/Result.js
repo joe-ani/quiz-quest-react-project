@@ -31,6 +31,7 @@ function Result() {
 
   //Answers Modal states
   const [answerModalQuestion, setAnswerModalQuestion] = useState();
+  const [answerModalAnswer, setAnswerModalAnswer] = useState();
 
   // * how to addevent listeners to a node of elements in react 🔍
   const toggle = () => {
@@ -94,9 +95,11 @@ function Result() {
 
   const showModal = (data) => {
     if (!showAnswerModal) {
-      JSON.parse(resultData).map((value, index) => {
+      JSON.parse(resultData).map((value) => {
         if (value.correctAnswer === data) {
-          console.log(value.question);
+          setAnswerModalQuestion(value.question);
+          setAnswerModalAnswer(data);
+          // console.log();
           console.log(value.correctAnswer, data);
         }
       });
@@ -219,6 +222,8 @@ function Result() {
         </div>
         {showAnswerModal && (
           <AnswerModal
+            answerModalQuestion={answerModalQuestion}
+            answerModalAnswer={answerModalAnswer}
             setShowAnswerModal={setShowAnswerModal}
             onClick={removeModal}
           />

@@ -2,9 +2,8 @@ import React, { useRef } from "react";
 import "./AnswerModal.css";
 import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
 
-function AnswerModal({ setShowAnswerModal, showAnswerModal }) {
+function AnswerModal({ setShowAnswerModal, answerModalQuestion, answerModalAnswer }) {
   const modalRef = useRef(null);
-
 
   const removeModal = () => {
     setShowAnswerModal(false);
@@ -18,16 +17,12 @@ function AnswerModal({ setShowAnswerModal, showAnswerModal }) {
       <div ref={modalRef} className="container">
         <div className="ques">
           <div className="heading">Question 4</div>
-          <div className="text">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo
-            necessitatibus ipsum, fugit culpa quis nostrum error voluptatum
-            dolorum et? Soluta.
-          </div>
+          <div className="text">{answerModalQuestion}</div>
         </div>
         <div className="line"></div>
         <div className="answer">
           <div className="heading">Answer</div>
-          <div className="text">Lorem ipsum dolor sit amet consectetur.</div>
+          <div className="text">{answerModalAnswer}</div>
         </div>
         <HighlightOffRoundedIcon
           onClick={removeModal}
