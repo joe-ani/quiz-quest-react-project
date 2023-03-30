@@ -22,8 +22,9 @@ function Result({ selectedOption }) {
   const [showAnswerModal, setShowAnswerModal] = useState(false);
   const [showScoreInfoModal, setShowScoreInfoModal] = useState(false);
   const [correctData, setCorrectData] = useState([]);
-  const [inCorrectData, setInCorrectData] = useState([]);
-  const [questionsData, setQuestionsData] = useState([]);
+  const [correctModalData, setCorrectModalData] = useState([]);
+  const [inCorrectModalData, setInCorrectModalData] = useState([]);
+  const [questionsModalData, setQuestionsModalData] = useState([]);
   const [optionsData, setOptionsData] = useState([]);
 
   // a json data holding ->> Correct answers and OPtion letter
@@ -55,12 +56,26 @@ function Result({ selectedOption }) {
     }
   };
 
-  const [optionLetter, setOptionLetter] = useState([]);
-
   const resultData = window.localStorage.getItem("RESULT_DATA");
+  const [optionLetter, setOptionLetter] = useState([]);
+  const questionCount = window.localStorage.getItem("QUESTION_COUNT");
+
+
   useEffect(() => {
+    JSON.parse(resultData).map((data, index) => {
+      if (selectedOption.includes(data.correctAnswer)) {
+        const obj = {
+          question: data.question,
+          answer: data.correctAnswer
+        }
+        correctModalData.push(obj)
+      }
+    })
+    console.log(correctModalData)
     console.log(selectedOption);
-    const questionCount = window.localStorage.getItem("QUESTION_COUNT");
+  }, []);
+
+  useEffect(() => {
     JSON.parse(resultData).map((data, index) => {
       if (correctData.length <= 19) {
         correctData.push(data.correctAnswer);
@@ -90,8 +105,7 @@ function Result({ selectedOption }) {
     });
     console.log(answerData);
     console.log(Number(JSON.parse(questionCount)));
-    // console.log(correctData);
-    // console.log(optionLetter);
+
   }, []);
 
   const showModal = (data) => {
