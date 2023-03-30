@@ -313,7 +313,6 @@ function Question({
 
   useEffect(() => {
     setLoading(true);
-    const data = window.localStorage.getItem("QUESTIONS_DATA");
     const fetchData = async () => {
       try {
         const response = await axios.get(
