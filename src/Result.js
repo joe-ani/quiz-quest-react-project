@@ -72,6 +72,7 @@ function Result({ selectedOption }) {
         const obj = {
           question: data.question,
           answer: data.correctAnswer,
+          page: index + 1,
         };
         correctModalData.push(obj);
       }
@@ -81,6 +82,7 @@ function Result({ selectedOption }) {
           const obj = {
             question: data.question,
             answer: data.correctAnswer,
+            page: index + 1,
           };
           inCorrectModalData.push(obj);
         }
@@ -96,6 +98,7 @@ function Result({ selectedOption }) {
             const obj = {
               question: data.question,
               answer: data.correctAnswer,
+              page: index + 1,
             };
             unattemptedModalData.push(obj);
           } else {
@@ -238,14 +241,14 @@ function Result({ selectedOption }) {
           <div className="score-info-container">
             <div className="correct-container">
               <div onClick={addInfoModalCorrect} className="top-cont">
-                <h3>3</h3>
+                <h3>{correctInfo.length}</h3>
                 <KeyboardDoubleArrowUpRoundedIcon className="up-arrow" />
               </div>
               <div className="correct-text">Correct</div>
             </div>
             <div className="incorrect-container">
               <div onClick={addInfoModalIncorrect} className="top-cont">
-                <h3>17</h3>
+                <h3>{inCorrectInfo.length}</h3>
                 <KeyboardDoubleArrowUpRoundedIcon className="down-arrow" />
               </div>
               <div className="incorrect-text"> Incorrect</div>

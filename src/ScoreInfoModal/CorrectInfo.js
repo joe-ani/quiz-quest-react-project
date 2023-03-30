@@ -8,7 +8,7 @@ function CorrectInfo({ correctInfo }) {
     return (
       <div key={data} className="correct-main-container">
         <div className="ques">
-          <div className="heading">Question 1</div>
+          <div className="heading">Question {data.page}</div>
           <div className="text">{data.question}</div>
         </div>
         <div className="line"></div>
