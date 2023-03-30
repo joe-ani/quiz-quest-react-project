@@ -11,7 +11,7 @@ import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
 import ScoreInfoModal from "./ScoreInfoModal";
 import AnswerModal from "./AnswerModal.js";
 
-function Result({ questionCount }) {
+function Result() {
   const navigate = useNavigate();
   const [isOn, setIsOn] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
@@ -54,6 +54,13 @@ function Result({ questionCount }) {
   const [optionLetter, setOptionLetter] = useState([]);
 
   useEffect(() => {
+    const questions = window.localStorage.getItem("RESULT_DATA");
+    const questionCount = window.localStorage.getItem("QUESTION_COUNT");
+    JSON.parse(questions).map((data, index) => {
+      if (correctData.length <= 19) {
+        correctData.push(data.correctAnswer);
+      }
+    });
     const options = window.localStorage.getItem("OPTIONS_DATA");
     setOptionsData(JSON.parse(options));
     JSON.parse(options).map((data, index) => {
@@ -66,25 +73,20 @@ function Result({ questionCount }) {
         }
       });
     });
-    const questions = window.localStorage.getItem("RESULT_DATA");
-    JSON.parse(questions).map((data, index) => {
-      if (correctData.length <= 19) {
-        correctData.push(data.correctAnswer);
+
+    correctData.forEach((data, i) => {
+      const obj = {
+        answer: correctData[i],
+        option: optionLetter[i],
+      };
+      if (answerData.length <= Number(JSON.parse(questionCount)) - 1) {
+        answerData.push(obj);
       }
     });
-
-    if (answerData.length <= 19) {
-        correctData.forEach((data, i) => {
-          const obj = {
-            answer: correctData[i],
-            option: optionLetter[i],
-          };
-          answerData.push(obj);
-        });
-    }
     console.log(answerData);
-    console.log(correctData);
-    console.log(optionLetter);
+    console.log(Number(JSON.parse(questionCount)));
+    // console.log(correctData);
+    // console.log(optionLetter);
   }, []);
 
   const showModal = () => {
@@ -93,13 +95,13 @@ function Result({ questionCount }) {
     }
   };
 
-  const diaplayAnswers = correctData.map((ans, index) => {
+  const diaplayAnswers = answerData.map((ans, index) => {
     return (
       <div key={index} className="question-count">
         <div className="num">{index + 1}</div>
         <div onClick={showModal} className="option1">
-          <div className="option-count">{getLetter(index)}</div>
-          {ans}
+          <div className="option-count">{ans.option}</div>
+          {ans.answer}
         </div>
       </div>
     );
