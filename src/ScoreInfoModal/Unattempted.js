@@ -24,7 +24,7 @@ function Unattempted({unattemptedInfo}) {
     <div className="unattempted-cont">
     <InfoRoundedIcon/>
      <div className="text">Unattempted Questions</div>
-    <div className="correct-scroll">DATA</div>
+    <div className="correct-scroll">{displayUnattemptedData}</div>
       <div className="faders">
         <div className="fade1"></div>
         <div className="fade2"></div>
