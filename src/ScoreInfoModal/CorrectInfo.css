@@ -44,6 +44,9 @@
 
 .correct-main-container .heading {
   text-align: start;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
 }
 
 .correct-main-container .answer .heading {
