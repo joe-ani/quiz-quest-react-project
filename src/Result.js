@@ -90,19 +90,22 @@ function Result({ selectedOption }) {
 
       // Unattempted
       if (unattemptedModalData.length <= JSON.parse(questionCount) - 1) {
-        data.incorrectAnswers.map((value) => {
-          if (
-            !selectedOption.includes(value) ||
-            !selectedOption.includes(data.correctAnswer)
-          ) {
+        if (!selectedOption.includes(data.correctAnswer)) {
+          const obj = {
+            question: data.question,
+            answer: data.correctAnswer,
+            page: index + 1,
+          };
+          unattemptedModalData.push(obj);
+        }
+        selectedOption.map((val, i) => {
+          if (!data.incorrectAnswers.includes(val)) {
             const obj = {
               question: data.question,
               answer: data.correctAnswer,
               page: index + 1,
             };
             unattemptedModalData.push(obj);
-          } else {
-            console.log("unattempted");
           }
         });
       }
@@ -264,7 +267,7 @@ function Result({ selectedOption }) {
             </div>
             <div className="unattempted-container">
               <div onClick={addInfoModalUnattempted} className="top-cont">
-                <h3>3</h3>
+                <h3>{unattemptedInfo.length}</h3>
                 <InfoRoundedIcon className="info" />
               </div>
               <div className="unattempted-text">Unattempted</div>
