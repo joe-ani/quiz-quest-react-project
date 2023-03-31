@@ -170,15 +170,14 @@ function Result({ selectedOption }) {
     console.log(Number(JSON.parse(questionCount)));
   }, []);
 
-
-  const [modalPage, setModalPage] = useState()
+  const [modalPage, setModalPage] = useState();
   const showModal = (data, page) => {
     if (!showAnswerModal) {
       JSON.parse(resultData).map((value) => {
         if (value.correctAnswer === data) {
           setAnswerModalQuestion(value.question);
           setAnswerModalAnswer(data);
-          setModalPage(page)
+          setModalPage(page);
           // console.log();
           console.log(value.correctAnswer, data);
         }
@@ -192,7 +191,10 @@ function Result({ selectedOption }) {
     return (
       <div key={index} className="question-count">
         <div className="num">{index + 1}</div>
-        <div onClick={(e) => showModal(ans.answer, index + 1)} className="option1">
+        <div
+          onClick={(e) => showModal(ans.answer, index + 1)}
+          className="option1"
+        >
           <div className="option-count">{ans.option}</div>
           {ans.answer}
         </div>
@@ -240,7 +242,10 @@ function Result({ selectedOption }) {
             </div>
             <div className="percentage-score">10% / 100%</div>
           </div>
-            <div className="attempt-info">You Attempted <b>{selectedOption.length}</b> out of <b>{Number(JSON.parse(questionCount))}</b> Questions</div>
+          <div className="attempt-info">
+            You Attempted <b>{selectedOption.length}</b> out of{" "}
+            <b>{Number(JSON.parse(questionCount))}</b> Questions
+          </div>
 
           <div className="score-info-container">
             <div className="correct-container">
@@ -307,7 +312,6 @@ function Result({ selectedOption }) {
             answerModalAnswer={answerModalAnswer}
             modalPage={modalPage}
             setShowAnswerModal={setShowAnswerModal}
-
             onClick={removeModal}
           />
         )}
