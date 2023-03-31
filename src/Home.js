@@ -176,7 +176,7 @@ function Home({ setTime, setTimeDuration, setQuestionCount }) {
               </li>
             </div>
             <div ref={questionDesRef} className="question-des">
-              Select up to 50 Questions.
+              You can Select up to 50 Questions.
             </div>
           </div>
         </div>
