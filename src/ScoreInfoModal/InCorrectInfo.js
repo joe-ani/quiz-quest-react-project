@@ -2,8 +2,7 @@ import React from "react";
 import KeyboardDoubleArrowUpRoundedIcon from "@mui/icons-material/KeyboardDoubleArrowUpRounded";
 import "./InCorrectInfo.css";
 
-function InCorrectInfo({inCorrectInfo}) {
-
+function InCorrectInfo({ inCorrectInfo }) {
   const displayInCorrectInfoData = inCorrectInfo.map((data, i) => {
     return (
       <div key={data} className="incorrect-main-container">
@@ -22,8 +21,10 @@ function InCorrectInfo({inCorrectInfo}) {
 
   return (
     <div className="incorrect-info-cont">
-      <KeyboardDoubleArrowUpRoundedIcon className="arrow-down" />
-      <div className="text">Questions You Failed</div>
+      <div className="incorrect-heading">
+        <KeyboardDoubleArrowUpRoundedIcon className="arrow-down" />
+        <div className="text">Questions You Failed</div>
+      </div>
       <div className="incorrect-scroll">{displayInCorrectInfoData}</div>
       <div className="faders">
         <div className="fade1"></div>
