@@ -145,8 +145,7 @@ function Result({ selectedOption }) {
     console.log("incorrect", uniqueInCorrectModalData);
     console.log("unattempted", uniqueUnattemptedModalData);
   }, [unattemptedInfo]);
-  
- 
+
   useEffect(() => {
     JSON.parse(resultData).map((data, index) => {
       if (correctData.length <= 19) {
@@ -246,13 +245,13 @@ function Result({ selectedOption }) {
               <div className="outer-line">
                 <div
                   ref={innerLineRef}
-                  style={{"--width": percentageScore}}
+                  style={{ "--width": percentageScore }}
                   className="inner-line"
                 ></div>
               </div>
             </div>
             <div className="percentage-score">
-              {`${percentageScore}%`} / 100%
+              {`${Math.round(percentageScore)}%`} / 100%
             </div>
           </div>
           <div className="attempt-info">
