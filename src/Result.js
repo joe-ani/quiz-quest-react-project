@@ -140,17 +140,13 @@ function Result({ selectedOption }) {
     setPercentageScore(
       (Number(correctInfo.length) / Number(JSON.parse(questionCount))) * 100
     );
+
     console.log("correct", uniqueCorrectModalData);
     console.log("incorrect", uniqueInCorrectModalData);
     console.log("unattempted", uniqueUnattemptedModalData);
   }, [unattemptedInfo]);
   
-  
-
-  useEffect(() => {
-  }, [unattemptedInfo, ])
-
-
+ 
   useEffect(() => {
     JSON.parse(resultData).map((data, index) => {
       if (correctData.length <= 19) {
@@ -248,7 +244,11 @@ function Result({ selectedOption }) {
             </div>
             <div className="chart">
               <div className="outer-line">
-                <div ref={innerLineRef} className="inner-line"></div>
+                <div
+                  ref={innerLineRef}
+                  style={{"--width": percentageScore}}
+                  className="inner-line"
+                ></div>
               </div>
             </div>
             <div className="percentage-score">

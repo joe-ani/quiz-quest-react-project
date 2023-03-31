@@ -14,7 +14,6 @@
 .score-container .attempt-info {
   margin-left: 10px;
   margin-top: 20px;
-  
 }
 
 .score-container .score .text {
@@ -28,14 +27,16 @@
 .text .bar-chat {
   font-size: 40px;
 }
+* {
+  --width: 10;
+}
 
 .chart .inner-line {
   background: rgb(255, 0, 0);
   z-index: 10;
   border-radius: 50px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.544);
-  width: 10%;
-  /* width: calc(var(--width) * 1px); */
+  width: calc(var(--width) * 1%);
   animation: animate 1.5s linear;
   height: 15px;
 }
@@ -45,7 +46,7 @@
     width: 0;
   }
   100% {
-    width: 10%;
+    width: calc(var(--width) * 1%);
   }
 }
 
@@ -291,10 +292,9 @@
     font-size: 35px;
   }
 
-  .score-container .score .text { 
+  .score-container .score .text {
     gap: 5px;
-   }
-
+  }
 
   .result h2 {
     font-size: 25px;
