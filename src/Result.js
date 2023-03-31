@@ -240,6 +240,7 @@ function Result({ selectedOption }) {
             </div>
             <div className="percentage-score">10% / 100%</div>
           </div>
+            <div className="attempt-info">You Attempted <b>{selectedOption.length}</b> out of <b>{Number(JSON.parse(questionCount))}</b> Questions</div>
 
           <div className="score-info-container">
             <div className="correct-container">
