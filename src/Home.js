@@ -166,14 +166,17 @@ function Home({ setTime, setTimeDuration, setQuestionCount }) {
                 10
               </li>
               <li onClick={handleChangeQuestion} ref={listRef}>
-                15
+                20
               </li>
               <li onClick={handleChangeQuestion} ref={listRef}>
-                20
+                30
+              </li>
+              <li onClick={handleChangeQuestion} ref={listRef}>
+                50
               </li>
             </div>
             <div ref={questionDesRef} className="question-des">
-              Select up to 20 Questions.
+              Select up to 50 Questions.
             </div>
           </div>
         </div>

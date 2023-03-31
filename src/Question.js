@@ -316,7 +316,7 @@ function Question({
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://the-trivia-api.com/api/questions?limit=20"
+          "https://the-trivia-api.com/api/questions?limit=50"
         );
         setLoading(false);
         window.localStorage.setItem(
