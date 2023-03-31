@@ -64,52 +64,45 @@ function Result({ selectedOption }) {
   const resultData = window.localStorage.getItem("RESULT_DATA");
   const [optionLetter, setOptionLetter] = useState([]);
   const questionCount = window.localStorage.getItem("QUESTION_COUNT");
-
+  const [refrenceData, setrefrenceData] = useState([])
   useEffect(() => {
-    JSON.parse(resultData).map((data, index) => {
-      // Correct
-      if (selectedOption.includes(data.correctAnswer)) {
-        const obj = {
-          question: data.question,
-          answer: data.correctAnswer,
-          page: index + 1,
-        };
-        correctModalData.push(obj);
-      }
-      // Incorrect
-      data.incorrectAnswers.map((val, i) => {
-        if (selectedOption.includes(val)) {
+    JSON.parse(resultData)
+      .slice(0, Number(JSON.parse(questionCount)))
+      .map((data, index) => {
+        // Correct
+        if (selectedOption.includes(data.correctAnswer)) {
           const obj = {
             question: data.question,
             answer: data.correctAnswer,
             page: index + 1,
           };
-          inCorrectModalData.push(obj);
+          correctModalData.push(obj);
         }
-      });
-
-      // Unattempted
-      if (unattemptedModalData.length <= JSON.parse(questionCount) - 1) {
-        if (!selectedOption.includes(data.correctAnswer)) {
-          const obj = {
-            question: data.question,
-            answer: data.correctAnswer,
-            page: index + 1,
-          };
-          unattemptedModalData.push(obj);
-        }
-        selectedOption.map((val, i) => {
-          if (!data.incorrectAnswers.includes(val)) {
+        // Incorrect
+        data.incorrectAnswers.map((val, i) => {
+          if (selectedOption.includes(val)) {
             const obj = {
               question: data.question,
               answer: data.correctAnswer,
               page: index + 1,
             };
-            unattemptedModalData.push(obj);
+            inCorrectModalData.push(obj);
           }
         });
-      }
-    });
+        if (true) {
+          const obj = {
+            question: data.question,
+            answer: data.correctAnswer,
+            page: index + 1,
+          };
+          refrenceData.push(obj);
+        }
+
+        // Unattempted
+       
+      });
+   
+
     const uniqueCorrectModalData = correctModalData.filter(
       (obj, index, self) =>
         index ===
@@ -124,17 +117,28 @@ function Result({ selectedOption }) {
           (o) => o.question === obj.question && o.answer === obj.answer
         )
     );
-    const uniqueUnattemptedModalData = unattemptedModalData.filter(
+    const uniqueRefrenceModalData = refrenceData.filter(
       (obj, index, self) =>
         index ===
         self.findIndex(
           (o) => o.question === obj.question && o.answer === obj.answer
         )
     );
+    const mergedData = uniqueCorrectModalData.concat(uniqueInCorrectModalData.concat(uniqueRefrenceModalData))
+    const uniqueUnattemptedModalData = mergedData.filter(
+      (obj, index, self) =>
+        self.findIndex(
+          (o) => o.question === obj.question && o.answer === obj.answer
+        ) === index && // keep only objects that don't have duplicates
+        self.filter(
+          (o) => o.question === obj.question && o.answer === obj.answer
+        ).length === 1 // remove objects that have duplicates
+    );
 
     setCorrectInfo(uniqueCorrectModalData);
     setInCorrectInfo(uniqueInCorrectModalData);
     setUnattemptedInfo(uniqueUnattemptedModalData);
+    console.log(uniqueRefrenceModalData)
     console.log("correct", uniqueCorrectModalData);
     console.log("incorrect", uniqueInCorrectModalData);
     console.log("unattempted", uniqueUnattemptedModalData);
