@@ -27,10 +27,10 @@ function Result({ selectedOption }) {
   const [unattemptedModalData, setUnattemptedModalData] = useState([]);
   const [questionsModalData, setQuestionsModalData] = useState([]);
   const [optionsData, setOptionsData] = useState([]);
-
   const [correctInfo, setCorrectInfo] = useState([]);
   const [inCorrectInfo, setInCorrectInfo] = useState([]);
   const [unattemptedInfo, setUnattemptedInfo] = useState([]);
+  const [percentageScore, setPercentageScore] = useState();
 
   // a json data holding ->> Correct answers and OPtion letter
   const [answerData, setAnswerData] = useState([]);
@@ -64,7 +64,7 @@ function Result({ selectedOption }) {
   const resultData = window.localStorage.getItem("RESULT_DATA");
   const [optionLetter, setOptionLetter] = useState([]);
   const questionCount = window.localStorage.getItem("QUESTION_COUNT");
-  const [refrenceData, setrefrenceData] = useState([])
+  const [refrenceData, setrefrenceData] = useState([]);
   useEffect(() => {
     JSON.parse(resultData)
       .slice(0, Number(JSON.parse(questionCount)))
@@ -89,6 +89,7 @@ function Result({ selectedOption }) {
             inCorrectModalData.push(obj);
           }
         });
+        // Unattempted
         if (true) {
           const obj = {
             question: data.question,
@@ -97,11 +98,7 @@ function Result({ selectedOption }) {
           };
           refrenceData.push(obj);
         }
-
-        // Unattempted
-       
       });
-   
 
     const uniqueCorrectModalData = correctModalData.filter(
       (obj, index, self) =>
@@ -124,7 +121,9 @@ function Result({ selectedOption }) {
           (o) => o.question === obj.question && o.answer === obj.answer
         )
     );
-    const mergedData = uniqueCorrectModalData.concat(uniqueInCorrectModalData.concat(uniqueRefrenceModalData))
+    const mergedData = uniqueCorrectModalData.concat(
+      uniqueInCorrectModalData.concat(uniqueRefrenceModalData)
+    );
     const uniqueUnattemptedModalData = mergedData.filter(
       (obj, index, self) =>
         self.findIndex(
@@ -138,12 +137,19 @@ function Result({ selectedOption }) {
     setCorrectInfo(uniqueCorrectModalData);
     setInCorrectInfo(uniqueInCorrectModalData);
     setUnattemptedInfo(uniqueUnattemptedModalData);
-    console.log(uniqueRefrenceModalData)
+    setPercentageScore(
+      (Number(correctInfo.length) / Number(JSON.parse(questionCount))) * 100
+    );
     console.log("correct", uniqueCorrectModalData);
     console.log("incorrect", uniqueInCorrectModalData);
     console.log("unattempted", uniqueUnattemptedModalData);
-    console.log(selectedOption);
-  }, []);
+  }, [unattemptedInfo]);
+  
+  
+
+  useEffect(() => {
+  }, [unattemptedInfo, ])
+
 
   useEffect(() => {
     JSON.parse(resultData).map((data, index) => {
@@ -173,8 +179,6 @@ function Result({ selectedOption }) {
         answerData.push(obj);
       }
     });
-    console.log(answerData);
-    console.log(Number(JSON.parse(questionCount)));
   }, []);
 
   const [modalPage, setModalPage] = useState();
@@ -247,7 +251,9 @@ function Result({ selectedOption }) {
                 <div ref={innerLineRef} className="inner-line"></div>
               </div>
             </div>
-            <div className="percentage-score">10% / 100%</div>
+            <div className="percentage-score">
+              {`${percentageScore}%`} / 100%
+            </div>
           </div>
           <div className="attempt-info">
             You Attempted <b>{selectedOption.length}</b> out of{" "}
