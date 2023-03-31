@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import "./AnswerModal.css";
 import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
 
-function AnswerModal({ setShowAnswerModal, answerModalQuestion, answerModalAnswer }) {
+function AnswerModal({ setShowAnswerModal, answerModalQuestion, answerModalAnswer, modalPage }) {
   const modalRef = useRef(null);
 
   const removeModal = () => {
@@ -16,7 +16,7 @@ function AnswerModal({ setShowAnswerModal, answerModalQuestion, answerModalAnswe
     <div className="answer-modal">
       <div ref={modalRef} className="container">
         <div className="ques">
-          <div className="heading">Question 4</div>
+          <div className="heading">Question {modalPage}:</div>
           <div className="text">{answerModalQuestion}</div>
         </div>
         <div className="line"></div>
