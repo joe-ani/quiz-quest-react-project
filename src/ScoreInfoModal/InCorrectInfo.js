@@ -7,7 +7,7 @@ function InCorrectInfo({ inCorrectInfo }) {
     return (
       <div key={data} className="incorrect-main-container">
         <div className="ques">
-          <div className="heading">Question {data.page}</div>
+          <div className="heading">Question {data.page}:</div>
           <div className="text">{data.question}</div>
         </div>
         <div className="line"></div>
