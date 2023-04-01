@@ -13,7 +13,7 @@ function InCorrectInfo({ inCorrectInfo }) {
         <div className="line"></div>
         <div className="answer">
           <div className="heading">Answer</div>
-          <div className="text">{data.answer}</div>
+          <div className="text">{data.answer} --- {data.incAns}</div>
         </div>
       </div>
     );
