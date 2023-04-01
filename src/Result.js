@@ -31,6 +31,7 @@ function Result({ selectedOption }) {
   const [inCorrectInfo, setInCorrectInfo] = useState([]);
   const [unattemptedInfo, setUnattemptedInfo] = useState([]);
   const [percentageScore, setPercentageScore] = useState();
+  const [colourRange, setColourRange] = useState()
 
   // a json data holding ->> Correct answers and OPtion letter
   const [answerData, setAnswerData] = useState([]);
@@ -141,6 +142,8 @@ function Result({ selectedOption }) {
       (Number(correctInfo.length) / Number(JSON.parse(questionCount))) * 100
     );
 
+    setColourRange(`hsl(${percentageScore}, 100%, 50%)`)
+
     console.log("correct", uniqueCorrectModalData);
     console.log("incorrect", uniqueInCorrectModalData);
     console.log("unattempted", uniqueUnattemptedModalData);
@@ -245,7 +248,7 @@ function Result({ selectedOption }) {
               <div className="outer-line">
                 <div
                   ref={innerLineRef}
-                  style={{ "--width": percentageScore }}
+                  style={{ "--width": percentageScore,  "--background": colourRange  }}
                   className="inner-line"
                 ></div>
               </div>
