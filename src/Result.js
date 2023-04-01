@@ -31,7 +31,7 @@ function Result({ selectedOption }) {
   const [inCorrectInfo, setInCorrectInfo] = useState([]);
   const [unattemptedInfo, setUnattemptedInfo] = useState([]);
   const [percentageScore, setPercentageScore] = useState();
-  const [colourRange, setColourRange] = useState()
+  const [colourRange, setColourRange] = useState();
 
   // a json data holding ->> Correct answers and OPtion letter
   const [answerData, setAnswerData] = useState([]);
@@ -86,6 +86,7 @@ function Result({ selectedOption }) {
               question: data.question,
               answer: data.correctAnswer,
               page: index + 1,
+              incAns: val,
             };
             inCorrectModalData.push(obj);
           }
@@ -142,7 +143,7 @@ function Result({ selectedOption }) {
       (Number(correctInfo.length) / Number(JSON.parse(questionCount))) * 100
     );
 
-    setColourRange(`hsl(${percentageScore}, 100%, 50%)`)
+    setColourRange(`hsl(${percentageScore}, 100%, 50%)`);
 
     console.log("correct", uniqueCorrectModalData);
     console.log("incorrect", uniqueInCorrectModalData);
@@ -248,7 +249,10 @@ function Result({ selectedOption }) {
               <div className="outer-line">
                 <div
                   ref={innerLineRef}
-                  style={{ "--width": percentageScore,  "--background": colourRange  }}
+                  style={{
+                    "--width": percentageScore,
+                    "--background": colourRange,
+                  }}
                   className="inner-line"
                 ></div>
               </div>
@@ -287,7 +291,17 @@ function Result({ selectedOption }) {
           </div>
 
           <div className="options-cont">
-            <div className="message">You Can always try again! </div>
+            {/* {percentageScore > 65 ?  } */}
+            <div className="message">
+              {" "}
+              {percentageScore > 60
+                ? "Not Bad, You can do better"
+                : percentageScore > 85
+                ? "Pretty Impressive!"
+                : percentageScore == 100
+                ? "✅WOW, Perfect Score!"
+                : "You can always try again"}
+            </div>
             <div className="option">
               <div onClick={(e) => navigate("/home")} className="home-button">
                 <CottageRoundedIcon className="home-icon" />
