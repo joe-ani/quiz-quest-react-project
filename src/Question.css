@@ -452,3 +452,25 @@
     margin: 45px;
   }
 }
+
+
+
+/* When the browser width is 70% or less */
+@media (max-width: 70%) {
+  /* Add your CSS styles here */
+}
+
+/* When the browser width is between 70% and 80% */
+@media (min-width: 70%) and (max-width: 80%) {
+  /* Add your CSS styles here */
+}
+
+/* When the browser width is between 80% and 90% */
+@media (min-width: 80%) and (max-width: 90%) {
+  /* Add your CSS styles here */
+}
+
+/* When the browser width is 90% or greater */
+@media (min-width: 90%) {
+  /* Add your CSS styles here */
+}
