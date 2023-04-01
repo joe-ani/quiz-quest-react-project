@@ -36,7 +36,6 @@
   background: var(--background);
   z-index: 10;
   border-radius: 50px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.544);
   width: calc(var(--width) * 1%);
   animation: animate 1.5s linear;
   height: 15px;
