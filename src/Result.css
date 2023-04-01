@@ -27,12 +27,13 @@
 .text .bar-chat {
   font-size: 40px;
 }
+
 * {
   --width: 10;
 }
 
 .chart .inner-line {
-  background: rgb(255, 0, 0);
+  background: var(--background);
   z-index: 10;
   border-radius: 50px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.544);
@@ -44,9 +45,12 @@
 @keyframes animate {
   0% {
     width: 0;
+    background: red;
   }
   100% {
     width: calc(var(--width) * 1%);
+    background: var(--background);
+
   }
 }
 
@@ -88,6 +92,7 @@
   color: red;
   align-items: center;
 }
+
 .unattempted-container {
   display: flex;
   flex-direction: column;
@@ -118,13 +123,13 @@
   background: rgba(128, 128, 128, 0.078);
 }
 
-.incorrect-container > .top-cont > .down-arrow {
+.incorrect-container>.top-cont>.down-arrow {
   transform: rotateZ(180deg);
   stroke: red;
   color: red;
 }
 
-.correct-container > .top-cont > .up-arrow {
+.correct-container>.top-cont>.up-arrow {
   stroke: rgb(0, 216, 79);
   color: rgb(0, 216, 79);
 }
@@ -163,6 +168,7 @@
 .home-button:hover {
   background: #57047d;
 }
+
 .retry-button:hover {
   background: #57047d;
 }
@@ -240,7 +246,7 @@
   position: absolute;
 }
 
-.main-answer-container > .option-cont {
+.main-answer-container>.option-cont {
   display: none;
 }
 
@@ -269,6 +275,7 @@
   z-index: 99;
   position: absolute;
 }
+
 .fade2 {
   position: absolute;
   bottom: 0%;
@@ -304,6 +311,7 @@
   .fade2 {
     bottom: -0.5%;
   }
+
   .result {
     overflow: scroll;
     overflow-x: hidden;
@@ -314,6 +322,7 @@
     font-weight: 800;
     font-size: 20px;
   }
+
   .answers-container {
     margin: 30px;
   }
@@ -321,6 +330,7 @@
   .score-container {
     gap: 10px;
   }
+
   .retry-button {
     font-size: 15px;
     padding: 7px;
@@ -340,9 +350,11 @@
   .home-button .home-icon {
     font-size: 20px;
   }
+
   .retry-button .retry-icon {
     font-size: 20px;
   }
+
   .score {
     margin: 20px;
     margin-top: 0;
@@ -352,6 +364,7 @@
     margin: 20px;
     gap: 50px;
   }
+
   .options-cont {
     margin: 50px 0 0 30px;
   }
