@@ -294,8 +294,8 @@ function Result({ selectedOption }) {
             {/* {percentageScore > 65 ?  } */}
             <div className="message">
               {" "}
-              {percentageScore > 60
-                ? "Not Bad, You can do better"
+              {percentageScore > 50
+                ? "Not Bad"
                 : percentageScore > 85
                 ? "Pretty Impressive!"
                 : percentageScore == 100
