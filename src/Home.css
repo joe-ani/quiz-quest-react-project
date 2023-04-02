@@ -305,6 +305,17 @@ h1::after {
   transform: rotateZ(-180deg);
   width: 2050px;
   /* display: none; */
+  animation: move 10s linear 0s infinite;
+}
+
+@keyframes move {
+  0% {
+    transform: translateX(-100px) rotate(0);
+
+  }
+  100% {
+    transform: translateX(100px) rotate(360deg);
+  }
 }
 
 @media screen and (max-width: 500px) {

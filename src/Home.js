@@ -160,10 +160,10 @@ function Home({ setTime, setTimeDuration, setQuestionCount }) {
             </div>
             <div ref={optionRef} className="options">
               <li onClick={handleChangeQuestion} ref={listRef}>
-                5
+                10
               </li>
               <li onClick={handleChangeQuestion} ref={listRef}>
-                10
+                15
               </li>
               <li onClick={handleChangeQuestion} ref={listRef}>
                 20
