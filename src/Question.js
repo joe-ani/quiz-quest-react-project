@@ -69,7 +69,7 @@ function Question({
   useEffect(() => {
     const questionsData = window.localStorage.getItem("QUESTIONS_DATA");
     if (questionsData) {
-      setSelectedOption([])
+      setSelectedOption([]);
       setMockQuestions(JSON.parse(questionsData));
       setQuestionsData(JSON.parse(questionsData));
       window.localStorage.setItem("RESULT_DATA", questionsData);
@@ -96,6 +96,8 @@ function Question({
       return "C";
     } else if (i === 3) {
       return "D";
+    } else if (i === 4) {
+      return "E";
     }
   };
 
