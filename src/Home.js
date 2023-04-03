@@ -140,9 +140,46 @@ function Home({ setTime, setTimeDuration, setQuestionCount }) {
     }
   };
 
+  // moveing SVG
+  const [move, setMove] = useState(0);
+  const svgRef = useRef();
+
+  const getCustomProperty = (elem, prop) => {
+    return parseFloat(getComputedStyle(elem).getPropertyValue(prop)) || 0;
+  };
+
+  const setProp = (elem, prop, value) => {
+    return elem.style.setProperty(prop, value);
+  };
+
+  const incProp = (elem, prop, incVal) => {
+    setProp(elem, prop, getCustomProperty(elem, prop) + incVal);
+  };
+
+  let lastTime;
+  let timerId;
+  // function update(time) {
+  //   if (lastTime == null) {
+  //     lastTime = time;
+  //     timerId = setInterval(() => {
+  //       const delta = performance.now() - lastTime - 10;
+  //       lastTime = performance.now();
+  //       incProp(svgRef.current, "--left", delta * .01);
+  //       console.log(getCustomProperty(svgRef.current, "--left"));
+  //     }, 10);
+  //     return;
+  //   }
+  //   const delta = time - lastTime - 10;
+  //   lastTime = time;
+  //   incProp(svgRef.current, "--left", delta * .01);
+  //   console.log(getCustomProperty(svgRef.current, "--left"));
+  // }
+  // requestAnimationFrame(update);
+  useEffect(() => {}, [move]);
+
   return (
     <div ref={homeRef} className="home">
-      <img src="svg/circle2437.svg" className="svg" />
+      <img src="svg/circle2437.svg" ref={svgRef} className="svg" />
       <h1>Home </h1>
       <div className="main">
         <div className="question-container">
