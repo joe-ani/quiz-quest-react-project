@@ -29,9 +29,3 @@
 <p><img src="screenshots/home.png" alt="Quiz Home Screen">Quiz Home Screen</p>
 <p><img src="screenshots/question.png" alt="Quiz Question Screen">Quiz Question Screen</p>
 <p><img src="screenshots/results.png" alt="Quiz Results Screen">Quiz Results Screen</p>
-
-<h2>Contributing</h2>
-<p>Contributions are welcome! Please see the <a href="CONTRIBUTING.md">CONTRIBUTING.md</a> file for guidelines.</p>
-
-<h2>License</h2>
-<p>This project is licensed under the MIT License - see the <a href="LICENSE">LICENSE</a> file for details.</p>
