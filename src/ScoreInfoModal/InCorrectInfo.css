@@ -71,13 +71,14 @@
 
 .incorrect-info-cont .fade1 {
   left: -10px;
-  background: linear-gradient(to bottom, #15243a, #15243adb rgba(223, 2, 2, 0));
+  background: linear-gradient(to bottom, #0e1827, #0e1827db rgba(223, 2, 2, 0));
   width: 110%;
   top: 8.7%;
 }
+
 .incorrect-info-cont .fade2 {
   left: -10px;
   top: 89%;
-  background: linear-gradient(to top, #15243a, #15243ac0, rgba(255, 0, 0, 0));
+  background: linear-gradient(to top, #0e1827, #0e1827c0, rgba(255, 0, 0, 0));
   width: 110%;
 }
