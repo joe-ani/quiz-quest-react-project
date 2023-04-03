@@ -59,6 +59,8 @@ function Result({ selectedOption }) {
       return "C";
     } else if (i === 3) {
       return "D";
+    } else if (i === 4) {
+      return "E"
     }
   };
 
