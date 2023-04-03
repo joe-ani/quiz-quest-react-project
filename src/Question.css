@@ -449,7 +449,7 @@
 
 @media only screen and (max-height: 670px) {
   .question-container2 {
-    margin: 45px;
+    margin: -20px 0px 30px 0px;
   }
 }
 
