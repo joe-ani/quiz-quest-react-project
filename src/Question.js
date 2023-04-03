@@ -39,9 +39,6 @@ function Question({
   const [showPop, setShowPop] = useState(false);
   const [isPrevEnd, setIsPrevEnd] = useState(false);
   const [isNextEnd, setIsNextEnd] = useState(false);
-  const [second, setSeconds] = useState(0);
-  const [minute, setMinute] = useState(0);
-  const [timesUp, setTimesUp] = useState(false);
   const [loading, setLoading] = useState(true);
   const [answers, setAnswers] = useState([]);
   const [timingDuration, setTimingDuration] = useState();
@@ -224,14 +221,17 @@ function Question({
   };
 
   const [timer, setTimer] = useState();
+  const [second, setSeconds] = useState(0);
+  const [minute, setMinute] = useState(0);
+  const [timesUp, setTimesUp] = useState(false);
   // timer
   useEffect(() => {
-    setTimer(
-      `${minute.toString().padStart(2, "0")}:${second
-        .toString()
-        .padStart(2, "0")}` //ERR
-    );
     if (!loading) {
+      setTimer(
+        `${minute.toString().padStart(2, "0")}:${second
+          .toString()
+          .padStart(2, "0")}`
+      );
       const interval = setInterval(() => {
         if (timesUp === false) {
           if (second <= 59) {
@@ -256,8 +256,7 @@ function Question({
       }, 1000);
       return () => clearInterval(interval);
     }
-  }, [second, minute]);
-
+  }, [second, minute, loading]);
   const goTo = () => {
     window.location.href = "/";
   };
@@ -322,7 +321,6 @@ function Question({
           "QUESTIONS_DATA",
           JSON.stringify(response.data)
         );
-  
       } catch (error) {
         console.log(error);
       }

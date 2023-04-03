@@ -98,7 +98,7 @@
 
 .buttons {
   display: flex;
-  position: fixed;
+  position: sticky;
   top: 65%;
   bottom: 10px;
   align-items: center;
