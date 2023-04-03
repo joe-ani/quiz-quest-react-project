@@ -1,5 +1,7 @@
 <h1>React Quiz Project</h1>
    </hr>
+   <p> This is a quiz application built using React that allows users to select take a timed quiz and receive a score at the end.</p>
+   </hr>
   <h2>Features</h2>
 <ul>
 	<li>Users can select the number of questions they want to answer and the time limit for the quiz.</li>
