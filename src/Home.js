@@ -47,8 +47,6 @@ function Home({ setTime, setTimeDuration, setQuestionCount }) {
       "DURATION_DATA",
       JSON.stringify(selectedOptionDuration)
     );
-    // window.localStorage.removeItem("QUESTIONS_DATA");
-    // window.localStorage.removeItem("OPTIONS_DATA");
   }, [selectedOption, selectedOptionDuration, selectedOptionTime]);
   const handleChangeQuestion = (event) => {
     setSelectedOption(event.target.innerHTML);
