@@ -19,7 +19,7 @@
   justify-content: center;
 }
 
-.unattempted-heading > .text {
+.unattempted-heading>.text {
   margin: 0;
   font-size: 20px;
   color: rgb(255, 255, 255);
@@ -66,13 +66,14 @@
 
 .unattempted .fade1 {
   left: -10px;
-  background: linear-gradient(to bottom, #0e1827, #0e1827db rgba(223, 2, 2, 0));
   width: 110%;
   top: 8.6%;
+  background: linear-gradient(to bottom, #0b1320db rgba(223, 2, 2, 0));
 }
+
 .unattempted .fade2 {
   left: -10px;
   top: 89%;
-  background: linear-gradient(to top, #0e1827, #0e1827c0, rgba(255, 0, 0, 0));
   width: 110%;
+  background: linear-gradient(to top, #0b1320c0, rgba(255, 0, 0, 0));
 }

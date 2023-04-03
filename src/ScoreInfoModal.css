@@ -1,6 +1,6 @@
 .score-modal {
   position: absolute;
-  background-color: rgba(44, 44, 44, 0.166);
+  background: rgba(24, 24, 24, 0.077);
   backdrop-filter: blur(0.4em);
   top: 0;
   width: 100%;
@@ -12,7 +12,7 @@
 }
 
 .score-modal > .modal-container {
-  background: #0e1827;
+  background:  #0b1320;
   width: 25%;
   position: relative;
   color: #fff;
