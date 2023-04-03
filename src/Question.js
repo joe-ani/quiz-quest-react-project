@@ -44,7 +44,6 @@ function Question({
   const [timesUp, setTimesUp] = useState(false);
   const [loading, setLoading] = useState(true);
   const [answers, setAnswers] = useState([]);
-  const [correctAnswer, setCorrectAnswer] = useState();
   const [timingDuration, setTimingDuration] = useState();
   const [questions, setQuestions] = useState([]);
   const [optionsData, setOptionsData] = useState([]);
@@ -52,8 +51,6 @@ function Question({
   const [isResult, setIsResult] = useState(false);
   // *Test Data-----------------------------------****
   const [mockQuestions, setMockQuestions] = useState([]);
-  // const [mockAnswers, setMockAnswers] = useState([]);
-  // const [mockCorrectAnswer, setMockCorrectAnswer] = useState();
   // *--------------------------------------------****
   const [pageNumber, setPageNumber] = useState(0);
   const userPerPage = 1;
@@ -325,15 +322,6 @@ function Question({
           "QUESTIONS_DATA",
           JSON.stringify(response.data)
         );
-        setQuestions(response.data);
-        response.data
-          .slice(pagesVisited, pagesVisited + userPerPage)
-          .map((qus) => {
-            // setAnswers(qus.incorrectAnswers);
-            // setCorrectAnswer(qus.correctAnswer);
-          });
-        // answers.push(correctAnswer);
-        // setAnswers(answers);
       } catch (error) {
         console.log(error);
       }
