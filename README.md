@@ -1,7 +1,5 @@
-	<title>React Quiz Project</title>
-</head>
-<body>
 	<h1>React Quiz Project</h1>
+          </hr>
   <h2>Features</h2>
 <ul>
 	<li>Users can select the number of questions they want to answer and the time limit for the quiz.</li>
