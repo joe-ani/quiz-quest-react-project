@@ -300,12 +300,14 @@ h1::after {
   bottom: 30px;
 }
 
+
 .home > .svg {
+  --left: 100;
   top: 100px;
   transform: rotateZ(-180deg);
+  position: absolute;
   width: 2050px;
-  /* display: none; */
-  animation: move 10s linear 0s infinite;
+  /* animation: move 10s linear 0s infinite; */
 }
 
 @keyframes move {
