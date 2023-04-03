@@ -322,15 +322,7 @@ function Question({
           "QUESTIONS_DATA",
           JSON.stringify(response.data)
         );
-        setQuestions(response.data);
-        response.data
-          .slice(pagesVisited, pagesVisited + userPerPage)
-          .map((qus) => {
-            // setAnswers(qus.incorrectAnswers);
-            // setCorrectAnswer(qus.correctAnswer);
-          });
-        // answers.push(correctAnswer);
-        // setAnswers(answers);
+  
       } catch (error) {
         console.log(error);
       }
