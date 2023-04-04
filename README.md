@@ -1,6 +1,6 @@
 <h1>React Quiz Project</h1>
    </hr>
-   <p> This is a quiz application built using React that allows users to select take a timed quiz and receive a score at the end.</p>
+   <p> This is a quiz application built using React that allows users to select and take a timed quiz and receive a score at the end. Have Fun :)...</p>
    </hr>
   <h2>Features</h2>
 <ul>
