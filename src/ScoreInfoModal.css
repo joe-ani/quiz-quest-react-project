@@ -51,6 +51,11 @@
     width: 70%;
   }
 
+  .score-modal .close-info-icon {
+    left: 85%;
+    top: 9px;
+  }
+
   .heading {
     font-size: 17px;
   }

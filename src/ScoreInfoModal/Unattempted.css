@@ -42,6 +42,9 @@
 
 .unattempted-main-container .text {
   font-weight: 300;
+  font-size: 12px;
+  line-height: 1.4;
+
 }
 
 .unattempted-main-container .heading {
@@ -76,4 +79,10 @@
   top: 89%;
   width: 110%;
   background: linear-gradient(to top, #0b1320c0, rgba(255, 0, 0, 0));
+}
+
+@media (max-width: 500px) {
+  .unattempted-heading .text {
+    font-size: 17px;
+  }
 }

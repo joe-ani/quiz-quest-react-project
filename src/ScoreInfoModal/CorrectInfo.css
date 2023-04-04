@@ -40,6 +40,9 @@
 
 .correct-main-container .text {
   font-weight: 300;
+  font-size: 12px;
+  line-height: 1.4;
+
 }
 
 .correct-main-container .heading {
@@ -74,4 +77,10 @@
   top: 89%;
   background: linear-gradient(to top, #0b1320c0, rgba(255, 0, 0, 0));
   width: 110%;
+}
+
+@media (max-width: 500px) {
+  .correct-heading .text {
+    font-size: 17px;
+  }
 }
