@@ -57,7 +57,7 @@
 
 .incorrect-main-container .text {
   font-weight: 100;
-  font-size: 12px;
+  font-size: 15px;
   line-height: 1.4;
 
 }
@@ -90,5 +90,10 @@
 @media (max-width: 500px) {
   .incorrect-heading .text {
     font-size: 17px;
+  }
+
+
+  .incorrect-info-cont .text {
+    font-size: 14px;
   }
 }

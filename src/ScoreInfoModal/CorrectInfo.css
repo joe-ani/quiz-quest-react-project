@@ -83,4 +83,7 @@
   .correct-heading .text {
     font-size: 17px;
   }
+  .correct-info-cont .text {
+    font-size: 14px;
+  }
 }

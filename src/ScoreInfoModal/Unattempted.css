@@ -42,7 +42,7 @@
 
 .unattempted-main-container .text {
   font-weight: 300;
-  font-size: 12px;
+  font-size: 15px;
   line-height: 1.4;
 
 }
@@ -84,5 +84,8 @@
 @media (max-width: 500px) {
   .unattempted-heading .text {
     font-size: 17px;
+  }
+  .unattempted-main-container .text {
+    font-size: 14px;
   }
 }
