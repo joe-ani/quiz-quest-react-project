@@ -1,4 +1,5 @@
 <h1>React Quiz Project</h1>
+![alt text](https://github.com/joe-ani/quiz-quest-react-project/blob/main/public/images/Quiz-quest%20SH.png?raw=true)
    </hr>
    <p> This is a quiz application built using React that allows users to select and take a timed quiz and receive a score at the end. Have Fun :)...</p>
    </hr>
