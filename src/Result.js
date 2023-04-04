@@ -145,9 +145,9 @@ function Result({ selectedOption }) {
       (Number(correctInfo.length) / Number(JSON.parse(questionCount))) * 100
     );
     setColourRange(`hsl(${percentageScore}, 100%, 50%)`);
-    console.log("correct", uniqueCorrectModalData);
-    console.log("incorrect", uniqueInCorrectModalData);
-    console.log("unattempted", uniqueUnattemptedModalData);
+    // console.log("correct", uniqueCorrectModalData);
+    // console.log("incorrect", uniqueInCorrectModalData);
+    // console.log("unattempted", uniqueUnattemptedModalData);
   }, [unattemptedInfo]);
 
   useEffect(() => {
@@ -161,7 +161,6 @@ function Result({ selectedOption }) {
     JSON.parse(options).map((data, index) => {
       data.options.map((value, idx) => {
         if (correctData.includes(value)) {
-          // console.log(getLetter(idx), idx);
           if (optionLetter.length <= 19) {
             optionLetter.push(getLetter(idx));
           }
@@ -188,8 +187,6 @@ function Result({ selectedOption }) {
           setAnswerModalQuestion(value.question);
           setAnswerModalAnswer(data);
           setModalPage(page);
-          // console.log();
-          console.log(value.correctAnswer, data);
         }
       });
       // Get the Result data run
