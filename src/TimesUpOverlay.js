@@ -16,11 +16,17 @@ function TimesUpOverlay() {
       </div>
       <div className="button-cont">
         <div className="retry-button">
-          <ReplayRoundedIcon className="retry-icon" />
+          <ReplayRoundedIcon
+            onClick={(e) => navigate("/question")}
+            className="retry-icon"
+          />
           Retry
         </div>
         <div onClick={(e) => navigate("/result")} className="result-button">
-          <BarChartRoundedIcon style={{transform: "rotate(0deg)"}} className="navigate" />
+          <BarChartRoundedIcon
+            style={{ transform: "rotate(0deg)" }}
+            className="navigate"
+          />
           Results
         </div>
       </div>
