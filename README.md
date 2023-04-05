@@ -1,4 +1,5 @@
 <h1>React Quiz Project</h1>
+<img  src="https://github.com/joe-ani/quiz-quest-react-project/blob/main/public/images/Quiz-quest%20SH.png?raw=true" />
    </hr>
    <p> This is a quiz application built using React that allows users to select and take a timed quiz and receive a score at the end. Have Fun :)...</p>
    </hr>
@@ -26,6 +27,6 @@
 </ol>
 
 <h2>Screenshots</h2>
-<p><img src="screenshots/home.png" alt="Quiz Home Screen">Quiz Home Screen</p>
-<p><img src="screenshots/question.png" alt="Quiz Question Screen">Quiz Question Screen</p>
-<p><img src="screenshots/results.png" alt="Quiz Results Screen">Quiz Results Screen</p>
+<p><img src="https://github.com/joe-ani/quiz-quest-react-project/blob/main/public/images/Quiz-quest%20SH.png?raw=true" alt="Quiz Home Screen">Quiz Home Screen</p>
+<p><img src="https://github.com/joe-ani/quiz-quest-react-project/blob/main/public/images/question%20page.png" alt="Quiz Question Screen">Quiz Question Screen</p>
+<p><img src="https://github.com/joe-ani/quiz-quest-react-project/blob/main/public/images/result%20page.png" alt="Quiz Results Screen">Quiz Results Screen</p>
