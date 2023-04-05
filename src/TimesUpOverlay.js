@@ -15,9 +15,9 @@ function TimesUpOverlay() {
         <h2>Your Times Up!</h2>
       </div>
       <div className="button-cont">
-        <div className="retry-button">
+        <div onClick={(e) =>  window.location.reload()} className="retry-button">
           <ReplayRoundedIcon
-            onClick={(e) => navigate("/question")}
+          
             className="retry-icon"
           />
           Retry
