@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import "./Home.css";
 import TimerRoundedIcon from "@mui/icons-material/TimerRounded";
 import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
-
 import { useNavigate } from "react-router-dom";
+import  axios from "axios"
 
 function Home({ setTime, setTimeDuration, setQuestionCount }) {
   const navigate = useNavigate();
@@ -27,6 +27,26 @@ function Home({ setTime, setTimeDuration, setQuestionCount }) {
   const [selectedOptionTime, setSelectedOptionTime] = useState("5");
   const [selectedOptionDuration, setSelectedOptionDuration] =
     useState("Minutes");
+
+
+    useEffect(() => {
+      // setLoading(true);
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(
+            "https://the-trivia-api.com/api/questions?limit=50"
+          );
+          // setLoading(false);
+          window.localStorage.setItem(
+            "QUESTIONS_DATA",
+            JSON.stringify(response.data)
+          );
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchData();
+    }, []);
 
   useEffect(() => {
     setTime(selectedOptionTime);

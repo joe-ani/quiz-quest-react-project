@@ -148,7 +148,7 @@ function Result({ selectedOption }) {
     // console.log("correct", uniqueCorrectModalData);
     // console.log("incorrect", uniqueInCorrectModalData);
     // console.log("unattempted", uniqueUnattemptedModalData);
-  }, []);
+  }, [unattemptedInfo]);
 
   useEffect(() => {
     JSON.parse(resultData).map((data, index) => {
