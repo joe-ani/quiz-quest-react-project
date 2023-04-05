@@ -20,7 +20,7 @@ function TimesUpOverlay() {
           Retry
         </div>
         <div onClick={(e) => navigate("/result")} className="result-button">
-          <BarChartRoundedIcon style={{transform: "rotate(90deg)"}} className="navigate" />
+          <BarChartRoundedIcon style={{transform: "rotate(0deg)"}} className="navigate" />
           Results
         </div>
       </div>
