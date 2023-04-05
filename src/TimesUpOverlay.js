@@ -1,5 +1,6 @@
 import React from "react";
 import "./TimesUpOverlay.css";
+import BarChartRoundedIcon from "@mui/icons-material/BarChartRounded";
 import ReplayRoundedIcon from "@mui/icons-material/ReplayRounded";
 
 import { useNavigate } from "react-router-dom";
@@ -19,8 +20,8 @@ function TimesUpOverlay() {
           Retry
         </div>
         <div onClick={(e) => navigate("/result")} className="result-button">
+          <BarChartRoundedIcon className="navigate" />
           Results
-          <NavigationRoundedIcon className="navigate" />
         </div>
       </div>
     </div>
