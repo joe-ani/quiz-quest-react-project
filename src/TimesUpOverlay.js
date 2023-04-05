@@ -1,7 +1,7 @@
 import React from "react";
 import "./TimesUpOverlay.css";
 import ReplayRoundedIcon from "@mui/icons-material/ReplayRounded";
-import NavigationRoundedIcon from "@mui/icons-material/NavigationRounded";
+
 import { useNavigate } from "react-router-dom";
 
 function TimesUpOverlay() {
