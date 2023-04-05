@@ -144,7 +144,7 @@ function Result({ selectedOption }) {
     setPercentageScore(
       (Number(correctInfo.length) / Number(JSON.parse(questionCount))) * 100
     );
-    setColourRange(`hsl(${percentageScore}, 100%, 50%)`);
+    setColourRange(`hsl(${percentageScore}, 100%, 45%)`);
     // console.log("correct", uniqueCorrectModalData);
     // console.log("incorrect", uniqueInCorrectModalData);
     // console.log("unattempted", uniqueUnattemptedModalData);
