@@ -406,8 +406,6 @@ function Question({
             previousClassName={"prevClass"}
             nextClassName={"nextClass"}
             containerClassName={"paginationButton"}
-            disabledClassName={"paginationDisable"}
-            activeClassName={"paginationActive"}
           />
           <div
             onClick={(e) => {

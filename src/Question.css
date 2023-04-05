@@ -10,7 +10,7 @@
   justify-content: space-between;
 }
 
-.top-container > .top-logo {
+.top-container>.top-logo {
   margin-top: 10px;
   margin-left: -80px;
   width: 330px;
@@ -30,10 +30,12 @@
   color: #fff;
 }
 
-.timer-container > .time {
+.timer-container>.time {
   display: flex;
   align-items: center;
 }
+
+
 
 .main-container {
   display: flex;
@@ -74,9 +76,11 @@
   0% {
     background: rgba(215, 215, 215, 0.096);
   }
+
   50% {
     background: rgba(215, 215, 215, 0.382);
   }
+
   100% {
     background: rgba(215, 215, 215, 0.096);
   }
@@ -102,7 +106,7 @@
   top: 65%;
   bottom: 10px;
   align-items: center;
-  gap: 30px;
+  gap: 23px;
   z-index: 99;
   margin-top: -10px;
 }
@@ -127,6 +131,27 @@
 
 .txt {
   font-size: 15px;
+}
+
+.paginationButton {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  list-style: none;
+  gap: 13px;
+  align-items: center;
+}
+
+.paginationButton li {
+  padding: 7px;
+  display: none;
+}
+
+.paginationButton .prevClass {
+  display: flex;
+}
+.paginationButton .nextClass {
+  display: flex;
 }
 
 .submit-button {
@@ -162,6 +187,7 @@
 .quit-button:hover {
   background: #530776;
 }
+
 .left-icon {
   color: #5e008a;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.271);
@@ -177,6 +203,7 @@
 .left-icon.prev-end {
   opacity: 0.3;
 }
+
 .left-icon.prev-end:hover {
   opacity: 0.3;
   cursor: not-allowed;
@@ -210,6 +237,7 @@
 .right-icon:hover {
   background: rgba(255, 255, 255, 0.864);
 }
+
 .left-icon:hover {
   background: rgba(255, 255, 255, 0.864);
 }
@@ -229,15 +257,16 @@
   flex-direction: column;
 }
 
-.question-cont > h2 {
+.question-cont>h2 {
   position: absolute;
   top: 20px;
   left: 35px;
 }
 
-.question-cont > p {
+.question-cont>p {
   margin-top: 330px;
 }
+
 .question-cont .question-data {
   margin: 20px;
   margin-top: 50px;
@@ -253,7 +282,8 @@
   width: 100%;
   gap: 1px;
 }
-.question > .link-container {
+
+.question>.link-container {
   margin: 0px;
   margin-left: 20px;
 }
@@ -294,6 +324,8 @@
   transform: scale(1.2);
 }
 
+
+
 .option-count {
   display: flex;
   align-items: center;
@@ -325,12 +357,15 @@
   0% {
     transform: translateX(0px);
   }
+
   30% {
     transform: translateX(-15px);
   }
+
   60% {
     transform: translateX(10px);
   }
+
   100% {
     transform: translateX(0);
   }
@@ -344,14 +379,14 @@
   transform: scale(1.2);
 }
 
-.option-cont > h2 {
+.option-cont>h2 {
   margin-top: -20px;
   font-size: 18px;
   font-weight: 700;
 }
 
 @media screen and (max-width: 500px) {
-  .top-container > .top-logo {
+  .top-container>.top-logo {
     width: 250px;
     margin-left: -65px;
     margin-top: 10px;
@@ -359,17 +394,32 @@
 
   .question-cont .question-data {
     font-size: 14px;
+    margin-top: 37px;
   }
-  
 
-.option-grid .option {
-  font-size: 14px;
-}
+  .paginationButton{
+   gap: 5px;
+  }
+
+  .playBtn {
+    top: 15px;
+    right: 20px;
+  }
+
+  .question-cont>h2 {
+    font-size: 20px;
+    top: 16px;
+  }
+
+  .option-grid .option {
+    font-size: 14px;
+  }
 
   .timer-container {
     font-size: 13px;
     margin: 20px;
   }
+
 
   .timer-container .timer-icon {
     font-size: 20px;
@@ -383,13 +433,14 @@
   .main-container {
     margin-top: 0px;
   }
+
   .pages {
     font-size: 12px;
     padding: 9px;
     /* width: 30px; */
   }
 
-  .option-cont > h2 {
+  .option-cont>h2 {
     margin-top: -20px;
     font-size: 18px;
   }
@@ -406,9 +457,11 @@
   }
 
   .buttons {
-    margin-top: 0px;
+    /* margin-top: -5px; */
+    gap: 7px;
   }
-  .question > .link-container {
+
+  .question>.link-container {
     margin: 20px;
     margin-bottom: -15px;
   }
@@ -420,6 +473,7 @@
     width: 62px;
     width: 80px;
   }
+
   .quit-button {
     font-size: 9px;
     padding: 7px;
@@ -431,6 +485,7 @@
   .quit-button .quit-icon {
     font-size: 20px;
   }
+
   .submit-button .submit-icon {
     font-size: 20px;
   }
@@ -442,22 +497,26 @@
     width: 400px;
   }
 }
+
 @media screen and (min-width: 500px) {
   .question-container2 {
     max-width: 100%;
     width: 400px;
   }
 }
+
 @media screen and (min-width: 800px) {
   .question-container2 {
     max-width: 50%;
   }
 }
+
 @media screen and (min-width: 1100px) {
   .question-container2 {
     max-width: 40%;
   }
 }
+
 @media screen and (min-width: 1100px) {
   .question-container2 {
     max-width: 42%;

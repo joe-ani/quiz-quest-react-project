@@ -5,8 +5,6 @@ import Question from "./Question.js";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import { useState } from "react";
 import Result from "./Result";
-import QuizQuestions from "./QuizQuestions.js";
-import { createContext } from "react";
 
 function App() {
   //  set a count down of 5 seconds after wards set showpage to true
@@ -14,12 +12,9 @@ function App() {
   const [time, setTime] = useState();
   const [timeDuration, setTimeDuration] = useState();
   const [questionCount, setQuestionCount] = useState();
-  // const [correctData, setCorrectData] = useState([]);
-  // const [inCorrectData, setInCorrectData] = useState([]);
   const [questionsData, setQuestionsData] = useState([]);
   const [selectedOption, setSelectedOption] = useState([]);
   const [optionObjs, setOptionObjs] = useState([]);
-  // const AppContext = createContext()
 
   // Timer
   let count = 0;
@@ -62,11 +57,7 @@ function App() {
                 questionCount={questionCount}
                 selectedOption={selectedOption}
                 setSelectedOption={setSelectedOption}
-                // setInCorrectData={setInCorrectData}
-                // setCorrectData={setCorrectData}
                 setQuestionsData={setQuestionsData}
-                // setOptionObjs={setOptionObjs}
-                // optionObjs={optionObjs}
               />
             }
           />
@@ -84,20 +75,13 @@ function App() {
             path="/result"
             element={
               <Result
-                // correctData={correctData}
-                // inCorrectData={inCorrectData}
                 questionsData={questionsData}
                 selectedOption={selectedOption}
-                // setInCorrectData={setInCorrectData}
-                // setCorrectData={setCorrectData}
                 setQuestionsData={setQuestionsData}
-                // optionObjs={optionObjs}
-                // setOptionObjs={setOptionObjs}
                 questionCount={questionCount}
               />
             }
           />
-          {/* <Route path="/test" element={<QuizQuestions/> }/> */}
         </Routes>
       </div>
     </Router>
