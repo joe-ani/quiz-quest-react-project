@@ -56,8 +56,8 @@ function Question({
 
   const displayQuestion = mockQuestions
     .slice(pagesVisited, pagesVisited + userPerPage)
-    .map((qes) => {
-      return <div>{qes.question}</div>;
+    .map((qes, i) => {
+      return <div key={i} >{qes.question}</div>;
     });
 
   useEffect(() => {
@@ -370,7 +370,7 @@ function Question({
             </button>
             <div className={`question-cont ${loading ? "show-skeleton" : ""}`}>
               <h2>Question {pagesVisited + 1}:</h2>
-              <p
+              <div
                 style={{
                   margin: "20px",
                   marginTop: "50px",
@@ -380,7 +380,7 @@ function Question({
                 }}
               >
                 {displayQuestion}
-              </p>
+              </div>
             </div>
             <div ref={elem1Ref} className="option-cont">
               <h2>Options</h2>
