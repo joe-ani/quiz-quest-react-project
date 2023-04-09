@@ -42,7 +42,7 @@ function Question({
   const [questions, setQuestions] = useState([]);
   const [optionsData, setOptionsData] = useState([]);
   const [optionsArr, setOptionsArr] = useState([]);
-  const [isResult, setIsResult] = useState(false);
+  const [isResult, setIsResult] = useState(true);
   // *Test Data-----------------------------------****
   const [mockQuestions, setMockQuestions] = useState([]);
   // *--------------------------------------------****
@@ -273,6 +273,7 @@ function Question({
 
   const [togglePopUp, setTogglePopUp] = useState(false);
   const showPopUp = () => {
+    setIsResult(true);
     if (togglePopUp === false) {
       setTogglePopUp(true);
     } else {
@@ -324,7 +325,7 @@ function Question({
       {/* first container */}
       <div className="top-container">
         <img className="top-logo" src="images/Qquestion.png" alt="Logo" />
-        <div className="timer-container"> 
+        <div className="timer-container">
           {/* clock icon */}
           <TimelapseRoundedIcon className="timer-icon" />
           <div className="time">
@@ -373,7 +374,9 @@ function Question({
           </div>
         )}
 
-        {togglePopUp && <PopUp setTogglePopUp={setTogglePopUp} />}
+        {togglePopUp && (
+          <PopUp isResult={isResult} setTogglePopUp={setTogglePopUp} />
+        )}
         <div ref={elem2Ref} className="buttons">
           <div onClick={showPopUp} className="quit-button">
             {/* Quit icon */}
@@ -400,9 +403,14 @@ function Question({
           />
           <div
             onClick={(e) => {
-              if (!loading) { //or if selectedOption arr is not empty
+              if (!loading && selectedOption.length !== 0) {
+                // or if selectedOption arr is not empty
                 navigate("/result");
-                setIsResult(true);
+              } else if (selectedOption.length < 1) {
+                if (!loading) {
+                  setIsResult(false);
+                  setTogglePopUp(true);
+                }
               }
             }}
             className={`submit-button ${loading ? "submit-false" : ""}`}

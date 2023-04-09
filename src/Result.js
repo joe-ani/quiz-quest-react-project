@@ -146,17 +146,12 @@ function Result({ selectedOption }) {
     setUnattemptedInfo(uniqueUnattemptedModalData);
   }, []);
 
-
-  // *TEST CODE------------------------
   useEffect(() => {
-    console.log("ran")
     setPercentageScore(
       (Number(correctInfo.length) / Number(JSON.parse(questionCount))) * 100
     );
     setColourRange(`hsl(${percentageScore}, 100%, 45%)`);
   }, [unattemptedInfo]);
-// *TEST CODE-----------------------------------
-
 
 
   useEffect(() => {
