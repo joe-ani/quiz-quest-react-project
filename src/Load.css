@@ -13,7 +13,7 @@
   animation: zoom-out;
   animation-duration: 350ms;
   animation-delay: 2.8s;
-  width: 450px;
+  width: 380px;
   transform: translate(-50%, -50%);
   top: -70%;
 }

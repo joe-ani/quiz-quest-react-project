@@ -11,20 +11,37 @@
 }
 
 .top-container>.top-logo {
-  margin-top: 10px;
-  margin-left: -80px;
-  width: 330px;
+  position: absolute;
+  margin-top: -59px;
+  margin-left: -34px;
+  width: 255px;
+  animation: slide-question-logo 500ms cubic-bezier(0.57, 0, 0.32, 0.99) ;
 }
+
+@keyframes slide-question-logo {
+  0% {
+    margin-top: -90px;
+    margin-left: -60px;
+  }
+  100% {
+    margin-top: -59px;
+    margin-left: -34px;
+  }
+  
+}
+
 
 .timer-container {
   display: flex;
   background: #5e008a;
   border-radius: 50px;
+  position: sticky;
+  left: 95%;
   align-items: center;
   gap: 5px;
   height: 25px;
   margin: 30px;
-  padding: 10px;
+  padding: 7px;
   font-weight: 700;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.271);
   color: #fff;
@@ -41,8 +58,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 40px;
   flex-direction: column;
-  margin-top: -75px;
+  margin-top: -71px;
 }
 
 .playBtn {
@@ -90,7 +108,7 @@
   color: #fff;
   padding: 10px;
   position: sticky;
-  top: 10px;
+  top: 20px;
   z-index: 99;
   text-align: center;
   font-weight: 700;
@@ -150,6 +168,7 @@
 .paginationButton .prevClass {
   display: flex;
 }
+
 .paginationButton .nextClass {
   display: flex;
 }
@@ -247,7 +266,6 @@
   padding: 30px;
   border-radius: 30px;
   color: #fff;
-  margin: 45px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.134);
   max-width: 100%;
   position: relative;
@@ -387,9 +405,22 @@
 
 @media screen and (max-width: 500px) {
   .top-container>.top-logo {
-    width: 250px;
-    margin-left: -65px;
-    margin-top: 10px;
+    width: 248px;
+    margin-top: -68px;
+    margin-left: -41px;
+
+  }
+
+  @keyframes slide-question-logo {
+    0% {
+      margin-top: -90px;
+      margin-left: -60px;
+    }
+    100% {
+      margin-top: -68px;
+      margin-left: -41px;
+    }
+    
   }
 
   .question-cont .question-data {
@@ -397,8 +428,8 @@
     margin-top: 37px;
   }
 
-  .paginationButton{
-   gap: 5px;
+  .paginationButton {
+    gap: 5px;
   }
 
   .playBtn {
@@ -427,11 +458,10 @@
 
   .question-container2 {
     max-width: 75%;
-    margin: 10px;
   }
 
   .main-container {
-    margin-top: 0px;
+    margin-top: 10px;
   }
 
   .pages {
@@ -491,43 +521,16 @@
   }
 }
 
-@media screen and (min-width: 600px) {
+
+@media (min-width: 500px) and (max-width: 2150px) {
   .question-container2 {
-    max-width: 100%;
-    width: 400px;
+    max-width: 400px;
   }
 }
 
-@media screen and (min-width: 500px) {
-  .question-container2 {
-    max-width: 100%;
-    width: 400px;
-  }
-}
 
-@media screen and (min-width: 800px) {
-  .question-container2 {
-    max-width: 50%;
-  }
-}
 
-@media screen and (min-width: 1100px) {
-  .question-container2 {
-    max-width: 40%;
-  }
-}
 
-@media screen and (min-width: 1100px) {
-  .question-container2 {
-    max-width: 42%;
-  }
-}
-
-@media only screen and (max-height: 670px) {
-  .question-container2 {
-    margin: -20px 0px 30px 0px;
-  }
-}
 
 
 
@@ -547,6 +550,6 @@
 }
 
 /* When the browser width is 90% or greater */
-@media (min-width: 90%) {
+@media (min-width: 100%) {
   /* Add your CSS styles here */
 }

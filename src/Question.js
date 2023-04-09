@@ -25,10 +25,7 @@ function Question({
   setQuestionCount,
   selectedOption,
   setSelectedOption,
-  // setCorrectData,
-  // setInCorrectData,
   setQuestionsData,
-  // setOptionObjs,
 }) {
   const navigate = useNavigate();
   const linkRef = useRef();
@@ -107,11 +104,6 @@ function Question({
     textRef.current.innerText = "** Carefully answer each question **";
     pagesSelected.push(index + pageCount * pageNumber);
     selectedOption.push(option);
-    console.log(
-      `clicked on option ${getIndex(index)} "${option}" in page ${
-        pageNumber + 1
-      }`
-    );
     setSelectedOptionIndex(index + pageCount * pageNumber);
     selectedOptions.push(selectedOptionIndex);
     // moves pagination by one page
@@ -286,7 +278,6 @@ function Question({
     } else {
       setTogglePopUp(false);
     }
-    console.log(togglePopUp);
   };
 
   useEffect(() => {
@@ -332,8 +323,8 @@ function Question({
     <div className="question">
       {/* first container */}
       <div className="top-container">
-        <img className="top-logo" src="images/image1647.png" alt="Logo" />
-        <div className="timer-container">
+        <img className="top-logo" src="images/Qquestion.png" alt="Logo" />
+        <div className="timer-container"> 
           {/* clock icon */}
           <TimelapseRoundedIcon className="timer-icon" />
           <div className="time">
@@ -409,7 +400,7 @@ function Question({
           />
           <div
             onClick={(e) => {
-              if (!loading) {
+              if (!loading) { //or if selectedOption arr is not empty
                 navigate("/result");
                 setIsResult(true);
               }

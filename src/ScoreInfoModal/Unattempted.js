@@ -5,7 +5,7 @@ import "./Unattempted.css";
 function Unattempted({ unattemptedInfo }) {
   const displayUnattemptedData = unattemptedInfo.map((data, i) => {
     return (
-      <div key={data} className="unattempted-main-container">
+      <div key={i} className="unattempted-main-container">
         <div className="ques">
           <div className="heading">Question {data.page}:</div>
           <div className="text">{data.question}</div>
@@ -22,7 +22,7 @@ function Unattempted({ unattemptedInfo }) {
   return (
     <div className="unattempted">
       <div className="unattempted-heading">
-        <InfoRoundedIcon className="info-icon"/>
+        <InfoRoundedIcon className="info-icon" />
         <div className="text">Unattempted Questions</div>
       </div>
       <div className="unattempted-scroll">{displayUnattemptedData}</div>

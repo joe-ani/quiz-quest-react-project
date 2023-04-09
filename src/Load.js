@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from "react";
 import "./Load.css";
-// import logo from ".images/image1647.png";
 
 function Load() {
   const containerRef = useRef(null);
@@ -8,7 +7,6 @@ function Load() {
 
   const goTo = () => {
     window.location.href = "/";
-    // console.log(linkRef)
   };
 
   // Use Svg 
@@ -17,7 +15,7 @@ function Load() {
     <div className="load" ref={containerRef}>
 <img src="svg/circle2437.svg" className="svg"/>
       {/* Logo */}
-      <img ref={imageRef} className="image-logo" src="images/image1647.png" alt="Logo" />
+      <img ref={imageRef} className="image-logo" src="images/QLoad.png" alt="Logo" />
       {/* Text */}
       <div className="text">A Fun General Knowledge Quiz Project </div>
       {/* Protfolio link */}

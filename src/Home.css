@@ -78,7 +78,7 @@ h1::after {
   z-index: 1;
   overflow: scroll;
   height: 100px;
-  transition: 400ms ease-in-out;
+  transition: 200ms ease-in-out;
   align-items: center;
   gap: 20px;
   border-radius: 10px;
@@ -130,6 +130,7 @@ h1::after {
 .question-des {
   position: absolute;
   top: 190px;
+  transition: 200ms ease-in-out ;
   text-align: center;
   width: 90px;
   display: none;
@@ -140,12 +141,16 @@ h1::after {
   top: 150px;
   text-align: center;
   display: none;
+  transition: 200ms ease-in-out ;
+
   width: 90px;
   font-size: 13px;
 }
 .duration-des {
   display: none;
   position: absolute;
+  transition: 200ms ease-in-out ;
+
   left: 20px;
   top: 150px;
   text-align: center;
@@ -300,9 +305,22 @@ h1::after {
 
 .quiz-logo {
   position: absolute;
-  width: 350px;
-  right: -95px;
-  bottom: 30px;
+  width: 255px;
+  right: -29px;
+  bottom: -6px;
+  animation: slide-home-logo 500ms cubic-bezier(0.57, 0, 0.32, 0.99);
+}
+
+@keyframes slide-home-logo {
+  0% {
+    right: -90px;
+    bottom: -60px;
+  }
+  100% {
+    right: -29px;
+    bottom: -6px;
+  }
+  
 }
 
 
@@ -369,10 +387,23 @@ h1::after {
   }
 
   .quiz-logo {
-    width: 250px;
-    left: 55%;
-    bottom: 10px;
+    width: 248px;
+    right: -33px;
+    bottom: -28px;
   }
+
+  
+@keyframes slide-home-logo {
+  0% {
+    right: -90px;
+    bottom: -60px;
+  }
+  100% {
+    right: -33px;
+    bottom: -28px;
+  }
+  
+}
 
   .main .question-container {
     justify-content: start;

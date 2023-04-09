@@ -3,7 +3,7 @@ import "./Home.css";
 import TimerRoundedIcon from "@mui/icons-material/TimerRounded";
 import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import { useNavigate } from "react-router-dom";
-import  axios from "axios"
+import axios from "axios";
 
 function Home({ setTime, setTimeDuration, setQuestionCount }) {
   const navigate = useNavigate();
@@ -28,25 +28,22 @@ function Home({ setTime, setTimeDuration, setQuestionCount }) {
   const [selectedOptionDuration, setSelectedOptionDuration] =
     useState("Minutes");
 
-
-    useEffect(() => {
-      // setLoading(true);
-      const fetchData = async () => {
-        try {
-          const response = await axios.get(
-            "https://the-trivia-api.com/api/questions?limit=50"
-          );
-          // setLoading(false);
-          window.localStorage.setItem(
-            "QUESTIONS_DATA",
-            JSON.stringify(response.data)
-          );
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      fetchData();
-    }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://the-trivia-api.com/api/questions?limit=50"
+        );
+        window.localStorage.setItem(
+          "QUESTIONS_DATA",
+          JSON.stringify(response.data)
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
 
   useEffect(() => {
     setTime(selectedOptionTime);
@@ -101,11 +98,27 @@ function Home({ setTime, setTimeDuration, setQuestionCount }) {
       questionDropIconRef.current.style.transform = "rotateZ(90deg)";
       optionRef.current.classList.add("show-options");
       questionDesRef.current.style.display = "block";
+      optionRef.current.style.opacity = "0";
+      optionRef.current.style.transform = "translateY(-10px)";
+      questionDesRef.current.style.opacity = "0";
+      questionDesRef.current.style.transform = "translateY(-10px)";
+      setTimeout(() => {
+        optionRef.current.style.transform = "translateY(0px)";
+        optionRef.current.style.opacity = "1";
+        questionDesRef.current.style.opacity = "1";
+        questionDesRef.current.style.transform = "translateY(0px)";
+      }, 10);
       setIsOption(false);
     } else {
+      optionRef.current.style.transform = "translateY(-15px)";
+      optionRef.current.style.opacity = "0";
+      questionDesRef.current.style.opacity = "0";
+      questionDesRef.current.style.transform = "translateY(-15px)";
+      setTimeout(() => {
+        questionDesRef.current.style.display = "none";
+        optionRef.current.classList.remove("show-options");
+      }, 200);
       questionDropIconRef.current.style.transform = "rotateZ(-90deg)";
-      optionRef.current.classList.remove("show-options");
-      questionDesRef.current.style.display = "none";
       setIsOption(true);
     }
   };
@@ -116,11 +129,27 @@ function Home({ setTime, setTimeDuration, setQuestionCount }) {
       timeDropIconRef.current.style.transform = "rotateZ(90deg)";
       timeOptionRef.current.classList.add("show-time");
       timeDesRef.current.style.display = "block";
+      timeOptionRef.current.style.opacity = "0";
+      timeOptionRef.current.style.transform = "translateY(-10px)";
+      timeDesRef.current.style.opacity = "0";
+      timeDesRef.current.style.transform = "translateY(-10px)";
+      setTimeout(() => {
+        timeOptionRef.current.style.transform = "translateY(0px)";
+        timeOptionRef.current.style.opacity = "1";
+        timeDesRef.current.style.opacity = "1";
+        timeDesRef.current.style.transform = "translateY(0px)";
+      }, 10);
       setIsTime(false);
     } else {
       timeDropIconRef.current.style.transform = "rotateZ(-90deg)";
-      timeOptionRef.current.classList.remove("show-time");
-      timeDesRef.current.style.display = "none";
+      timeOptionRef.current.style.transform = "translateY(-15px)";
+      timeOptionRef.current.style.opacity = "0";
+      timeDesRef.current.style.opacity = "0";
+      timeDesRef.current.style.transform = "translateY(-15px)";
+      setTimeout(() => {
+        timeOptionRef.current.classList.remove("show-time");
+        timeDesRef.current.style.display = "none";
+      }, 200);
       setIsTime(true);
     }
   };
@@ -131,11 +160,27 @@ function Home({ setTime, setTimeDuration, setQuestionCount }) {
       durationDropIconRef.current.style.transform = "rotateZ(90deg)";
       durationOptionRef.current.classList.add("show-duration");
       durationDesRef.current.style.display = "block";
+      durationOptionRef.current.style.opacity = "0";
+      durationOptionRef.current.style.transform = "translateY(-10px)";
+      durationDesRef.current.style.opacity = "0";
+      durationDesRef.current.style.transform = "translateY(-10px)";
+      setTimeout(() => {
+        durationOptionRef.current.style.transform = "translateY(0px)";
+        durationOptionRef.current.style.opacity = "1";
+        durationDesRef.current.style.opacity = "1";
+        durationDesRef.current.style.transform = "translateY(0px)";
+      }, 10);
       setIsDuration(false);
     } else {
       durationDropIconRef.current.style.transform = "rotateZ(-90deg)";
-      durationOptionRef.current.classList.remove("show-duration");
-      durationDesRef.current.style.display = "none";
+      durationOptionRef.current.style.transform = "translateY(-15px)";
+      durationOptionRef.current.style.opacity = "0";
+      durationDesRef.current.style.opacity = "0";
+      durationDesRef.current.style.transform = "translateY(-15px)";
+      setTimeout(() => {
+        durationOptionRef.current.classList.remove("show-duration");
+        durationDesRef.current.style.display = "none";
+      }, 200);
       setIsDuration(true);
     }
   };
@@ -312,7 +357,7 @@ function Home({ setTime, setTimeDuration, setQuestionCount }) {
           className="arrow-icon"
         />
       </div>
-      <img className="quiz-logo" src="images/image1647.png" alt="Logo" />
+      <img className="quiz-logo" src="images/QHome.png" alt="Logo" />
     </div>
   );
 }

@@ -24,8 +24,6 @@ function Result({ selectedOption }) {
   const [correctData, setCorrectData] = useState([]);
   const [correctModalData, setCorrectModalData] = useState([]);
   const [inCorrectModalData, setInCorrectModalData] = useState([]);
-  const [unattemptedModalData, setUnattemptedModalData] = useState([]);
-  const [questionsModalData, setQuestionsModalData] = useState([]);
   const [optionsData, setOptionsData] = useState([]);
   const [correctInfo, setCorrectInfo] = useState([]);
   const [inCorrectInfo, setInCorrectInfo] = useState([]);
@@ -60,7 +58,7 @@ function Result({ selectedOption }) {
     } else if (i === 3) {
       return "D";
     } else if (i === 4) {
-      return "E"
+      return "E";
     }
   };
 
@@ -138,17 +136,28 @@ function Result({ selectedOption }) {
         ).length === 1 // remove objects that have duplicates
     );
 
+    // setPercentageScore(
+    //   (Number(correctInfo.length) / Number(JSON.parse(questionCount))) * 100
+    // );
+    // setColourRange(`hsl(${percentageScore}, 100%, 45%)`);
+
     setCorrectInfo(uniqueCorrectModalData);
     setInCorrectInfo(uniqueInCorrectModalData);
     setUnattemptedInfo(uniqueUnattemptedModalData);
+  }, []);
+
+
+  // *TEST CODE------------------------
+  useEffect(() => {
+    console.log("ran")
     setPercentageScore(
       (Number(correctInfo.length) / Number(JSON.parse(questionCount))) * 100
     );
     setColourRange(`hsl(${percentageScore}, 100%, 45%)`);
-    // console.log("correct", uniqueCorrectModalData);
-    // console.log("incorrect", uniqueInCorrectModalData);
-    // console.log("unattempted", uniqueUnattemptedModalData);
   }, [unattemptedInfo]);
+// *TEST CODE-----------------------------------
+
+
 
   useEffect(() => {
     JSON.parse(resultData).map((data, index) => {
@@ -290,7 +299,6 @@ function Result({ selectedOption }) {
           <div className="options-cont">
             {/* {percentageScore > 65 ?  } */}
             <div className="message">
-              {" "}
               {percentageScore > 50
                 ? "Not Bad"
                 : percentageScore > 85
