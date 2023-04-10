@@ -16,7 +16,7 @@ function PopUp({ setTogglePopUp, isResult }) {
         {isResult ? (
           <div className="txt">Are You sure ?</div>
         ) : (
-          <div className="txt">Answer a Question</div>
+          <div className="txt">Attempt a Question</div>
         )}
 
         {isResult ? (
