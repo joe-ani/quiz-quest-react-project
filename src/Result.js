@@ -135,23 +135,21 @@ function Result({ selectedOption }) {
           (o) => o.question === obj.question && o.answer === obj.answer
         ).length === 1 // remove objects that have duplicates
     );
-
-    // setPercentageScore(
-    //   (Number(correctInfo.length) / Number(JSON.parse(questionCount))) * 100
-    // );
-    // setColourRange(`hsl(${percentageScore}, 100%, 45%)`);
-
     setCorrectInfo(uniqueCorrectModalData);
     setInCorrectInfo(uniqueInCorrectModalData);
     setUnattemptedInfo(uniqueUnattemptedModalData);
   }, []);
 
+
+  // *TEST CODE------------------------
   useEffect(() => {
     setPercentageScore(
       (Number(correctInfo.length) / Number(JSON.parse(questionCount))) * 100
     );
     setColourRange(`hsl(${percentageScore}, 100%, 45%)`);
-  }, [unattemptedInfo]);
+  }, [unattemptedInfo, percentageScore]);
+// *TEST CODE-----------------------------------
+
 
 
   useEffect(() => {
