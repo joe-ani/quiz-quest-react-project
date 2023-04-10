@@ -22,7 +22,8 @@
   0% {
     transform: scale();
     opacity: 1;
-  } 
+  }
+
   100% {
     transform: scale(7);
     opacity: 0;
@@ -68,6 +69,7 @@
   0% {
     margin-left: 120px;
   }
+
   100% {
     margin-left: 140px;
   }
@@ -77,6 +79,7 @@
   0% {
     scale: 0;
   }
+
   100% {
     scale: 1;
   }
@@ -126,5 +129,9 @@
   .svg {
     width: 1000px;
     left: -30%;
+  }
+
+  .image-logo {
+    width: 332px;
   }
 }

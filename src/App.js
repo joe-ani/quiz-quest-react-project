@@ -28,6 +28,7 @@ function App() {
   };
 
   setInterval(counter, 1000);
+
   return (
     <Router>
       <div className="App">
