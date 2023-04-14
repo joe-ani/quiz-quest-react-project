@@ -30,10 +30,8 @@ function Result({ selectedOption }) {
   const [unattemptedInfo, setUnattemptedInfo] = useState([]);
   const [percentageScore, setPercentageScore] = useState();
   const [colourRange, setColourRange] = useState();
-
   // a json data holding ->> Correct answers and OPtion letter
   const [answerData, setAnswerData] = useState([]);
-
   //Answers Modal states
   const [answerModalQuestion, setAnswerModalQuestion] = useState();
   const [answerModalAnswer, setAnswerModalAnswer] = useState();

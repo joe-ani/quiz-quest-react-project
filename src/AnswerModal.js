@@ -2,11 +2,22 @@ import React, { useEffect, useRef } from "react";
 import "./AnswerModal.css";
 import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
 
-function AnswerModal({ setShowAnswerModal, answerModalQuestion, answerModalAnswer, modalPage }) {
-  const modalRef = useRef(null);
+function AnswerModal({
+  setShowAnswerModal,
+  answerModalQuestion,
+  answerModalAnswer,
+  modalPage,
+}) {
+  const modalRef = useRef();
+  const overlayRef = useRef();
 
   const removeModal = () => {
-    setShowAnswerModal(false);
+    modalRef.current.style.opacity = 0;
+    overlayRef.current.style.opacity = 0;
+    modalRef.current.style.transform = " translateY(20px)";
+    setTimeout(() => {
+      setShowAnswerModal(false);
+    }, 300);
   };
 
   // * how to execute functions in different components in react 🔍
@@ -14,6 +25,7 @@ function AnswerModal({ setShowAnswerModal, answerModalQuestion, answerModalAnswe
 
   return (
     <div className="answer-modal">
+      <div onClick={removeModal} ref={overlayRef} className="overlay"></div>
       <div ref={modalRef} className="container">
         <div className="ques">
           <div className="heading">Question {modalPage}:</div>

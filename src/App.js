@@ -14,7 +14,7 @@ function App() {
   const [questionCount, setQuestionCount] = useState();
   const [questionsData, setQuestionsData] = useState([]);
   const [selectedOption, setSelectedOption] = useState([]);
-  const [optionObjs, setOptionObjs] = useState([]);
+  const [showAbout, setShowAbout] = useState(false);
 
   // Timer
   let count = 0;
@@ -42,6 +42,8 @@ function App() {
                   setQuestionCount={setQuestionCount}
                   setTime={setTime}
                   setTimeDuration={setTimeDuration}
+                  setShowAbout={setShowAbout}
+                  showAbout={showAbout}
                 />
               }
             />
@@ -59,6 +61,8 @@ function App() {
                 selectedOption={selectedOption}
                 setSelectedOption={setSelectedOption}
                 setQuestionsData={setQuestionsData}
+                setShowAbout={setShowAbout}
+                showAbout={showAbout}
               />
             }
           />
@@ -69,6 +73,8 @@ function App() {
                 setQuestionCount={setQuestionCount}
                 setTime={setTime}
                 setTimeDuration={setTimeDuration}
+                setShowAbout={setShowAbout}
+                showAbout={showAbout}
               />
             }
           />

@@ -392,7 +392,7 @@ function Question({
             }
             nextLabel={
               <ArrowLeftRoundedIcon
-                onClick={nextPage}
+                onClick={!loading && nextPage}
                 className={`right-icon ${isNextEnd ? "next-end" : ""}`}
               />
             }

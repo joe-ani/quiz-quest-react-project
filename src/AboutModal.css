@@ -1,0 +1,176 @@
+.about-modal {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-overlay {
+    z-index: 400;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    transition: 300ms ease-in-out;
+    bottom: 0;
+    background: rgba(24, 24, 24, 0.077);
+    backdrop-filter: blur(0.4em);
+    animation: overyaly-animate 300ms ease-in-out;
+}
+
+
+@keyframes overyaly-animate {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.about-container {
+    gap: 40px;
+    background: #0b1320;
+    border: 5px solid #5e008a;
+    border-radius: 15px;
+    padding: 45px;
+    color: #fff;
+    z-index: 500;
+    position: relative;
+    transition: 300ms ease-in-out;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: pop-up-about 300ms ease-in-out;
+}
+
+
+
+@keyframes pop-up-about {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+.developer-info {
+    display: flex;
+    align-items: center;
+    position: relative;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.developer-info::after {
+    content: "";
+    background: #ffffffb4;
+    width: 1px;
+    height: 100px;
+    position: absolute;
+    left: 105px;
+    border-radius: 20px;
+}
+
+.developer-info .my-img {
+    width: 70px;
+    border-radius: 50px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+
+.developer-info .user-name {
+    font-weight: 700;
+    flex: 25px;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: start;
+    justify-content: center;
+}
+
+.links .portfolio-link {
+    background: #5e008a;
+    padding: 10px;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: 200ms ease-in-out;
+    font-size: 13px;
+    border: 2px solid #fff;
+}
+
+
+.links .github-link {
+    background: #5e008a;
+    padding: 10px;
+    border-radius: 50px;
+    transition: 200ms ease-in-out;
+    font-weight: bold;
+    font-size: 13px;
+    border: 2px solid #fff;
+}
+
+.github-link:hover {
+    background: #4c066c;
+
+}
+
+.portfolio-link:hover {
+    background: #4c066c;
+
+}
+
+.about-container .close-about-icon {
+    position: absolute;
+    left: 85%;
+    top: 4%;
+    background: #ffffff00;
+    transition: 300ms ease-in-out;
+    padding: 8px;
+    border-radius: 50px;
+}
+
+.close-about-icon:hover {
+    background: #ffffff22;
+}
+
+.close-about-icon:active {
+    background: #ffffff4f;
+}
+
+
+@media (max-width:500px) {
+    .about-container {
+        padding: 30px;
+    }
+
+    .developer-info .my-img {
+        width: 63px;
+    }
+
+    .developer-info .user-name {
+        font-size: 14px;
+    }
+
+    .developer-info {
+        gap: 11px;
+    }
+
+    .developer-info::after {
+        left: 96px;
+    }
+}

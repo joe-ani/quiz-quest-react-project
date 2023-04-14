@@ -7,9 +7,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgba(24, 24, 24, 0.077);
-  backdrop-filter: blur(0.4em);
-  z-index: 99;
 }
 
 .line {
@@ -23,19 +20,50 @@
   margin-top: 40px;
 }
 
+.answer-modal .overlay {
+  transition: 300ms ease-in-out;
+  animation: overyaly-animate 300ms ease-in-out;
+}
+
+
+@keyframes overyaly-animate {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .container {
   background: #0b1320;
   width: 350px;
   position: relative;
   display: flex;
+  z-index: 500;
   align-items: center;
   flex-direction: column;
+  transition: 300ms ease-in-out;
   color: #fff;
   border: 5px solid #5e008a;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.205);
   padding: 30px;
   border-radius: 20px;
+  animation: pop-up-answer 300ms ease-in-out;
 }
+
+@keyframes pop-up-answer {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
 
 .pop-up-animate {
   animation: pop-up 400ms linear 0ms;

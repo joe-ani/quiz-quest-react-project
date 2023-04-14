@@ -4,8 +4,9 @@ import TimerRoundedIcon from "@mui/icons-material/TimerRounded";
 import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import AboutModal from "./AboutModal.js";
 
-function Home({ setTime, setTimeDuration, setQuestionCount }) {
+function Home({ setTime, setTimeDuration, setQuestionCount, setShowAbout, showAbout }) {
   const navigate = useNavigate();
   const linkRef = useRef();
   const listRef = useRef();
@@ -221,27 +222,6 @@ function Home({ setTime, setTimeDuration, setQuestionCount }) {
     setProp(elem, prop, getCustomProperty(elem, prop) + incVal);
   };
 
-  let lastTime;
-  let timerId;
-  // function update(time) {
-  //   if (lastTime == null) {
-  //     lastTime = time;
-  //     timerId = setInterval(() => {
-  //       const delta = performance.now() - lastTime - 10;
-  //       lastTime = performance.now();
-  //       incProp(svgRef.current, "--left", delta * .01);
-  //       console.log(getCustomProperty(svgRef.current, "--left"));
-  //     }, 10);
-  //     return;
-  //   }
-  //   const delta = time - lastTime - 10;
-  //   lastTime = time;
-  //   incProp(svgRef.current, "--left", delta * .01);
-  //   console.log(getCustomProperty(svgRef.current, "--left"));
-  // }
-  // requestAnimationFrame(update);
-  useEffect(() => {}, [move]);
-
   return (
     <div ref={homeRef} className="home">
       <img src="svg/circle2437.svg" ref={svgRef} className="svg" />
@@ -339,6 +319,9 @@ function Home({ setTime, setTimeDuration, setQuestionCount }) {
         <h2>Start</h2>
       </div>
 
+
+     {showAbout && <AboutModal setShowAbout={setShowAbout} showAbout={showAbout} />}
+      
       <div className="link-container">
         <img
           className="joe-pic"
@@ -346,7 +329,7 @@ function Home({ setTime, setTimeDuration, setQuestionCount }) {
           src="images/joe.png"
           alt=""
         />
-        <div ref={linkRef} className="my-link" onClick={goTo}>
+        <div ref={linkRef} className="my-link" onClick={e => {setShowAbout(true)}}>
           By Joseph Ani
         </div>
         {/* Close Icon */}
