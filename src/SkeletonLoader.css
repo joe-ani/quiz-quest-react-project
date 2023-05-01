@@ -1,66 +1,99 @@
-.skelenton-cont > .question-container2 {
+.skelenton-cont>.question-container2 {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0);
-  width: 100%;
-  max-width: 70%;
+  width: 400px;
+  height: 300px;
+}
+
+:root {
+  --gradient: linear-gradient(to left,
+      #ffffff00,
+      rgba(169, 169, 169, 0.649),
+      #ffffff00);
+  --bg: #d9d9d93b;
+  --speed: 1.3s;
+}
+
+
+.skelenton-cont .question-cont {
+  display: flex;
+  flex-direction: column;
 }
 
 .skelenton-cont {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.skelenton-cont .question-cont p {
-  background: rgb(255, 255, 255);
-  border-radius: 0px;
-  opacity: 0;
+.skelenton-cont p {
+  background: var(--bg);
+  width: 70%;
+  position: absolute;
+  top: 60px;
+  background-image: var(--gradient);
+  background-position: -540px;
   border-radius: 50px;
-  animation: wave 2s ease-in infinite;
-  transition: 400ms ease-in-out;
+  background-repeat: no-repeat;
+  height: 6%;
+  animation: shimmer var(--speed) linear infinite;
 }
 
-.skelenton-cont .question-cont p::after {
+.skelenton-cont p::after {
   content: "";
   width: 70%;
-  left: 0;
   position: absolute;
-  top: 25px;
-  height: 15px;
+  top: 35px;
+  background: var(--bg);
+  background-image: var(--gradient);
+  background-position: -540px;
   border-radius: 50px;
-  background: white;
-  animation: wave 2s ease-in infinite;
-}
-
-.skelenton-cont .question-cont p:hover {
-  background: red;
-}
-
-@keyframes wave {
-  0% {
-    background: rgba(128, 128, 128, 0.467);
-  }
-  50% {
-    background: #ffffff6c;
-  }
-  100% {
-    background: rgba(128, 128, 128, 0.467);
-  }
+  background-repeat: no-repeat;
+  height: 100%;
+  animation: shimmer var(--speed) linear infinite;
 }
 
 .skelenton-cont h2 {
-  background-color: rgb(255, 255, 255);
-  animation: wave 2s ease-in infinite;
-  width: 90px;
-  display: inline-flex;
-  height: 20px;
+  width: 30%;
+
+  height: 6%;
+  background: var(--bg);
+  background-image: var(--gradient);
+  background-position: -540px;
+  border-radius: 10px;
+  background-repeat: no-repeat;
+  animation: shimmer var(--speed) linear infinite;
+}
+
+.skelenton-cont .option-cont {
+  margin-top: 33%;
+}
+
+
+.skelenton-cont .option-cont h2 {
+  margin-top: 1px;
+  width: 35%;
+  height: 24px;
+  background: var(--bg);
+  background-image: var(--gradient);
+  background-position: -540px;
   border-radius: 50px;
+  background-repeat: no-repeat;
+  animation: shimmer var(--speed) linear infinite;
 }
 
 .skelenton-cont .option {
-  animation: wave 2s ease-in infinite;
-  border-radius: 50px;
+  position: relative;
   width: 70%;
+  background-image: var(--gradient);
+  background-position: -540px;
+  border-radius: 50px;
+  background-repeat: no-repeat;
+  height: 30%;
+  animation: shimmer var(--speed) linear infinite;
 }
 
-
-
+@keyframes shimmer {
+  to {
+    background-position: 400px 0;
+  }
+}
