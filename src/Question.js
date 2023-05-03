@@ -349,8 +349,8 @@ function Question({
         <div className="pages">
           {pagesVisited + 1} / {pageCount}
         </div>
-        {loading && <SkelentonLoader />}
-        {!loading && (
+        {!loading && <SkelentonLoader />}
+        {loading && (
           <div className="question-container2">
             <audio autoPlay id="audio" src="music/audio2.mp3" />
             <button className="playBtn" onClick={handlePlayPause}>

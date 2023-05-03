@@ -97,3 +97,17 @@
     background-position: 400px 0;
   }
 }
+
+
+@media  (max-width: 500px ) {
+  .skelenton-cont .option-cont h2 {
+    margin-top: 30px;
+   }
+
+   .skelenton-cont>.question-container2{
+    max-width: 65%;
+    height: 258px;
+   }
+
+  
+}
