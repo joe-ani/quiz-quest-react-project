@@ -13,7 +13,11 @@ function InCorrectInfo({ inCorrectInfo }) {
         <div className="line"></div>
         <div className="answer">
           <div className="heading">Answer</div>
-          <div className="text">{data.answer} --- {data.incAns}</div>
+          <div style={{fontWeight: "normal"}} className="text">
+            <p style={{ color: "green" }}>{data.answer} </p>
+            ---
+            <p style={{ color: "red" }}> {data.incAns}</p>
+          </div>
         </div>
       </div>
     );
