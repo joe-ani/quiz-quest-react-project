@@ -16,11 +16,13 @@ function AboutModal({ setShowAbout, showAbout }) {
     }, 300);
   };
 
-
-
   return (
     <div className="about-modal">
-      <div className="about-overlay"  ref={overlayRef} onClick={removeAbout}></div>
+      <div
+        className="about-overlay"
+        ref={overlayRef}
+        onClick={removeAbout}
+      ></div>
       <div ref={containerRef} className="about-container">
         <HighlightOffRoundedIcon
           onClick={removeAbout}
@@ -31,8 +33,28 @@ function AboutModal({ setShowAbout, showAbout }) {
           <div className="user-name">Joseph Ani</div>
         </div>
         <div className="links">
-          <div className="portfolio-link">Portfolio 🧑🏾‍💻</div>
-          <div className="github-link">View source Code</div>
+          <a
+            className="portfolio-link"
+            style={{
+              textDecoration: "none",
+              color: "white",
+            }}
+            href=""
+            target="_blank"
+          >
+            Portfolio 🧑🏾‍💻
+          </a>
+          <a
+            className="github-link"
+            style={{
+              textDecoration: "none",
+              color: "white",
+            }}
+            href="https://github.com/joe-ani/quiz-quest-react-project"
+            target="_blank"
+          >
+            View source Code
+          </a>
         </div>
       </div>
     </div>
